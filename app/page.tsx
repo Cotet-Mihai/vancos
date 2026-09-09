@@ -8,6 +8,7 @@ import { services } from "./_lib/services";
 import { ServiceCard } from "./_components/ServiceCard";
 import { Logo } from "./_components/Logo";
 import { Reveal } from "./_components/Reveal";
+import { PriceCalculator } from "./_components/PriceCalculator";
 import {
   IconTruck,
   IconContainer,
@@ -248,6 +249,10 @@ export default function Home() {
             Contactează-ne
           </Link>
         </div>
+      </section>
+
+      <section className="mx-auto flex max-w-2xl flex-col px-6 py-16">
+        <PriceCalculator />
       </section>
 
       <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row">
