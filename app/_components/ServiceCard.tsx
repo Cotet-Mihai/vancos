@@ -5,9 +5,10 @@ import type { Service } from "../_lib/services";
 type ServiceCardProps = {
   service: Service;
   image: StaticImageData;
+  unit: string;
 };
 
-export function ServiceCard({ service, image }: ServiceCardProps) {
+export function ServiceCard({ service, image, unit }: ServiceCardProps) {
   return (
     <div className="flex h-full flex-col gap-4 rounded-[1.75rem] border border-white/10 bg-surface p-4">
       <div className="group relative h-56 w-full overflow-hidden rounded-2xl">
@@ -18,6 +19,9 @@ export function ServiceCard({ service, image }: ServiceCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(min-width: 1024px) 33vw, 100vw"
         />
+        <span className="absolute top-3 left-3 rounded-md border border-white/20 bg-ink/70 px-2 py-1 font-mono text-[10px] tracking-widest text-brand-light backdrop-blur-sm">
+          UNIT—{unit}
+        </span>
       </div>
       <div className="flex flex-1 flex-col justify-between gap-3 px-2 pb-2">
         <div className="flex flex-col gap-3">

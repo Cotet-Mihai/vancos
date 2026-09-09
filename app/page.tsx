@@ -16,6 +16,7 @@ import {
   IconChevronDown,
   IconClock,
   IconShield,
+  IconPhone,
 } from "./_components/icons";
 
 const serviceImages: Record<string, StaticImageData> = {
@@ -57,16 +58,19 @@ const whyUs = [
 const steps = [
   {
     number: "1",
+    icon: IconPhone,
     title: "Ne contactezi",
     description: "Suni, ne scrii sau completezi formularul de contact și ne spui ce deșeuri ai de ridicat.",
   },
   {
     number: "2",
+    icon: IconClock,
     title: "Stabilim programarea",
     description: "Confirmăm împreună ziua și intervalul orar potrivit pentru intervenție.",
   },
   {
     number: "3",
+    icon: IconTruck,
     title: "Ridicăm deșeurile",
     description: "Venim cu utilajul potrivit și, la nevoie, cu forță de muncă pentru încărcare.",
   },
@@ -187,8 +191,13 @@ export default function Home() {
         </div>
 
         <div className="grid w-full gap-6 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.slug} service={service} image={serviceImages[service.slug]} />
+          {services.map((service, index) => (
+            <ServiceCard
+              key={service.slug}
+              service={service}
+              image={serviceImages[service.slug]}
+              unit={String(index + 1).padStart(2, "0")}
+            />
           ))}
         </div>
 
@@ -219,8 +228,17 @@ export default function Home() {
           <p className="text-paper/70">
             Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
           </p>
-          <div className="mt-4 flex flex-1 items-center justify-center">
-            <IconRecycle className="h-28 w-28 animate-[spin_10s_linear_infinite] text-brand-light/30" />
+          <div className="relative mt-4 flex flex-1 flex-col items-center justify-center gap-2 rounded-[1.75rem] border border-white/10 bg-surface p-8">
+            <span className="absolute top-4 left-4 h-1.5 w-1.5 rounded-full bg-white/20" />
+            <span className="absolute top-4 right-4 h-1.5 w-1.5 rounded-full bg-white/20" />
+            <span className="absolute bottom-4 left-4 h-1.5 w-1.5 rounded-full bg-white/20" />
+            <span className="absolute right-4 bottom-4 h-1.5 w-1.5 rounded-full bg-white/20" />
+            <span className="font-mono text-5xl font-bold text-brand-light">100%</span>
+            <span className="text-center font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
+              Acoperire
+              <br />
+              București
+            </span>
           </div>
         </div>
 
@@ -232,6 +250,9 @@ export default function Home() {
                 index === whyUs.length - 1 ? "sm:col-span-3" : ""
               }`}
             >
+              <span className="font-mono text-[10px] tracking-widest text-brand-light/70">
+                ARG.{String(index + 1).padStart(2, "0")}
+              </span>
               <item.icon className="h-8 w-8 flex-shrink-0 text-brand-light" />
               <h3 className="font-semibold text-paper">{item.title}</h3>
               <p className="text-sm text-paper/70">{item.description}</p>
@@ -240,21 +261,37 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-paper">Cum lucrăm</h2>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
-        </div>
-        <div className="grid gap-8 sm:grid-cols-3">
-          {steps.map((step) => (
-            <div key={step.number} className="flex flex-col gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-bold text-white">
-                {step.number}
-              </span>
-              <h3 className="font-semibold text-paper">{step.title}</h3>
-              <p className="text-sm text-paper/70">{step.description}</p>
-            </div>
-          ))}
+      <section className="relative overflow-hidden bg-surface py-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand/15 via-transparent to-brand-light/10" />
+        <div
+          className="absolute inset-0 opacity-[0.4]"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-14 px-6">
+          <div className="flex flex-col gap-2">
+            <span className="font-mono text-xs tracking-[0.3em] text-white/50 uppercase">Dispatch — 3 pași</span>
+            <h2 className="text-4xl font-bold text-paper sm:text-5xl">Cum lucrăm</h2>
+          </div>
+
+          <div className="relative grid gap-10 sm:grid-cols-3">
+            <div className="absolute top-7 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-white/20 to-transparent sm:block" />
+            {steps.map((step) => (
+              <div key={step.number} className="group relative flex flex-col gap-4">
+                <div className="flex items-center gap-4">
+                  <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border-2 border-dashed border-brand-light bg-surface font-mono text-lg font-bold text-brand-light transition-transform duration-300 group-hover:scale-110">
+                    {step.number}
+                  </span>
+                  <step.icon className="h-6 w-6 text-brand-light opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+                <h3 className="text-lg font-semibold text-paper">{step.title}</h3>
+                <p className="text-sm text-paper/70">{step.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
