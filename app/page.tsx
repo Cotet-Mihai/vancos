@@ -169,43 +169,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex max-w-xl flex-col gap-4">
-            <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
-              Serviciile noastre
-            </span>
-            <span className="h-[3px] w-12 rounded-full bg-brand" />
-            <h2 className="text-3xl leading-tight font-bold text-paper sm:text-4xl">
-              Tot ce trebuie să plece,
-              <br />
-              <span className="text-brand-light">pleacă cu noi.</span>
-            </h2>
-            <p className="text-paper/70">
-              Indiferent de tipul de deșeuri, ne ocupăm de colectare, încărcare și transport, rapid, eficient și
-              cu grijă pentru un București mai curat.
-            </p>
-          </div>
-
-          <div className="hidden flex-1 items-start justify-between gap-8 pt-2 lg:flex">
-            <div className="flex items-center gap-3">
-              <Logo className="h-6 w-6 flex-shrink-0 text-brand-light" />
-              <span className="h-8 w-px bg-white/20" />
-              <span className="text-[10px] leading-relaxed font-semibold tracking-[0.2em] text-white/50 uppercase">
-                Soluții complete
-                <br />
-                pentru un oraș mai curat
-              </span>
-            </div>
-            <span className="font-script -rotate-2 text-right text-2xl text-brand-light">
-              București
-              <br />
-              fără limite
-            </span>
-          </div>
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
+        <div className="flex flex-col gap-2">
+          <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
+            Serviciile noastre
+          </span>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+          <h2 className="max-w-xl text-3xl leading-tight font-bold text-paper sm:text-4xl">
+            Tot ce trebuie să plece,
+            <br />
+            <span className="text-brand-light">pleacă cu noi.</span>
+          </h2>
+          <p className="max-w-xl text-paper/70">
+            Indiferent de tipul de deșeuri, ne ocupăm de colectare, încărcare și transport, rapid, eficient și cu
+            grijă pentru un București mai curat.
+          </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid w-full gap-6 lg:grid-cols-3">
           {services.map((service, index) => (
             <ServiceCard
               key={service.slug}
