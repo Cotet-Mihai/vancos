@@ -5,38 +5,31 @@ import type { Service } from "../_lib/services";
 type ServiceCardProps = {
   service: Service;
   image: StaticImageData;
-  index: number;
 };
 
-export function ServiceCard({ service, image, index }: ServiceCardProps) {
-  const number = String(index + 1).padStart(2, "0");
-
+export function ServiceCard({ service, image }: ServiceCardProps) {
   return (
-    <div className="group relative h-[420px] w-full overflow-hidden rounded-[2rem] sm:h-[480px]">
-      <Image
-        src={image}
-        alt={service.imageAlt}
-        fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
-        sizes="(min-width: 1024px) 33vw, 100vw"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/10 to-black/80" />
-
-      <div className="absolute inset-0 flex flex-col justify-between p-6">
-        <div className="flex flex-col gap-2">
-          <span className="flex items-center gap-2 text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
-            {number}
-            <span className="h-px w-6 bg-brand-light" />
-          </span>
-          <h3 className="text-xl leading-tight font-bold text-white">{service.title}</h3>
-          <p className="text-sm text-white/70">{service.summary}</p>
-        </div>
+    <div className="flex flex-col gap-4 rounded-[1.75rem] border border-white/10 bg-surface p-4">
+      <div className="group relative h-56 w-full overflow-hidden rounded-2xl">
+        <Image
+          src={image}
+          alt={service.imageAlt}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(min-width: 1024px) 33vw, 100vw"
+        />
+      </div>
+      <div className="flex flex-col gap-3 px-2 pb-2">
+        <h3 className="text-xl leading-tight font-bold text-paper">{service.title}</h3>
+        <p className="text-sm text-paper/70">{service.summary}</p>
         <Link
           href={`/servicii#${service.slug}`}
-          className="flex w-fit items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105"
+          className="flex w-fit items-center gap-3 rounded-full bg-brand-light py-2 pr-5 pl-2 text-sm font-bold text-ink transition-all duration-300 hover:scale-105"
         >
-          Descoperă serviciul
-          <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/30">→</span>
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-ink text-brand-light">
+            →
+          </span>
+          Detalii
         </Link>
       </div>
     </div>

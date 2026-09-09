@@ -169,32 +169,46 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
-        <div className="flex flex-col gap-2">
-          <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
-            Serviciile noastre
-          </span>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
-          <h2 className="max-w-xl text-3xl leading-tight font-bold text-paper sm:text-4xl">
-            Tot ce trebuie să plece,
-            <br />
-            <span className="text-brand-light">pleacă cu noi.</span>
+      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <span className="h-[3px] w-8 rounded-full bg-brand-light" />
+            <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
+              Serviciile noastre
+            </span>
+          </div>
+          <h2 className="max-w-3xl text-4xl font-bold text-paper sm:text-5xl">
+            Servicii pentru <span className="text-brand-light">orice tip de deșeu.</span>
           </h2>
-          <p className="max-w-xl text-paper/70">
-            Indiferent de tipul de deșeuri, ne ocupăm de colectare, încărcare și transport, rapid, eficient și cu
-            grijă pentru un București mai curat.
+          <p className="max-w-2xl text-paper/70">
+            Colectăm și transportăm deșeuri din construcții, demolări, gospodării și materiale reciclabile.
+            Rapid, eficient și fără complicații.
           </p>
         </div>
 
         <div className="grid w-full gap-6 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={service.slug}
-              service={service}
-              image={serviceImages[service.slug]}
-              index={index}
-            />
+          {services.map((service) => (
+            <ServiceCard key={service.slug} service={service} image={serviceImages[service.slug]} />
           ))}
+        </div>
+
+        <div className="flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <Logo className="h-6 w-6 flex-shrink-0 text-brand-light" />
+            <div className="flex flex-col gap-1">
+              <h3 className="font-bold text-paper">Ai deșeuri de ridicat?</h3>
+              <p className="text-sm text-paper/70">Spune-ne ce ai de transportat și îți răspundem rapid.</p>
+            </div>
+          </div>
+          <Link
+            href="/contact"
+            className="flex w-fit items-center gap-3 rounded-full bg-brand-light py-2 pr-5 pl-2 text-sm font-bold text-ink transition-all duration-300 hover:scale-105"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-brand-light">
+              →
+            </span>
+            Contactează-ne
+          </Link>
         </div>
       </section>
 
