@@ -24,8 +24,8 @@ export default function Home() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink from-0% via-ink/75 via-55% to-transparent to-90%" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black from-0% via-black/80 via-55% to-transparent to-90%" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/85" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-6 px-6">
           <span className="text-xs font-bold tracking-[0.3em] text-white/60 uppercase">
