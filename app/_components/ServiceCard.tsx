@@ -17,24 +17,22 @@ export function ServiceCard({ service, image, index, featured = false }: Service
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-[2rem] ${featured ? "lg:col-span-2" : ""}`}
+      className={`group relative h-[420px] w-full overflow-hidden rounded-[2rem] sm:h-[480px] ${featured ? "lg:col-span-2" : ""}`}
     >
-      <div className="relative h-[420px] w-full sm:h-[480px]">
-        <Image
-          src={image}
-          alt={service.imageAlt}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes={featured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"}
-        />
-        <div
-          className={
-            featured
-              ? "absolute inset-0 bg-gradient-to-r from-black from-0% via-black/75 via-45% to-transparent to-80%"
-              : "absolute inset-0 bg-gradient-to-b from-black/85 via-black/10 to-black/80"
-          }
-        />
-      </div>
+      <Image
+        src={image}
+        alt={service.imageAlt}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes={featured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"}
+      />
+      <div
+        className={
+          featured
+            ? "absolute inset-0 bg-gradient-to-r from-black from-0% via-black/75 via-45% to-transparent to-80%"
+            : "absolute inset-0 bg-gradient-to-b from-black/85 via-black/10 to-black/80"
+        }
+      />
 
       {featured ? (
         <div className="absolute inset-0 flex max-w-sm flex-col justify-center gap-4 p-8">
