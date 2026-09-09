@@ -3,13 +3,84 @@ import Link from "next/link";
 import heroImage from "../public/images/hero-truck.png";
 import { services } from "./_lib/services";
 import { ServiceCard } from "./_components/ServiceCard";
-import { IconTruck, IconContainer, IconBolt, IconRecycle } from "./_components/icons";
+import { IconTruck, IconContainer, IconBolt, IconRecycle, IconTorch, IconChevronDown } from "./_components/icons";
 
 const stats = [
   { icon: IconTruck, value: "3,5 t", label: "Autovehicule cu acces în tot Bucureștiul" },
   { icon: IconContainer, value: "4 tone", label: "Capacitate pe container" },
   { icon: IconBolt, value: "24-48h", label: "Timp mediu de intervenție" },
   { icon: IconRecycle, value: "500+", label: "Lucrări finalizate" },
+];
+
+const whyUs = [
+  {
+    icon: IconContainer,
+    title: "Fără autorizație de circulație",
+    description: "Mașinile noastre de 3,5 tone au acces liber în orice zonă din București.",
+  },
+  {
+    icon: IconBolt,
+    title: "Răspuns rapid",
+    description: "Intervenim de obicei în 24-48h de la solicitare, în funcție de disponibilitate.",
+  },
+  {
+    icon: IconTruck,
+    title: "Forță de muncă la cerere",
+    description: "Dacă nu ai cine să încarce containerul, venim și cu oameni pentru asta.",
+  },
+  {
+    icon: IconTorch,
+    title: "Debitare la fața locului",
+    description: "Pentru deșeuri voluminoase, debităm cu flex sau autogen, direct pe teren.",
+  },
+];
+
+const steps = [
+  {
+    number: "1",
+    title: "Ne contactezi",
+    description: "Suni, ne scrii sau completezi formularul de contact și ne spui ce deșeuri ai de ridicat.",
+  },
+  {
+    number: "2",
+    title: "Stabilim programarea",
+    description: "Confirmăm împreună ziua și intervalul orar potrivit pentru intervenție.",
+  },
+  {
+    number: "3",
+    title: "Ridicăm deșeurile",
+    description: "Venim cu utilajul potrivit și, la nevoie, cu forță de muncă pentru încărcare.",
+  },
+];
+
+const sectors = ["Sector 1", "Sector 2", "Sector 3", "Sector 4", "Sector 5", "Sector 6"];
+
+const faqs = [
+  {
+    question: "Ce zone din București deserviți?",
+    answer: "Lucrăm în toate cele 6 sectoare ale Bucureștiului.",
+  },
+  {
+    question: "Cât de repede puteți interveni?",
+    answer: "De obicei intervenim în 24-48h de la solicitare, în funcție de disponibilitate.",
+  },
+  {
+    question: "Am nevoie de autorizație pentru containerul vostru?",
+    answer:
+      "Nu. Mașinile noastre de 3,5 tone circulă fără autorizație de circulație în nicio zonă din București.",
+  },
+  {
+    question: "Ce fac dacă nu am cine să încarce containerul?",
+    answer: "Punem la dispoziție forță de muncă pentru încărcare, în funcție de disponibilitate.",
+  },
+  {
+    question: "Ce deșeuri reciclabile preluați?",
+    answer: "Fier, aluminiu, cupru, bronz, alamă, plumb, precum și electronice și electrocasnice.",
+  },
+  {
+    question: "Care este programul vostru?",
+    answer: "[program de lucru]",
+  },
 ];
 
 export default function Home() {
@@ -87,6 +158,82 @@ export default function Home() {
         <div className="grid gap-6 sm:grid-cols-3">
           {services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-paper">De ce Vancos</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {whyUs.map((item) => (
+            <div
+              key={item.title}
+              className="flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6"
+            >
+              <item.icon className="h-8 w-8 flex-shrink-0 text-brand-light" />
+              <h3 className="font-semibold text-paper">{item.title}</h3>
+              <p className="text-sm text-paper/70">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-paper">Cum lucrăm</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+        </div>
+        <div className="grid gap-8 sm:grid-cols-3">
+          {steps.map((step) => (
+            <div key={step.number} className="flex flex-col gap-3">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-bold text-white">
+                {step.number}
+              </span>
+              <h3 className="font-semibold text-paper">{step.title}</h3>
+              <p className="text-sm text-paper/70">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-paper">Zona de acoperire</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+          <p className="max-w-2xl text-paper/70">Deservim toate cele 6 sectoare ale Bucureștiului.</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {sectors.map((sector) => (
+            <div
+              key={sector}
+              className="flex items-center justify-center rounded-full border border-white/10 bg-surface px-4 py-3 text-sm font-semibold text-paper"
+            >
+              {sector}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-16">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-paper">Întrebări frecvente</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+        </div>
+        <div className="flex flex-col gap-3">
+          {faqs.map((faq) => (
+            <details
+              key={faq.question}
+              className="group rounded-[1.5rem] border border-white/10 bg-surface px-6 py-4"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-paper">
+                {faq.question}
+                <IconChevronDown className="h-5 w-5 flex-shrink-0 text-brand-light transition-transform duration-300 group-open:rotate-180" />
+              </summary>
+              <p className="mt-3 text-sm text-paper/70">{faq.answer}</p>
+            </details>
           ))}
         </div>
       </section>
