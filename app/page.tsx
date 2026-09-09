@@ -213,25 +213,27 @@ export default function Home() {
       </section>
 
       <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row lg:items-start">
+        <div className="flex w-full flex-col gap-2 lg:w-72 lg:flex-shrink-0">
+          <h2 className="text-3xl font-bold text-paper sm:text-4xl">De ce Vancos</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+          <p className="text-paper/70">
+            Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
+          </p>
+        </div>
+
         <div className="grid flex-1 gap-6 sm:grid-cols-3">
-          {whyUs.map((item) => (
+          {whyUs.map((item, index) => (
             <div
               key={item.title}
-              className="flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6"
+              className={`flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 ${
+                index === whyUs.length - 1 ? "sm:col-span-3" : ""
+              }`}
             >
               <item.icon className="h-8 w-8 flex-shrink-0 text-brand-light" />
               <h3 className="font-semibold text-paper">{item.title}</h3>
               <p className="text-sm text-paper/70">{item.description}</p>
             </div>
           ))}
-        </div>
-
-        <div className="flex w-full flex-col gap-2 lg:w-72 lg:flex-shrink-0">
-          <h2 className="text-2xl font-bold text-paper">De ce Vancos</h2>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
-          <p className="text-paper/70">
-            Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
-          </p>
         </div>
       </section>
 
