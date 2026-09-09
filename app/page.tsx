@@ -214,12 +214,12 @@ export default function Home() {
 
       <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row">
         <div className="flex w-full flex-col gap-2 lg:w-72 lg:flex-shrink-0">
-          <h2 className="text-3xl font-bold text-paper sm:text-4xl">De ce Vancos</h2>
+          <h2 className="text-4xl font-bold text-paper sm:text-5xl">De ce Vancos</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
           <p className="text-paper/70">
             Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
           </p>
-          <div className="mt-4 flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface">
+          <div className="mt-4 flex flex-1 items-center justify-center">
             <IconRecycle className="h-28 w-28 animate-[spin_10s_linear_infinite] text-brand-light/30" />
           </div>
         </div>
