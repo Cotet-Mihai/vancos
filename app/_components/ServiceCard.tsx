@@ -16,9 +16,7 @@ export function ServiceCard({ service, image, index, featured = false }: Service
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <div
-      className={`group relative h-[420px] w-full overflow-hidden rounded-[2rem] sm:h-[480px] ${featured ? "lg:col-span-2" : ""}`}
-    >
+    <div className="group relative h-[420px] w-full overflow-hidden rounded-[2rem] sm:h-[480px]">
       <Image
         src={image}
         alt={service.imageAlt}

@@ -155,7 +155,7 @@ export default function Home() {
         </div>
 
         <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-6 py-8 sm:grid-cols-4 sm:divide-x sm:divide-white/10">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-8 px-6 py-8 sm:grid-cols-4 sm:divide-x sm:divide-white/10">
             {stats.map((stat) => (
               <div key={stat.label} className="flex items-center gap-3 sm:px-6">
                 <stat.icon className="h-12 w-12 flex-shrink-0 text-brand-light" />
@@ -169,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-16">
+      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex max-w-xl flex-col gap-4">
             <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
@@ -205,7 +205,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-4">
+        <div className="grid gap-6 lg:grid-cols-3">
           {services.map((service, index) => (
             <ServiceCard
               key={service.slug}
@@ -218,7 +218,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-bold text-paper">De ce Vancos</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
@@ -237,7 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-bold text-paper">Cum lucrăm</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
@@ -255,7 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-bold text-paper">Zona de acoperire</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
@@ -294,7 +294,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="flex flex-col gap-8 rounded-[2rem] border border-white/10 bg-surface p-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-start gap-3">
             <Logo className="h-6 w-6 flex-shrink-0 text-brand-light" />
