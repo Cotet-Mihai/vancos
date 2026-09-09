@@ -24,10 +24,10 @@ export default function Home() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black from-0% via-black/80 via-55% to-transparent to-90%" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black from-0% via-black/70 via-30% to-transparent to-50%" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/85" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-6 px-6">
+        <div className="relative z-10 flex w-full max-w-xl flex-col gap-6 px-6 sm:px-12 lg:pr-6 lg:pl-24">
           <span className="text-xs font-bold tracking-[0.3em] text-white/60 uppercase">
             Servicii de colectare și reciclare
           </span>
