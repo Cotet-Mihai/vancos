@@ -218,7 +218,7 @@ export default function Home() {
           ))}
         </Reveal>
 
-        <div className="flex w-full flex-col gap-6 rounded-[2rem] border border-white/10 bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex w-full flex-col gap-6 rounded-[2rem] border border-white/10 bg-surface px-10 py-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full">
           <div className="flex items-center gap-4">
             <Logo className="h-7 w-7 flex-shrink-0 text-brand-light" />
             <div className="flex flex-col gap-1">
