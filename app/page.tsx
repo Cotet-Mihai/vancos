@@ -27,7 +27,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-black from-0% via-black/70 via-30% to-transparent to-50%" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/85" />
 
-        <div className="relative z-10 flex w-full max-w-xl flex-col gap-6 px-6 sm:px-12 lg:pr-6 lg:pl-24">
+        <div className="relative z-10 flex w-full max-w-2xl flex-col gap-6 px-6 sm:px-24 lg:pr-6 lg:pl-48">
           <span className="text-xs font-bold tracking-[0.3em] text-white/60 uppercase">
             Servicii de colectare și reciclare
           </span>
@@ -36,7 +36,7 @@ export default function Home() {
             <br />
             pentru un
             <br />
-            <span className="text-brand-light">oraș mai curat.</span>
+            <span className="whitespace-nowrap text-brand-light">oraș mai curat.</span>
           </h1>
           <p className="max-w-md text-white/80">
             Colectăm și transportăm deșeuri din construcții,
@@ -64,11 +64,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10 bg-ink/60 backdrop-blur-sm">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-8 sm:grid-cols-4">
+        <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/10">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-6 py-8 sm:grid-cols-4 sm:divide-x sm:divide-white/10">
             {stats.map((stat) => (
-              <div key={stat.label} className="flex items-start gap-3">
-                <stat.icon className="h-6 w-6 flex-shrink-0 text-brand-light" />
+              <div key={stat.label} className="flex items-center gap-3 sm:px-6">
+                <stat.icon className="h-12 w-12 flex-shrink-0 text-brand-light" />
                 <div className="flex flex-col">
                   <span className="text-xl font-bold text-white">{stat.value}</span>
                   <span className="text-xs text-white/60">{stat.label}</span>
