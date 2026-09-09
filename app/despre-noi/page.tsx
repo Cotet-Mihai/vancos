@@ -21,6 +21,7 @@ export default function DespreNoiPage() {
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16 sm:flex-row sm:items-center">
       <div className="flex flex-1 flex-col gap-4">
         <h1 className="text-3xl font-bold text-ink">Despre Vancos</h1>
+        <span className="h-[3px] w-12 rounded-full bg-brand" />
         <p className="text-ink/70">
           Suntem o firmă din București specializată în degajarea deșeurilor din construcții, demolări și gospodării,
           plus colectarea diversificată a deșeurilor reciclabile. Lucrăm cu mașini de 3,5 tone care circulă fără
@@ -39,12 +40,12 @@ export default function DespreNoiPage() {
           ))}
         </ul>
       </div>
-      <div className="relative h-64 w-full flex-1 overflow-hidden rounded-2xl sm:h-96">
+      <div className="group relative h-64 w-full flex-1 overflow-hidden rounded-[2rem] sm:h-96">
         <Image
           src={despreImage}
           alt="Utilaj de construcții folosit pentru degajarea deșeurilor"
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(min-width: 640px) 50vw, 100vw"
         />
       </div>

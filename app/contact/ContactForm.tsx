@@ -15,7 +15,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-[1.75rem] border border-black/5 bg-white p-6 shadow-sm">
       <label className="flex flex-col gap-1 text-sm text-ink/80">
         Nume
         <input
@@ -48,7 +48,7 @@ export function ContactForm() {
       </label>
       <button
         type="submit"
-        className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+        className="rounded-full bg-brand px-6 py-3 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"
       >
         Trimite cererea
       </button>

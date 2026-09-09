@@ -23,15 +23,20 @@ export function Header() {
           <span className="text-lg font-bold tracking-tight text-ink">VANCOS</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 sm:flex">
+        <nav className="hidden items-center gap-8 sm:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium text-ink/70 hover:text-brand">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="group relative py-2 text-xs font-bold tracking-widest text-ink/60 uppercase transition-colors hover:text-ink"
+            >
               {link.label}
+              <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-brand transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
           <Link
             href="/contact"
-            className="rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-light"
+            className="rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"
           >
             Cere ofertă
           </Link>

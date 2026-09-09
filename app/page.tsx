@@ -17,6 +17,7 @@ export default function Home() {
           sizes="100vw"
           className="object-cover opacity-40 -z-10"
         />
+        <div className="absolute inset-x-0 bottom-0 h-32 -z-10 bg-gradient-to-b from-transparent to-ink" />
         <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-24 sm:py-32">
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Degajăm deșeuri din construcții, gospodării și colectăm reciclabile în tot Bucureștiul
@@ -28,13 +29,13 @@ export default function Home() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/contact"
-              className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+              className="rounded-full bg-brand px-6 py-3 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"
             >
               Cere ofertă
             </Link>
             <Link
               href="/servicii"
-              className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="rounded-full border border-white/30 px-6 py-3 text-xs font-bold tracking-widest text-white uppercase transition-all duration-300 hover:scale-105 hover:bg-white/10"
             >
               Vezi serviciile
             </Link>
@@ -43,7 +44,10 @@ export default function Home() {
       </section>
 
       <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
-        <h2 className="text-2xl font-bold text-ink">Serviciile noastre</h2>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-ink">Serviciile noastre</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+        </div>
         <div className="grid gap-6 sm:grid-cols-3">
           {services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
@@ -74,11 +78,14 @@ export default function Home() {
       </section>
 
       <section className="mx-auto flex max-w-5xl flex-col items-start gap-4 px-6 py-16">
-        <h2 className="text-2xl font-bold text-ink">Ai deșeuri de ridicat?</h2>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-ink">Ai deșeuri de ridicat?</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+        </div>
         <p className="max-w-lg text-ink/70">Spune-ne ce ai de degajat și îți răspundem cu o ofertă rapidă.</p>
         <Link
           href="/contact"
-          className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+          className="rounded-full bg-brand px-6 py-3 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"
         >
           Contactează-ne
         </Link>
