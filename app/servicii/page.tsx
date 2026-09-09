@@ -21,9 +21,9 @@ export default function ServiciiPage() {
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-20 px-6 pt-28 pb-16">
       <div className="flex flex-col gap-3">
-        <h1 className="text-3xl font-bold text-ink">Serviciile noastre</h1>
+        <h1 className="text-3xl font-bold text-paper">Serviciile noastre</h1>
         <span className="h-[3px] w-12 rounded-full bg-brand" />
-        <p className="max-w-2xl text-ink/70">
+        <p className="max-w-2xl text-paper/70">
           De la degajarea molozului rezultat din demolări, până la colectarea deșeurilor reciclabile, adaptăm fiecare
           intervenție la nevoile tale.
         </p>
@@ -47,11 +47,11 @@ export default function ServiciiPage() {
             />
           </div>
           <div className="flex flex-1 flex-col gap-4">
-            <h2 className="text-2xl font-bold text-ink">{service.title}</h2>
-            <p className="text-ink/70">{service.description}</p>
+            <h2 className="text-2xl font-bold text-paper">{service.title}</h2>
+            <p className="text-paper/70">{service.description}</p>
             <ul className="flex flex-col gap-2">
               {service.advantages.map((advantage) => (
-                <li key={advantage} className="flex items-start gap-2 text-sm text-ink/80">
+                <li key={advantage} className="flex items-start gap-2 text-sm text-paper/80">
                   <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand" />
                   {advantage}
                 </li>

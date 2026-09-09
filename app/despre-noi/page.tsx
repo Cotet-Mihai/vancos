@@ -20,20 +20,20 @@ export default function DespreNoiPage() {
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 pt-28 pb-16 sm:flex-row sm:items-center">
       <div className="flex flex-1 flex-col gap-4">
-        <h1 className="text-3xl font-bold text-ink">Despre Vancos</h1>
+        <h1 className="text-3xl font-bold text-paper">Despre Vancos</h1>
         <span className="h-[3px] w-12 rounded-full bg-brand" />
-        <p className="text-ink/70">
+        <p className="text-paper/70">
           Suntem o firmă din București specializată în degajarea deșeurilor din construcții, demolări și gospodării,
           plus colectarea diversificată a deșeurilor reciclabile. Lucrăm cu mașini de 3,5 tone care circulă fără
           autorizație în orice zonă a orașului, ceea ce ne permite să intervenim rapid, indiferent de locație.
         </p>
-        <p className="text-ink/70">
+        <p className="text-paper/70">
           Ne adaptăm la fiecare client: venim cu forță de muncă atunci când e nevoie de încărcare, și debităm
           deșeurile voluminoase cu flex sau autogen direct la fața locului.
         </p>
         <ul className="flex flex-col gap-3">
           {values.map((value) => (
-            <li key={value} className="flex items-start gap-2 text-sm text-ink/80">
+            <li key={value} className="flex items-start gap-2 text-sm text-paper/80">
               <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand" />
               {value}
             </li>

@@ -81,7 +81,7 @@ export default function Home() {
 
       <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-ink">Serviciile noastre</h2>
+          <h2 className="text-2xl font-bold text-paper">Serviciile noastre</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
         </div>
         <div className="grid gap-6 sm:grid-cols-3">
@@ -93,10 +93,10 @@ export default function Home() {
 
       <section className="mx-auto flex max-w-5xl flex-col items-start gap-4 px-6 py-16">
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-ink">Ai deșeuri de ridicat?</h2>
+          <h2 className="text-2xl font-bold text-paper">Ai deșeuri de ridicat?</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
         </div>
-        <p className="max-w-lg text-ink/70">Spune-ne ce ai de degajat și îți răspundem cu o ofertă rapidă.</p>
+        <p className="max-w-lg text-paper/70">Spune-ne ce ai de degajat și îți răspundem cu o ofertă rapidă.</p>
         <Link
           href="/contact"
           className="rounded-full bg-brand px-6 py-3 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"

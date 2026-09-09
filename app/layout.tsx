@@ -3,6 +3,7 @@ import { Montserrat, Caveat, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_components/Header";
 import { Footer } from "./_components/Footer";
+import { BackgroundLayer } from "./_components/BackgroundLayer";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -34,7 +35,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ro"
       className={`${montserrat.variable} ${caveat.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-ink">
+      <body className="min-h-full flex flex-col bg-ink text-paper">
+        <BackgroundLayer />
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />

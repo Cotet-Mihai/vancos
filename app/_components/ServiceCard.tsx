@@ -3,9 +3,9 @@ import type { Service } from "../_lib/services";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <div className="group flex flex-col gap-3 rounded-[1.75rem] border border-black/5 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <h3 className="text-lg font-semibold text-ink">{service.title}</h3>
-      <p className="text-sm leading-6 text-ink/70">{service.summary}</p>
+    <div className="group flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <h3 className="text-lg font-semibold text-paper">{service.title}</h3>
+      <p className="text-sm leading-6 text-paper/70">{service.summary}</p>
       <Link
         href={`/servicii#${service.slug}`}
         className="mt-auto flex items-center gap-3 text-xs font-bold tracking-widest text-brand uppercase"

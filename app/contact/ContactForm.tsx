@@ -15,8 +15,8 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-[1.75rem] border border-black/5 bg-white p-6 shadow-sm">
-      <label className="flex flex-col gap-1 text-sm text-ink/80">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-[1.75rem] border border-white/10 bg-surface p-6 shadow-sm">
+      <label className="flex flex-col gap-1 text-sm text-paper/80">
         Nume
         <input
           type="text"
@@ -26,7 +26,7 @@ export function ContactForm() {
           className="rounded-lg border border-black/10 px-3 py-2 text-ink outline-none focus:border-brand"
         />
       </label>
-      <label className="flex flex-col gap-1 text-sm text-ink/80">
+      <label className="flex flex-col gap-1 text-sm text-paper/80">
         Telefon
         <input
           type="tel"
@@ -36,7 +36,7 @@ export function ContactForm() {
           className="rounded-lg border border-black/10 px-3 py-2 text-ink outline-none focus:border-brand"
         />
       </label>
-      <label className="flex flex-col gap-1 text-sm text-ink/80">
+      <label className="flex flex-col gap-1 text-sm text-paper/80">
         Mesaj
         <textarea
           required
