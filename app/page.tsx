@@ -212,7 +212,6 @@ export default function Home() {
               service={service}
               image={serviceImages[service.slug]}
               index={index}
-              featured={index === 0}
             />
           ))}
         </div>
