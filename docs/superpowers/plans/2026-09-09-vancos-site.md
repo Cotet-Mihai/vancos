@@ -1,0 +1,1137 @@
+# Vancos Presentation Site Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Build the four-page Vancos marketing site (Acasă, Servicii, Despre noi, Contact) on the existing Next.js 16 App Router project, per `docs/superpowers/specs/2026-09-09-vancos-site-design.md`.
+
+**Architecture:** Server components for every page (static content, no data fetching); two small client components (`Header` for the mobile menu toggle, `ContactForm` for local form state + `mailto:` submit). Shared, non-routable files live under `app/_components/` and `app/_lib/`. Real stock photos are downloaded once into `public/images/` and loaded via Next.js static `import` so width/height are inferred automatically.
+
+**Tech Stack:** Next.js 16 (App Router), React 19, Tailwind CSS v4 (`@theme` tokens), Geist fonts (already wired in `app/layout.tsx`). No new npm dependencies.
+
+## Global Constraints
+
+- No new dependencies — no icon library, animation library, form library, or CMS. Everything is hand-authored SVG + Tailwind utilities (per spec's Technical Notes / Out of scope).
+- Content is Romanian and hardcoded in source files (no i18n, no CMS).
+- Real contact details are unknown — use literal placeholders `[telefon]`, `[email]`, `[adresă/zonă acoperită]`, `[program de lucru]` exactly, so they're easy to grep for later.
+- Contact form is UI-only: on submit it builds a `mailto:` link and navigates to it — no API route, no server action.
+- **No test framework is installed in this repo and none is being added** (this is a static content site with no business logic to unit-test — consistent with the "no new dependencies" constraint above). Verification per task uses `pnpm build` (full type-check + prerender of every route) and, for the final task, a manual browser pass — not automated tests. This replaces the red/green TDD cycle referenced in the general planning process.
+- Images: real, freely-licensed photos (Pexels License — free for commercial use, no attribution required) downloaded once into `public/images/`, then loaded with Next's static `import ... from` syntax (not the `src="/images/..."` string form) so `next/image` infers width/height automatically.
+- Palette tokens (hex values, from the approved spec): brand green `#1F6B3A`, brand accent green `#3E9B5C`, ink (near-black) `#1C1C1A`, paper (warm off-white) `#F5F4F0`, warm accent `#C97B3D`.
+
+---
+
+## Task 1: Download stock photos
+
+**Files:**
+- Create: `public/images/hero.jpg`
+- Create: `public/images/servicii-constructii.jpg`
+- Create: `public/images/servicii-gospodarii.jpg`
+- Create: `public/images/servicii-reciclabile.jpg`
+- Create: `public/images/despre-noi.jpg`
+
+**Interfaces:**
+- Produces: five JPEG files under `public/images/` that later tasks import by relative path (`../public/images/<name>.jpg` from `app/*.tsx`, `../../public/images/<name>.jpg` from `app/<segment>/*.tsx`).
+
+These are verified-working Pexels direct CDN URLs (Pexels License: free for commercial use, no attribution required). Each was confirmed to return HTTP 200 with real image bytes before writing this plan.
+
+- [ ] **Step 1: Create the images directory and download all five photos**
+
+```bash
+mkdir -p public/images
+
+curl -L -o public/images/hero.jpg \
+  "https://images.pexels.com/photos/1188532/pexels-photo-1188532.jpeg?auto=compress&cs=tinysrgb&w=1600"
+
+curl -L -o public/images/servicii-constructii.jpg \
+  "https://images.pexels.com/photos/2327065/pexels-photo-2327065.jpeg?auto=compress&cs=tinysrgb&w=1600"
+
+curl -L -o public/images/servicii-gospodarii.jpg \
+  "https://images.pexels.com/photos/11115604/pexels-photo-11115604.jpeg?auto=compress&cs=tinysrgb&w=1600"
+
+curl -L -o public/images/servicii-reciclabile.jpg \
+  "https://images.pexels.com/photos/6196281/pexels-photo-6196281.jpeg?auto=compress&cs=tinysrgb&w=1600"
+
+curl -L -o public/images/despre-noi.jpg \
+  "https://images.pexels.com/photos/11461002/pexels-photo-11461002.jpeg?auto=compress&cs=tinysrgb&w=1600"
+```
+
+- [ ] **Step 2: Verify all five files downloaded and are non-trivial in size**
+
+Run: `ls -la public/images/`
+Expected: five `.jpg` files, each between roughly 200KB and 700KB (not 0 bytes, not an HTML error page). If any file is suspiciously small (under 5KB), `cat` it — it's probably an HTML error page, not a JPEG — and re-run that one `curl` command.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add public/images/
+git commit -m "Add stock photos for Vancos site sections"
+```
+
+---
+
+## Task 2: Brand palette and base styles
+
+**Files:**
+- Modify: `app/globals.css`
+
+**Interfaces:**
+- Produces: Tailwind utility classes `bg-brand`, `text-brand`, `border-brand`, `bg-brand-light`, `text-brand-light`, `bg-ink`, `text-ink`, `bg-paper`, `text-paper`, `bg-accent-warm`, `text-accent-warm` (generated by Tailwind v4 from the `--color-*` tokens under `@theme inline`), usable by every later task.
+
+- [ ] **Step 1: Replace the theme tokens and base styles**
+
+```css
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1c1c1a;
+  --brand: #1f6b3a;
+  --brand-light: #3e9b5c;
+  --ink: #1c1c1a;
+  --paper: #f5f4f0;
+  --accent-warm: #c97b3d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-light: var(--brand-light);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-accent-warm: var(--accent-warm);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+This removes the `@media (prefers-color-scheme: dark)` block from the default template: Vancos is a branded marketing site with one fixed light palette, not a dark-mode-aware app.
+
+- [ ] **Step 2: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds (the existing default `app/page.tsx` still compiles against the new CSS; visual changes aren't checked yet since no component uses the new tokens).
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/globals.css
+git commit -m "Set Vancos brand palette in globals.css"
+```
+
+---
+
+## Task 3: Logo component and favicon
+
+**Files:**
+- Create: `app/_components/Logo.tsx`
+- Create: `app/icon.svg`
+
+**Interfaces:**
+- Produces: `Logo({ className }: { className?: string })` — a React component exported from `app/_components/Logo.tsx`, rendering an SVG whose badge background uses `currentColor` (so `text-brand` / `text-brand-light` on the wrapping element controls the badge color).
+
+- [ ] **Step 1: Create the Logo component**
+
+```tsx
+type LogoProps = {
+  className?: string;
+};
+
+export function Logo({ className }: LogoProps) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      fill="none"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="40" height="40" rx="10" fill="currentColor" />
+      <path
+        d="M10 12l10 14 10-14"
+        stroke="#F5F4F0"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="30" cy="10" r="3" fill="#3E9B5C" />
+    </svg>
+  );
+}
+```
+
+- [ ] **Step 2: Create the static favicon file**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <rect width="40" height="40" rx="10" fill="#1F6B3A"/>
+  <path d="M10 12l10 14 10-14" stroke="#F5F4F0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="30" cy="10" r="3" fill="#3E9B5C"/>
+</svg>
+```
+
+Save this exact markup to `app/icon.svg` (Next.js's file-based icon convention — no code changes elsewhere are needed for it to take effect).
+
+- [ ] **Step 3: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds. `Logo` isn't imported anywhere yet, so TypeScript may warn about an unused export only if you add a stricter lint rule — the default Next lint config does not flag unused exports, only unused local variables, so this is expected to pass cleanly.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add app/_components/Logo.tsx app/icon.svg
+git commit -m "Add Vancos logo mark and favicon"
+```
+
+---
+
+## Task 4: Icon set
+
+**Files:**
+- Create: `app/_components/icons.tsx`
+
+**Interfaces:**
+- Produces: nine components, each `(props: { className?: string }) => JSX.Element`, all using `stroke="currentColor"` so color is controlled by the caller's `text-*` class: `IconCheck`, `IconMenu`, `IconClose`, `IconPhone`, `IconMail`, `IconPin`, `IconTruck`, `IconContainer`, `IconTorch`.
+
+- [ ] **Step 1: Create the icon set**
+
+```tsx
+type IconProps = {
+  className?: string;
+};
+
+export function IconCheck({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function IconMenu({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function IconClose({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function IconPhone({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1c-8 0-14-6-14-14a1 1 0 0 1 1-1z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function IconMail({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3 7l9 6 9-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function IconPin({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M12 21s7-7.5 7-12a7 7 0 0 0-14 0c0 4.5 7 12 7 12z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+export function IconTruck({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M2 7h11v9H2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M13 10h4l3 3v3h-7z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle cx="6" cy="18" r="1.8" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17" cy="18" r="1.8" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+export function IconContainer({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M3 8h18M5 8l1.5 11h11L19 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9 8V5h6v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function IconTorch({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M12 3c-1 3.5-5 5.5-5 9.5a5 5 0 0 0 10 0c0-2.2-1.2-3.3-1.8-5-0.3 1.5-1 2.3-1.7 2.3-1 0-1.5-1.3-1.5-2.8 0-1.2 0-2.3 0-4z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/_components/icons.tsx
+git commit -m "Add hand-authored icon set"
+```
+
+---
+
+## Task 5: Shared services content
+
+**Files:**
+- Create: `app/_lib/services.ts`
+
+**Interfaces:**
+- Produces: `type Service = { slug: string; title: string; summary: string; description: string; advantages: string[]; image: string; imageAlt: string }` and `export const services: Service[]` (exactly 3 entries, slugs `"constructii-demolari"`, `"gospodarii"`, `"reciclabile"`, in that order) — consumed by `ServiceCard` (Task 6), the Home page (Task 10), and the Servicii page (Task 11).
+
+- [ ] **Step 1: Create the services data module**
+
+```ts
+export type Service = {
+  slug: string;
+  title: string;
+  summary: string;
+  description: string;
+  advantages: string[];
+  image: string;
+  imageAlt: string;
+};
+
+export const services: Service[] = [
+  {
+    slug: "constructii-demolari",
+    title: "Degajare deșeuri din construcții și demolări",
+    summary:
+      "Ridicăm până la 4 tone de moloz pe container, cu mașini de 3,5 tone care nu au nevoie de autorizație de circulație.",
+    description:
+      "Degajăm deșeuri rezultate din construcții și demolări, până în 4 tone pe container. Avantajul principal al acestui serviciu este faptul că firma noastră dispune de mașini de 3,5 tone, care nu necesită autorizație de circulație în nicio zonă din București. Acesta este principalul motiv pentru care clienții noștri apelează la noi.",
+    advantages: [
+      "Mașini de 3,5 tone, fără autorizație de circulație în nicio zonă din București",
+      "Containere de până la 4 tone",
+      "Intervenție rapidă, oriunde în oraș",
+    ],
+    image: "servicii-constructii.jpg",
+    imageAlt: "Moloz și deșeuri rezultate dintr-o demolare",
+  },
+  {
+    slug: "gospodarii",
+    title: "Preluare deșeuri din gospodării",
+    summary:
+      "Venim cu forță de muncă pentru încărcare și, dacă e nevoie, debităm deșeurile voluminoase la fața locului.",
+    description:
+      "În cazul preluării deșeurilor din casa beneficiarului, dispunem și de forță de muncă, în vederea încărcării containerului. Dacă clientul ne anunță că nu are oameni să încarce containerul, în funcție de disponibilitate, oferim și acest serviciu. Dacă deșeurile sunt prea voluminoase pentru a fi transportate, punem la dispoziție servicii de debitare a deșeurilor prin aparat flex sau autogen, în funcție de nevoie și împrejurimi.",
+    advantages: [
+      "Forță de muncă disponibilă pentru încărcarea containerului",
+      "Debitare cu flex sau autogen pentru deșeuri voluminoase",
+      "Adaptare la nevoile fiecărui client",
+    ],
+    image: "servicii-gospodarii.jpg",
+    imageAlt: "Camion de gunoi ridicând o pubelă",
+  },
+  {
+    slug: "reciclabile",
+    title: "Colectare diversificată a deșeurilor reciclabile",
+    summary: "Preluăm fier, aluminiu, cupru, bronz, alamă, plumb și electrocasnice.",
+    description:
+      "Societatea noastră dispune de o posibilitate variată de colectare a deșeurilor reciclabile, cum ar fi deșeuri de fier, aluminiu, cupru, bronz, alamă, plumb, precum și electronice și electrocasnice.",
+    advantages: [
+      "Fier, aluminiu, cupru, bronz, alamă, plumb",
+      "Electronice și electrocasnice",
+      "Colectare adaptată tipului de material",
+    ],
+    image: "servicii-reciclabile.jpg",
+    imageAlt: "Grămadă de deșeuri metalice reciclabile",
+  },
+];
+```
+
+Note: `image` stores only the filename (not a path) — Task 11 maps slugs to statically-imported `StaticImageData` objects, since static image imports can't be built from a dynamic string path.
+
+- [ ] **Step 2: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/_lib/services.ts
+git commit -m "Add shared services content"
+```
+
+---
+
+## Task 6: ServiceCard component
+
+**Files:**
+- Create: `app/_components/ServiceCard.tsx`
+
+**Interfaces:**
+- Consumes: `Service` type from `../_lib/services` (Task 5).
+- Produces: `ServiceCard({ service }: { service: Service })`, consumed by the Home page (Task 10).
+
+- [ ] **Step 1: Create the component**
+
+```tsx
+import Link from "next/link";
+import type { Service } from "../_lib/services";
+
+export function ServiceCard({ service }: { service: Service }) {
+  return (
+    <div className="flex flex-col gap-3 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+      <h3 className="text-lg font-semibold text-ink">{service.title}</h3>
+      <p className="text-sm leading-6 text-ink/70">{service.summary}</p>
+      <Link
+        href={`/servicii#${service.slug}`}
+        className="mt-auto text-sm font-medium text-brand hover:text-brand-light"
+      >
+        Detalii →
+      </Link>
+    </div>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/_components/ServiceCard.tsx
+git commit -m "Add ServiceCard component"
+```
+
+---
+
+## Task 7: Header component
+
+**Files:**
+- Create: `app/_components/Header.tsx`
+
+**Interfaces:**
+- Consumes: `Logo` from `./Logo` (Task 3), `IconMenu`/`IconClose` from `./icons` (Task 4).
+- Produces: `Header()` — a client component (default export via named export `Header`), consumed by `app/layout.tsx` (Task 9).
+
+- [ ] **Step 1: Create the component**
+
+```tsx
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Logo } from "./Logo";
+import { IconMenu, IconClose } from "./icons";
+
+const links = [
+  { href: "/", label: "Acasă" },
+  { href: "/servicii", label: "Servicii" },
+  { href: "/despre-noi", label: "Despre noi" },
+  { href: "/contact", label: "Contact" },
+];
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="border-b border-black/5 bg-white">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+          <Logo className="h-8 w-8 text-brand" />
+          <span className="text-lg font-bold tracking-tight text-ink">VANCOS</span>
+        </Link>
+
+        <nav className="hidden items-center gap-6 sm:flex">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-ink/70 hover:text-brand">
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            className="rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-light"
+          >
+            Cere ofertă
+          </Link>
+        </nav>
+
+        <button
+          type="button"
+          className="sm:hidden"
+          aria-label={open ? "Închide meniul" : "Deschide meniul"}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? <IconClose className="h-6 w-6 text-ink" /> : <IconMenu className="h-6 w-6 text-ink" />}
+        </button>
+      </div>
+
+      {open && (
+        <nav className="flex flex-col gap-1 border-t border-black/5 px-6 py-4 sm:hidden">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-lg px-2 py-2 text-sm font-medium text-ink/80 hover:bg-paper"
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      )}
+    </header>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/_components/Header.tsx
+git commit -m "Add site header with mobile menu"
+```
+
+---
+
+## Task 8: Footer component
+
+**Files:**
+- Create: `app/_components/Footer.tsx`
+
+**Interfaces:**
+- Consumes: `Logo` from `./Logo` (Task 3).
+- Produces: `Footer()`, consumed by `app/layout.tsx` (Task 9).
+
+- [ ] **Step 1: Create the component**
+
+```tsx
+import Link from "next/link";
+import { Logo } from "./Logo";
+
+export function Footer() {
+  return (
+    <footer className="border-t border-black/5 bg-ink text-white/80">
+      <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12 sm:flex-row sm:justify-between">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <Logo className="h-7 w-7 text-brand-light" />
+            <span className="text-lg font-bold text-white">VANCOS</span>
+          </div>
+          <p className="max-w-xs text-sm text-white/60">
+            Degajare deșeuri din construcții, demolări și gospodării, plus colectare de reciclabile — în toată zona
+            București.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2 text-sm">
+          <span className="font-semibold text-white">Linkuri</span>
+          <Link href="/servicii" className="text-white/60 hover:text-white">
+            Servicii
+          </Link>
+          <Link href="/despre-noi" className="text-white/60 hover:text-white">
+            Despre noi
+          </Link>
+          <Link href="/contact" className="text-white/60 hover:text-white">
+            Contact
+          </Link>
+        </div>
+
+        <div className="flex flex-col gap-2 text-sm text-white/60">
+          <span className="font-semibold text-white">Contact</span>
+          <span>[telefon]</span>
+          <span>[email]</span>
+          <span>Deservim toată zona București</span>
+        </div>
+      </div>
+      <div className="border-t border-white/10 px-6 py-4 text-center text-xs text-white/40">
+        © {new Date().getFullYear()} Vancos. Toate drepturile rezervate.
+      </div>
+    </footer>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app still builds**
+
+Run: `pnpm build`
+Expected: build succeeds.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/_components/Footer.tsx
+git commit -m "Add site footer"
+```
+
+---
+
+## Task 9: Wire Header/Footer into the root layout and set site metadata
+
+**Files:**
+- Modify: `app/layout.tsx`
+
+**Interfaces:**
+- Consumes: `Header` (Task 7), `Footer` (Task 8).
+- Produces: every page rendered inside `<main>` between the shared header and footer; root `metadata` with a `%s | Vancos` title template used by every page's own `metadata` export (Tasks 10–13).
+
+- [ ] **Step 1: Update the root layout**
+
+```tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Header } from "./_components/Header";
+import { Footer } from "./_components/Footer";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Vancos",
+    default: "Vancos – Degajări deșeuri și colectare reciclabile în București",
+  },
+  description:
+    "Vancos preia și transportă deșeuri din construcții, demolări și gospodării în București, plus colectare diversificată de deșeuri reciclabile.",
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html lang="ro" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-paper text-ink">
+        <Header />
+        <main className="flex-1 flex flex-col">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+Note `lang="ro"` (was `"en"`) — all site content is Romanian.
+
+- [ ] **Step 2: Verify the app builds and renders the shared chrome**
+
+Run: `pnpm build`
+Expected: build succeeds — the still-default `app/page.tsx` content now renders between the new header and footer.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/layout.tsx
+git commit -m "Wire header and footer into root layout, set site metadata"
+```
+
+---
+
+## Task 10: Home page
+
+**Files:**
+- Modify: `app/page.tsx`
+
+**Interfaces:**
+- Consumes: `services` from `./_lib/services` (Task 5), `ServiceCard` from `./_components/ServiceCard` (Task 6), `IconContainer`/`IconTruck`/`IconTorch` from `./_components/icons` (Task 4), `public/images/hero.jpg` (Task 1).
+- Produces: the `/` route.
+
+- [ ] **Step 1: Replace the Home page content**
+
+```tsx
+import Image from "next/image";
+import Link from "next/link";
+import heroImage from "../public/images/hero.jpg";
+import { services } from "./_lib/services";
+import { ServiceCard } from "./_components/ServiceCard";
+import { IconContainer, IconTruck, IconTorch } from "./_components/icons";
+
+export default function Home() {
+  return (
+    <>
+      <section className="relative isolate overflow-hidden bg-ink">
+        <Image
+          src={heroImage}
+          alt="Utilaje de construcții pe un șantier"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-40 -z-10"
+        />
+        <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-24 sm:py-32">
+          <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            Degajăm deșeuri din construcții, gospodării și colectăm reciclabile în tot Bucureștiul
+          </h1>
+          <p className="max-w-xl text-lg text-white/80">
+            Mașini de 3,5 tone fără nevoie de autorizație de circulație, forță de muncă la cerere și debitare pentru
+            deșeuri voluminoase.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/contact"
+              className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+            >
+              Cere ofertă
+            </Link>
+            <Link
+              href="/servicii"
+              className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >
+              Vezi serviciile
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
+        <h2 className="text-2xl font-bold text-ink">Serviciile noastre</h2>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {services.map((service) => (
+            <ServiceCard key={service.slug} service={service} />
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto grid max-w-5xl gap-8 px-6 py-16 sm:grid-cols-3">
+          <div className="flex flex-col gap-3">
+            <IconContainer className="h-8 w-8 text-brand" />
+            <h3 className="font-semibold text-ink">Fără autorizație de circulație</h3>
+            <p className="text-sm text-ink/70">Mașinile noastre de 3,5 tone circulă liber în orice zonă din București.</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <IconTruck className="h-8 w-8 text-brand" />
+            <h3 className="font-semibold text-ink">Forță de muncă la cerere</h3>
+            <p className="text-sm text-ink/70">Dacă nu ai cine să încarce containerul, venim și cu oameni pentru asta.</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <IconTorch className="h-8 w-8 text-brand" />
+            <h3 className="font-semibold text-ink">Debitare la nevoie</h3>
+            <p className="text-sm text-ink/70">
+              Deșeurile voluminoase le debităm cu flex sau autogen, direct la fața locului.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto flex max-w-5xl flex-col items-start gap-4 px-6 py-16">
+        <h2 className="text-2xl font-bold text-ink">Ai deșeuri de ridicat?</h2>
+        <p className="max-w-lg text-ink/70">Spune-ne ce ai de degajat și îți răspundem cu o ofertă rapidă.</p>
+        <Link
+          href="/contact"
+          className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+        >
+          Contactează-ne
+        </Link>
+      </section>
+    </>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app builds**
+
+Run: `pnpm build`
+Expected: build succeeds and prerenders `/`. If it fails on the `heroImage` import, re-check that `public/images/hero.jpg` exists (Task 1) and the relative path (`../public/images/hero.jpg` from `app/page.tsx`) is correct.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx
+git commit -m "Build Vancos home page"
+```
+
+---
+
+## Task 11: Servicii page
+
+**Files:**
+- Create: `app/servicii/page.tsx`
+
+**Interfaces:**
+- Consumes: `services` from `../_lib/services` (Task 5), `public/images/servicii-*.jpg` (Task 1).
+- Produces: the `/servicii` route, with in-page anchors `#constructii-demolari`, `#gospodarii`, `#reciclabile` matching the `ServiceCard` links from the Home page (Task 6).
+
+- [ ] **Step 1: Create the page**
+
+```tsx
+import Image, { type StaticImageData } from "next/image";
+import type { Metadata } from "next";
+import { services } from "../_lib/services";
+import imgConstructii from "../../public/images/servicii-constructii.jpg";
+import imgGospodarii from "../../public/images/servicii-gospodarii.jpg";
+import imgReciclabile from "../../public/images/servicii-reciclabile.jpg";
+
+export const metadata: Metadata = {
+  title: "Servicii",
+  description:
+    "Degajare deșeuri din construcții și demolări, preluare deșeuri din gospodării și colectare de deșeuri reciclabile în București.",
+};
+
+const images: Record<string, StaticImageData> = {
+  "constructii-demolari": imgConstructii,
+  gospodarii: imgGospodarii,
+  reciclabile: imgReciclabile,
+};
+
+export default function ServiciiPage() {
+  return (
+    <div className="mx-auto flex max-w-5xl flex-col gap-20 px-6 py-16">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-3xl font-bold text-ink">Serviciile noastre</h1>
+        <p className="max-w-2xl text-ink/70">
+          De la degajarea molozului rezultat din demolări, până la colectarea deșeurilor reciclabile, adaptăm fiecare
+          intervenție la nevoile tale.
+        </p>
+      </div>
+
+      {services.map((service, index) => (
+        <section
+          key={service.slug}
+          id={service.slug}
+          className={`flex flex-col gap-8 scroll-mt-24 sm:flex-row sm:items-center ${
+            index % 2 === 1 ? "sm:flex-row-reverse" : ""
+          }`}
+        >
+          <div className="relative h-64 w-full flex-1 overflow-hidden rounded-2xl sm:h-80">
+            <Image
+              src={images[service.slug]}
+              alt={service.imageAlt}
+              fill
+              className="object-cover"
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
+          </div>
+          <div className="flex flex-1 flex-col gap-4">
+            <h2 className="text-2xl font-bold text-ink">{service.title}</h2>
+            <p className="text-ink/70">{service.description}</p>
+            <ul className="flex flex-col gap-2">
+              {service.advantages.map((advantage) => (
+                <li key={advantage} className="flex items-start gap-2 text-sm text-ink/80">
+                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand" />
+                  {advantage}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app builds**
+
+Run: `pnpm build`
+Expected: build succeeds and prerenders `/servicii`.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/servicii/page.tsx
+git commit -m "Build Servicii page"
+```
+
+---
+
+## Task 12: Despre noi page
+
+**Files:**
+- Create: `app/despre-noi/page.tsx`
+
+**Interfaces:**
+- Consumes: `IconCheck` from `../_components/icons` (Task 4), `public/images/despre-noi.jpg` (Task 1).
+- Produces: the `/despre-noi` route.
+
+- [ ] **Step 1: Create the page**
+
+```tsx
+import Image from "next/image";
+import type { Metadata } from "next";
+import despreImage from "../../public/images/despre-noi.jpg";
+import { IconCheck } from "../_components/icons";
+
+export const metadata: Metadata = {
+  title: "Despre noi",
+  description:
+    "Vancos degajează deșeuri din construcții, demolări și gospodării și colectează deșeuri reciclabile în toată zona București.",
+};
+
+const values = [
+  "Răspundem rapid, oriunde în București",
+  "Ne adaptăm la volumul și tipul deșeurilor tale",
+  "Mașini de 3,5 tone, fără blocaje de autorizație",
+  "Echipă pregătită să încarce și să debiteze la nevoie",
+];
+
+export default function DespreNoiPage() {
+  return (
+    <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16 sm:flex-row sm:items-center">
+      <div className="flex flex-1 flex-col gap-4">
+        <h1 className="text-3xl font-bold text-ink">Despre Vancos</h1>
+        <p className="text-ink/70">
+          Suntem o firmă din București specializată în degajarea deșeurilor din construcții, demolări și gospodării,
+          plus colectarea diversificată a deșeurilor reciclabile. Lucrăm cu mașini de 3,5 tone care circulă fără
+          autorizație în orice zonă a orașului, ceea ce ne permite să intervenim rapid, indiferent de locație.
+        </p>
+        <p className="text-ink/70">
+          Ne adaptăm la fiecare client: venim cu forță de muncă atunci când e nevoie de încărcare, și debităm
+          deșeurile voluminoase cu flex sau autogen direct la fața locului.
+        </p>
+        <ul className="flex flex-col gap-3">
+          {values.map((value) => (
+            <li key={value} className="flex items-start gap-2 text-sm text-ink/80">
+              <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand" />
+              {value}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="relative h-64 w-full flex-1 overflow-hidden rounded-2xl sm:h-96">
+        <Image
+          src={despreImage}
+          alt="Utilaj de construcții folosit pentru degajarea deșeurilor"
+          fill
+          className="object-cover"
+          sizes="(min-width: 640px) 50vw, 100vw"
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the app builds**
+
+Run: `pnpm build`
+Expected: build succeeds and prerenders `/despre-noi`.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/despre-noi/page.tsx
+git commit -m "Build Despre noi page"
+```
+
+---
+
+## Task 13: Contact page and form
+
+**Files:**
+- Create: `app/contact/page.tsx`
+- Create: `app/contact/ContactForm.tsx`
+
+**Interfaces:**
+- Consumes: `IconPhone`/`IconMail`/`IconPin` from `../_components/icons` (Task 4).
+- Produces: the `/contact` route; `ContactForm()` client component with local `name`/`phone`/`message` state that builds a `mailto:[email]?subject=...&body=...` link on submit (the literal `[email]` placeholder is intentional — see Global Constraints).
+
+- [ ] **Step 1: Create the contact form client component**
+
+```tsx
+"use client";
+
+import { useState, type FormEvent } from "react";
+
+export function ContactForm() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Cerere ofertă de la ${name}`);
+    const body = encodeURIComponent(`Nume: ${name}\nTelefon: ${phone}\n\nMesaj:\n${message}`);
+    window.location.href = `mailto:[email]?subject=${subject}&body=${body}`;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
+      <label className="flex flex-col gap-1 text-sm text-ink/80">
+        Nume
+        <input
+          type="text"
+          required
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          className="rounded-lg border border-black/10 px-3 py-2 text-ink outline-none focus:border-brand"
+        />
+      </label>
+      <label className="flex flex-col gap-1 text-sm text-ink/80">
+        Telefon
+        <input
+          type="tel"
+          required
+          value={phone}
+          onChange={(event) => setPhone(event.target.value)}
+          className="rounded-lg border border-black/10 px-3 py-2 text-ink outline-none focus:border-brand"
+        />
+      </label>
+      <label className="flex flex-col gap-1 text-sm text-ink/80">
+        Mesaj
+        <textarea
+          required
+          rows={4}
+          value={message}
+          onChange={(event) => setMessage(event.target.value)}
+          className="rounded-lg border border-black/10 px-3 py-2 text-ink outline-none focus:border-brand"
+        />
+      </label>
+      <button
+        type="submit"
+        className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+      >
+        Trimite cererea
+      </button>
+    </form>
+  );
+}
+```
+
+- [ ] **Step 2: Create the contact page**
+
+```tsx
+import type { Metadata } from "next";
+import { ContactForm } from "./ContactForm";
+import { IconPhone, IconMail, IconPin } from "../_components/icons";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Contactează Vancos pentru degajare de deșeuri și colectare de reciclabile în București.",
+};
+
+export default function ContactPage() {
+  return (
+    <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16 sm:flex-row">
+      <div className="flex flex-1 flex-col gap-6">
+        <h1 className="text-3xl font-bold text-ink">Contact</h1>
+        <p className="text-ink/70">
+          Spune-ne ce deșeuri ai de ridicat și în ce zonă din București te afli. Îți răspundem cu o ofertă rapidă.
+        </p>
+        <ul className="flex flex-col gap-4 text-ink/80">
+          <li className="flex items-center gap-3">
+            <IconPhone className="h-5 w-5 text-brand" />
+            [telefon]
+          </li>
+          <li className="flex items-center gap-3">
+            <IconMail className="h-5 w-5 text-brand" />
+            [email]
+          </li>
+          <li className="flex items-center gap-3">
+            <IconPin className="h-5 w-5 text-brand" />
+            [adresă/zonă acoperită] — deservim toată zona București
+          </li>
+        </ul>
+        <p className="text-sm text-ink/60">Program: [program de lucru]</p>
+      </div>
+      <div className="flex-1">
+        <ContactForm />
+      </div>
+    </div>
+  );
+}
+```
+
+- [ ] **Step 3: Verify the app builds**
+
+Run: `pnpm build`
+Expected: build succeeds and prerenders `/contact`.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add app/contact/page.tsx app/contact/ContactForm.tsx
+git commit -m "Build Contact page and form"
+```
+
+---
+
+## Task 14: Final verification pass
+
+**Files:** none (verification only).
+
+**Interfaces:** none — this task only checks the integrated output of Tasks 1–13.
+
+- [ ] **Step 1: Full production build**
+
+Run: `pnpm build`
+Expected: build succeeds, all four routes (`/`, `/servicii`, `/despre-noi`, `/contact`) listed in the route summary as prerendered (○ Static).
+
+- [ ] **Step 2: Lint**
+
+Run: `pnpm lint`
+Expected: no errors. If warnings appear about unused variables or missing `alt` text, fix them in the relevant file from Tasks 1–13 before proceeding.
+
+- [ ] **Step 3: Manual browser check**
+
+Run: `pnpm dev`, then open `http://localhost:3000` in a browser and check:
+- Home: hero image loads and text is readable over it, both CTA buttons navigate correctly, all three service cards render and their "Detalii" links jump to the matching anchor on `/servicii`.
+- Header: on a narrow viewport (resize below 640px or use device toolbar), the hamburger button toggles the mobile menu open/closed, and each link closes the menu on click.
+- `/servicii`: all three sections render with alternating image/text sides, images load.
+- `/despre-noi`: image loads, values list renders with checkmark icons.
+- `/contact`: filling in the form and submitting opens the device's mail client with a prefilled `mailto:` link (or shows a "no mail app configured" prompt in the browser — either is expected, since there's no real backend).
+- Footer: renders on every page with placeholder contact details and working quick links.
+
+Stop the dev server (`Ctrl+C`) once the check is complete.
+
+- [ ] **Step 4: Commit any fixes made during this task**
+
+If Steps 1–3 required any code fixes, stage and commit them:
+
+```bash
+git add -A
+git commit -m "Fix issues found in final verification pass"
+```
+
+If no fixes were needed, skip this step — there is nothing to commit.
