@@ -30,7 +30,7 @@ export const services: Service[] = [
     summary:
       "Venim cu forță de muncă pentru încărcare și, dacă e nevoie, debităm deșeurile voluminoase la fața locului.",
     description:
-      "În cazul preluării deșeurilor din casa beneficiarului, dispunem și de forță de muncă, în vederea încărcării containerului. Dacă clientul ne anunță că nu are oameni să încarce containerul, în funcție de disponibilitate, oferim și acest serviciu. Dacă deșeurile sunt prea voluminoase pentru a fi transportate, punem la dispoziție servicii de debitare a deșeurilor prin aparat flex sau autogen, în funcție de nevoie și împrejurări.",
+      "În cazul preluării deșeurilor din casa beneficiarului, dispunem și de forță de muncă, în vederea încărcării containerului. Dacă clientul ne anunță că nu are oameni să încarce containerul, în funcție de disponibilitate, oferim și acest serviciu. Dacă deșeurile sunt prea voluminoase pentru a fi transportate, punem la dispoziție servicii de debitare a deșeurilor prin aparat flex sau autogen, în funcție de nevoie și împrejurimi.",
     advantages: [
       "Forță de muncă disponibilă pentru încărcarea containerului",
       "Debitare cu flex sau autogen pentru deșeuri voluminoase",
