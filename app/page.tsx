@@ -212,15 +212,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row lg:items-start">
+      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row">
         <div className="flex w-full flex-col gap-2 lg:w-72 lg:flex-shrink-0">
           <h2 className="text-3xl font-bold text-paper sm:text-4xl">De ce Vancos</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
           <p className="text-paper/70">
             Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
           </p>
-          <div className="mt-4 flex h-16 w-16 items-center justify-center rounded-full border border-brand-light/30 bg-brand-light/5">
-            <Logo className="h-8 w-8 animate-[spin_6s_linear_infinite] text-brand-light" />
+          <div className="mt-4 flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface">
+            <IconRecycle className="h-28 w-28 animate-[spin_10s_linear_infinite] text-brand-light/30" />
           </div>
         </div>
 
