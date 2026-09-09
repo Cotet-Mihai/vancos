@@ -1,9 +1,28 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import heroImage from "../public/images/hero-truck.png";
+import imgConstructii from "../public/images/servicii-constructii.jpg";
+import imgGospodarii from "../public/images/servicii-gospodarii.jpg";
+import imgReciclabile from "../public/images/servicii-reciclabile.jpg";
 import { services } from "./_lib/services";
 import { ServiceCard } from "./_components/ServiceCard";
-import { IconTruck, IconContainer, IconBolt, IconRecycle, IconTorch, IconChevronDown } from "./_components/icons";
+import { Logo } from "./_components/Logo";
+import {
+  IconTruck,
+  IconContainer,
+  IconBolt,
+  IconRecycle,
+  IconTorch,
+  IconChevronDown,
+  IconClock,
+  IconShield,
+} from "./_components/icons";
+
+const serviceImages: Record<string, StaticImageData> = {
+  "constructii-demolari": imgConstructii,
+  gospodarii: imgGospodarii,
+  reciclabile: imgReciclabile,
+};
 
 const stats = [
   { icon: IconTruck, value: "3,5 t", label: "Autovehicule cu acces în tot Bucureștiul" },
@@ -150,14 +169,51 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-16">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-paper">Serviciile noastre</h2>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
+      <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-16">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex max-w-xl flex-col gap-4">
+            <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">
+              Serviciile noastre
+            </span>
+            <span className="h-[3px] w-12 rounded-full bg-brand" />
+            <h2 className="text-3xl leading-tight font-bold text-paper sm:text-4xl">
+              Tot ce trebuie să plece,
+              <br />
+              <span className="text-brand-light">pleacă cu noi.</span>
+            </h2>
+            <p className="text-paper/70">
+              Indiferent de tipul de deșeuri, ne ocupăm de colectare, încărcare și transport, rapid, eficient și
+              cu grijă pentru un București mai curat.
+            </p>
+          </div>
+
+          <div className="hidden flex-1 items-start justify-between gap-8 pt-2 lg:flex">
+            <div className="flex items-center gap-3">
+              <Logo className="h-6 w-6 flex-shrink-0 text-brand-light" />
+              <span className="h-8 w-px bg-white/20" />
+              <span className="text-[10px] leading-relaxed font-semibold tracking-[0.2em] text-white/50 uppercase">
+                Soluții complete
+                <br />
+                pentru un oraș mai curat
+              </span>
+            </div>
+            <span className="font-script -rotate-2 text-right text-2xl text-brand-light">
+              București
+              <br />
+              fără limite
+            </span>
+          </div>
         </div>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
+
+        <div className="grid gap-6 lg:grid-cols-4">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={service.slug}
+              service={service}
+              image={serviceImages[service.slug]}
+              index={index}
+              featured={index === 0}
+            />
           ))}
         </div>
       </section>
@@ -238,18 +294,49 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-5xl flex-col items-start gap-4 px-6 py-16">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-paper">Ai deșeuri de ridicat?</h2>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <div className="flex flex-col gap-8 rounded-[2rem] border border-white/10 bg-surface p-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-start gap-3">
+            <Logo className="h-6 w-6 flex-shrink-0 text-brand-light" />
+            <span className="text-[10px] leading-relaxed font-semibold tracking-[0.2em] text-white/50 uppercase">
+              Gata să facem
+              <br />
+              loc pentru un oraș mai curat?
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl font-bold text-paper">Ai deșeuri de ridicat?</h2>
+            <p className="max-w-sm text-sm text-paper/70">
+              Spune-ne ce ai de transportat și îți răspundem rapid cu o ofertă personalizată.
+            </p>
+          </div>
+
+          <Link
+            href="/contact"
+            className="flex w-fit items-center gap-3 rounded-full bg-brand-light py-2 pr-6 pl-2 text-sm font-bold text-ink shadow-lg transition-all duration-300 hover:scale-105"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-brand-light">
+              →
+            </span>
+            Solicită o ofertă
+          </Link>
+
+          <div className="flex items-center gap-6 divide-x divide-white/10">
+            <div className="flex items-center gap-2 pl-0 text-xs font-semibold text-paper/70">
+              <IconClock className="h-5 w-5 text-brand-light" />
+              Răspuns rapid
+            </div>
+            <div className="flex items-center gap-2 pl-6 text-xs font-semibold text-paper/70">
+              <IconShield className="h-5 w-5 text-brand-light" />
+              Fără bătăi de cap
+            </div>
+            <div className="flex items-center gap-2 pl-6 text-xs font-semibold text-paper/70">
+              <Logo className="h-5 w-5 text-brand-light" />
+              Un oraș mai curat
+            </div>
+          </div>
         </div>
-        <p className="max-w-lg text-paper/70">Spune-ne ce ai de degajat și îți răspundem cu o ofertă rapidă.</p>
-        <Link
-          href="/contact"
-          className="rounded-full bg-brand px-6 py-3 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"
-        >
-          Contactează-ne
-        </Link>
       </section>
     </>
   );
