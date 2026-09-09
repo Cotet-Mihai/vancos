@@ -7,6 +7,7 @@ import imgReciclabile from "../public/images/servicii-reciclabile.jpg";
 import { services } from "./_lib/services";
 import { ServiceCard } from "./_components/ServiceCard";
 import { Logo } from "./_components/Logo";
+import { Reveal } from "./_components/Reveal";
 import {
   IconTruck,
   IconContainer,
@@ -77,6 +78,18 @@ const steps = [
 ];
 
 const sectors = ["Sector 1", "Sector 2", "Sector 3", "Sector 4", "Sector 5", "Sector 6"];
+
+const materials = [
+  "Fier",
+  "Aluminiu",
+  "Cupru",
+  "Bronz",
+  "Alamă",
+  "Plumb",
+  "Moloz",
+  "Electrocasnice",
+  "Deșeuri menajere",
+];
 
 const faqs = [
   {
@@ -173,7 +186,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16">
+      <section className="mx-auto flex max-w-[100rem] flex-col gap-10 px-6 py-16">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <span className="h-[3px] w-8 rounded-full bg-brand-light" />
@@ -190,25 +203,41 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid w-full gap-6 lg:grid-cols-3">
+        <Reveal className="flex w-full flex-col gap-4 lg:flex-row">
           {services.map((service, index) => (
-            <ServiceCard
+            <div
               key={service.slug}
-              service={service}
-              image={serviceImages[service.slug]}
-              unit={String(index + 1).padStart(2, "0")}
-            />
+              className="flex min-w-0 flex-1 transition-[flex-grow] duration-500 ease-out hover:flex-[3]"
+            >
+              <ServiceCard
+                service={service}
+                image={serviceImages[service.slug]}
+                unit={String(index + 1).padStart(2, "0")}
+              />
+            </div>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex w-full flex-col gap-6 rounded-[2rem] border border-white/10 bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            <Logo className="h-6 w-6 flex-shrink-0 text-brand-light" />
+            <Logo className="h-7 w-7 flex-shrink-0 text-brand-light" />
             <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-paper">Ai deșeuri de ridicat?</h3>
+              <h3 className="text-lg font-bold text-paper">Ai deșeuri de ridicat?</h3>
               <p className="text-sm text-paper/70">Spune-ne ce ai de transportat și îți răspundem rapid.</p>
             </div>
           </div>
+
+          <div className="flex items-center gap-6 divide-x divide-white/10">
+            <div className="flex items-center gap-2 text-xs font-semibold text-paper/70">
+              <IconClock className="h-5 w-5 text-brand-light" />
+              Răspuns rapid
+            </div>
+            <div className="flex items-center gap-2 pl-6 text-xs font-semibold text-paper/70">
+              <IconShield className="h-5 w-5 text-brand-light" />
+              Fără bătăi de cap
+            </div>
+          </div>
+
           <Link
             href="/contact"
             className="flex w-fit items-center gap-3 rounded-full bg-brand-light py-2 pr-5 pl-2 text-sm font-bold text-ink transition-all duration-300 hover:scale-105"
@@ -229,10 +258,10 @@ export default function Home() {
             Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
           </p>
           <div className="relative mt-4 flex flex-1 flex-col items-center justify-center gap-2 rounded-[1.75rem] border border-white/10 bg-surface p-8">
-            <span className="absolute top-4 left-4 h-1.5 w-1.5 rounded-full bg-white/20" />
-            <span className="absolute top-4 right-4 h-1.5 w-1.5 rounded-full bg-white/20" />
-            <span className="absolute bottom-4 left-4 h-1.5 w-1.5 rounded-full bg-white/20" />
-            <span className="absolute right-4 bottom-4 h-1.5 w-1.5 rounded-full bg-white/20" />
+            <span className="absolute top-4 left-4 h-1.5 w-1.5 animate-pulse rounded-full bg-brand-light/60" />
+            <span className="absolute top-4 right-4 h-1.5 w-1.5 animate-pulse rounded-full bg-brand-light/60" />
+            <span className="absolute bottom-4 left-4 h-1.5 w-1.5 animate-pulse rounded-full bg-brand-light/60" />
+            <span className="absolute right-4 bottom-4 h-1.5 w-1.5 animate-pulse rounded-full bg-brand-light/60" />
             <span className="font-mono text-5xl font-bold text-brand-light">100%</span>
             <span className="text-center font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
               Acoperire
@@ -242,11 +271,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid flex-1 gap-6 sm:grid-cols-3">
+        <Reveal delay={150} className="grid flex-1 gap-6 sm:grid-cols-3">
           {whyUs.map((item, index) => (
             <div
               key={item.title}
-              className={`flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 ${
+              className={`flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-light/40 ${
                 index === whyUs.length - 1 ? "sm:col-span-3" : ""
               }`}
             >
@@ -258,8 +287,22 @@ export default function Home() {
               <p className="text-sm text-paper/70">{item.description}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
+
+      <div className="relative overflow-hidden border-y border-white/10 py-4">
+        <div className="flex w-max animate-marquee gap-8">
+          {[...materials, ...materials].map((material, index) => (
+            <span
+              key={`${material}-${index}`}
+              className="flex items-center gap-8 font-mono text-sm tracking-widest text-white/40 uppercase"
+            >
+              {material}
+              <span className="h-1 w-1 rounded-full bg-brand-light" />
+            </span>
+          ))}
+        </div>
+      </div>
 
       <section className="relative overflow-hidden bg-surface py-20">
         <div className="absolute inset-0 bg-gradient-to-br from-brand/15 via-transparent to-brand-light/10" />
@@ -278,9 +321,12 @@ export default function Home() {
           </div>
 
           <div className="relative grid gap-10 sm:grid-cols-3">
-            <div className="absolute top-7 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-white/20 to-transparent sm:block" />
-            {steps.map((step) => (
-              <div key={step.number} className="group relative flex flex-col gap-4">
+            <Reveal
+              variant="line"
+              className="absolute top-7 right-0 left-0 hidden h-px origin-left bg-gradient-to-r from-brand-light via-white/20 to-transparent sm:block"
+            />
+            {steps.map((step, index) => (
+              <Reveal key={step.number} delay={index * 200 + 200} className="group relative flex flex-col gap-4">
                 <div className="flex items-center gap-4">
                   <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border-2 border-dashed border-brand-light bg-surface font-mono text-lg font-bold text-brand-light transition-transform duration-300 group-hover:scale-110">
                     {step.number}
@@ -289,7 +335,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg font-semibold text-paper">{step.title}</h3>
                 <p className="text-sm text-paper/70">{step.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
