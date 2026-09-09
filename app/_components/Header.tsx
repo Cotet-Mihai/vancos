@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "./Logo";
-import { IconMenu, IconClose } from "./icons";
+import { IconMenu, IconClose, IconPhone } from "./icons";
 
 const links = [
   { href: "/", label: "Acasă" },
@@ -14,33 +15,50 @@ const links = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="border-b border-black/5 bg-white">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <Logo className="h-8 w-8 text-brand" />
-          <span className="text-lg font-bold tracking-tight text-ink">VANCOS</span>
+    <header className="bg-ink">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+          <Logo className="h-9 w-9 text-brand-light" />
+          <span className="flex flex-col leading-none">
+            <span className="text-lg font-bold tracking-tight text-white">VANCOS</span>
+            <span className="text-[10px] font-semibold tracking-[0.2em] text-white/50 uppercase">
+              Mai curat, mai bine
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 sm:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group relative py-2 text-xs font-bold tracking-widest text-ink/60 uppercase transition-colors hover:text-ink"
-            >
-              {link.label}
-              <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-brand transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light"
-          >
-            Cere ofertă
-          </Link>
+          {links.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`group relative py-2 text-xs font-bold tracking-widest uppercase transition-colors ${
+                  active ? "text-white" : "text-white/60 hover:text-white"
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-[1.5px] bg-brand-light transition-all duration-300 ${
+                    active ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </nav>
+
+        <a
+          href="tel:[telefon]"
+          className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light sm:flex"
+        >
+          <IconPhone className="h-4 w-4" />
+          Sună acum
+        </a>
 
         <button
           type="button"
@@ -48,22 +66,29 @@ export function Header() {
           aria-label={open ? "Închide meniul" : "Deschide meniul"}
           onClick={() => setOpen((value) => !value)}
         >
-          {open ? <IconClose className="h-6 w-6 text-ink" /> : <IconMenu className="h-6 w-6 text-ink" />}
+          {open ? <IconClose className="h-6 w-6 text-white" /> : <IconMenu className="h-6 w-6 text-white" />}
         </button>
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-black/5 px-6 py-4 sm:hidden">
+        <nav className="flex flex-col gap-1 border-t border-white/10 px-6 py-4 sm:hidden">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-2 py-2 text-sm font-medium text-ink/80 hover:bg-paper"
+              className="rounded-lg px-2 py-2 text-sm font-medium text-white/80 hover:bg-white/5"
               onClick={() => setOpen(false)}
             >
               {link.label}
             </Link>
           ))}
+          <a
+            href="tel:[telefon]"
+            className="mt-2 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase"
+          >
+            <IconPhone className="h-4 w-4" />
+            Sună acum
+          </a>
         </nav>
       )}
     </header>

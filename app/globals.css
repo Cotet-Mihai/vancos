@@ -20,6 +20,7 @@
   --color-accent-warm: var(--accent-warm);
   --font-sans: var(--font-montserrat);
   --font-mono: var(--font-geist-mono);
+  --font-script: var(--font-caveat);
 }
 
 body {

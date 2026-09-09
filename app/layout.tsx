@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Montserrat, Geist_Mono } from "next/font/google";
+import { Montserrat, Caveat, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_components/Header";
 import { Footer } from "./_components/Footer";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
 });
 
@@ -25,7 +30,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ro" className={`${montserrat.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="ro"
+      className={`${montserrat.variable} ${caveat.variable} ${geistMono.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>

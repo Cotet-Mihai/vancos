@@ -11,15 +11,8 @@ export function Logo({ className }: LogoProps) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <rect width="40" height="40" rx="10" fill="currentColor" />
-      <path
-        d="M10 12l10 14 10-14"
-        stroke="#F5F4F0"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="30" cy="10" r="3" fill="#3E9B5C" />
+      <path d="M6 34C6 19 19 6 34 6C34 21 21 34 6 34Z" fill="#F5F4F0" />
+      <path d="M14 34C14 24 24 14 34 14C34 24 24 34 14 34Z" fill="currentColor" />
     </svg>
   );
 }
