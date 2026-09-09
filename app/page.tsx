@@ -219,6 +219,9 @@ export default function Home() {
           <p className="text-paper/70">
             Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
           </p>
+          <div className="mt-4 flex h-16 w-16 items-center justify-center rounded-full border border-brand-light/30 bg-brand-light/5">
+            <Logo className="h-8 w-8 animate-[spin_6s_linear_infinite] text-brand-light" />
+          </div>
         </div>
 
         <div className="grid flex-1 gap-6 sm:grid-cols-3">
