@@ -18,7 +18,7 @@ const values = [
 
 export default function DespreNoiPage() {
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 py-16 sm:flex-row sm:items-center">
+    <div className="mx-auto flex max-w-5xl flex-col gap-12 px-6 pt-28 pb-16 sm:flex-row sm:items-center">
       <div className="flex flex-1 flex-col gap-4">
         <h1 className="text-3xl font-bold text-ink">Despre Vancos</h1>
         <span className="h-[3px] w-12 rounded-full bg-brand" />

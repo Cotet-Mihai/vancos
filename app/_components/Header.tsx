@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { IconMenu, IconClose, IconPhone } from "./icons";
 
@@ -15,10 +15,26 @@ const links = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const transparent = isHome && !scrolled && !open;
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 24);
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-ink">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        transparent ? "bg-transparent" : "bg-ink/95 shadow-lg backdrop-blur-sm"
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <Logo className="h-9 w-9 text-brand-light" />
@@ -71,7 +87,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-white/10 px-6 py-4 sm:hidden">
+        <nav className="flex flex-col gap-1 border-t border-white/10 bg-ink px-6 py-4 sm:hidden">
           {links.map((link) => (
             <Link
               key={link.href}

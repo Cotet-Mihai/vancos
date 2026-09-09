@@ -19,7 +19,7 @@ const images: Record<string, StaticImageData> = {
 
 export default function ServiciiPage() {
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-20 px-6 py-16">
+    <div className="mx-auto flex max-w-5xl flex-col gap-20 px-6 pt-28 pb-16">
       <div className="flex flex-col gap-3">
         <h1 className="text-3xl font-bold text-ink">Serviciile noastre</h1>
         <span className="h-[3px] w-12 rounded-full bg-brand" />
