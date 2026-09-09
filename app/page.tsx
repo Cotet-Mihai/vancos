@@ -212,12 +212,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-16">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-paper">De ce Vancos</h2>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row lg:items-start">
+        <div className="grid flex-1 gap-6 sm:grid-cols-3">
           {whyUs.map((item) => (
             <div
               key={item.title}
@@ -228,6 +224,14 @@ export default function Home() {
               <p className="text-sm text-paper/70">{item.description}</p>
             </div>
           ))}
+        </div>
+
+        <div className="flex w-full flex-col gap-2 lg:w-72 lg:flex-shrink-0">
+          <h2 className="text-2xl font-bold text-paper">De ce Vancos</h2>
+          <span className="h-[3px] w-12 rounded-full bg-brand" />
+          <p className="text-paper/70">
+            Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
+          </p>
         </div>
       </section>
 
