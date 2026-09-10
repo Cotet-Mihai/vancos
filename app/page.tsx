@@ -134,7 +134,10 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <Reveal delay={120} className="flex w-full flex-col gap-4 lg:flex-row">
+          {/* Pe mobil si tableta cardurile stau 2 x 2; de la `lg` redevin rand,
+              unde exista cursor pentru deschiderea la hover. Proprietatile flex
+              ale copiilor sunt ignorate cat timp parintele e grila. */}
+          <Reveal delay={120} className="grid w-full grid-cols-2 gap-3 sm:gap-4 lg:flex lg:flex-row">
             {services.map((service, index) => (
               <div
                 key={service.slug}
