@@ -151,7 +151,7 @@ export default function Home() {
         </div>
 
         <Reveal className="mx-auto w-full max-w-[88rem] px-6">
-          <div className="flex w-full flex-col gap-6 rounded-[2rem] border border-white/10 bg-surface px-10 py-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full">
+          <div className="flex w-full flex-col gap-5 rounded-[2rem] border border-white/10 bg-surface px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:rounded-full sm:px-10 sm:py-4">
             <div className="flex items-center gap-4">
               <div className="flex flex-col gap-1">
                 <h3 className="text-lg font-bold text-paper">Ai deșeuri de ridicat?</h3>
@@ -159,8 +159,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex items-center gap-6 divide-x divide-white/10">
-              <div className="flex items-center gap-2 pr-6 text-xs font-semibold text-paper/70">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:gap-6 sm:divide-x sm:divide-white/10">
+              <div className="flex items-center gap-2 text-xs font-semibold text-paper/70 sm:pr-6">
                 <IconClock className="h-5 w-5 text-brand-light" />
                 Răspuns rapid
               </div>

@@ -28,7 +28,10 @@ export function ServiceCard({ service, image, unit }: ServiceCardProps) {
         <h3 className="line-clamp-2 min-h-[2.5rem] text-sm leading-tight font-bold text-white transition-all duration-500 ease-out sm:min-h-[2.75rem] sm:text-base">
           {service.title}
         </h3>
-        <div className="grid grid-rows-[0fr] opacity-0 [transition:grid-template-rows_500ms_ease-out,opacity_500ms_ease-out_150ms] group-hover:grid-rows-[1fr] group-hover:opacity-100">
+        {/* Deschiderea la hover e o interactiune de desktop: pe touch nu se
+            declanseaza niciodata, deci sub `lg` rezumatul si butonul stau
+            deschise. Altfel, pe telefon, cardul nu duce nicaieri. */}
+        <div className="grid grid-rows-[1fr] opacity-100 [transition:grid-template-rows_500ms_ease-out,opacity_500ms_ease-out_150ms] lg:grid-rows-[0fr] lg:opacity-0 lg:group-hover:grid-rows-[1fr] lg:group-hover:opacity-100">
           <div className="flex flex-col gap-4 overflow-hidden">
             <p className="line-clamp-2 text-sm text-white/80">{service.summary}</p>
             <Link
