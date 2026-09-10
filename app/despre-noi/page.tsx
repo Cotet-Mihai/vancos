@@ -93,7 +93,10 @@ export default function DespreNoiPage() {
             plus colectarea diversificată a deșeurilor reciclabile.
           </p>
 
-          <div className="relative h-72 w-full overflow-hidden rounded-[2rem] border border-white/10 sm:h-96 lg:h-[30rem]">
+          <div
+            className="hero-rise relative h-72 w-full overflow-hidden rounded-[2rem] border border-white/10 sm:h-96 lg:h-[30rem]"
+            style={{ "--rise-delay": "0.6s" } as CSSProperties}
+          >
             <Image
               src={despreImage}
               alt="Vedere de sus peste o hală de reciclare, cu zeci de containere pline cu materiale sortate"
@@ -123,16 +126,16 @@ export default function DespreNoiPage() {
 
       <div className="mx-auto flex max-w-7xl flex-col px-6">
         <section className="py-16 lg:py-24">
-          <Reveal className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
-            <div className="flex flex-col gap-4">
+          <div className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
+            <Reveal className="flex flex-col gap-4">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Cine suntem</span>
               <h2 className="text-3xl font-bold text-paper sm:text-4xl">
                 O echipă mică, cu utilajul potrivit.
               </h2>
               <span className="h-[3px] w-12 rounded-full bg-brand" />
-            </div>
+            </Reveal>
 
-            <div className="flex flex-col gap-5 leading-relaxed text-paper/70">
+            <Reveal delay={120} className="flex flex-col gap-5 leading-relaxed text-paper/70">
               <p>
                 Lucrăm cu mașini de 3,5 tone care circulă fără autorizație în orice zonă a orașului, ceea ce ne permite
                 să intervenim rapid, indiferent de locație. Containerele merg până la 4 tone, iar numărul de curse îl
@@ -147,45 +150,45 @@ export default function DespreNoiPage() {
                 Materialele reciclabile — fier, aluminiu, cupru, bronz, alamă, plumb, electronice și electrocasnice —
                 le preluăm separat și le trimitem mai departe spre reciclare.
               </p>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </section>
 
         <section className="py-16 lg:py-24">
-          <Reveal className="flex flex-col gap-10">
-            <div className="flex items-center gap-5">
+          <div className="flex flex-col gap-10">
+            <Reveal className="flex items-center gap-5">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Cum lucrăm</span>
               <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
-            </div>
+            </Reveal>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {principles.map((principle, index) => (
-                <div
-                  key={principle.title}
-                  className="flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 transition-colors duration-300 hover:border-brand-light/40 motion-reduce:transition-none"
-                >
+                <Reveal key={principle.title} delay={80 * index} className="h-full">
+                  <div className="flex h-full flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 transition-colors duration-300 hover:border-brand-light/40 motion-reduce:transition-none">
                   <span className="font-mono text-[10px] tracking-widest text-brand-light">
                     PRINC.{String(index + 1).padStart(2, "0")}
                   </span>
                   <principle.icon className="h-8 w-8 flex-shrink-0 text-brand-light" />
                   <h3 className="font-semibold text-paper">{principle.title}</h3>
                   <p className="text-sm leading-relaxed text-paper/70">{principle.description}</p>
-                </div>
+                  </div>
+                </Reveal>
               ))}
             </div>
-          </Reveal>
+          </div>
         </section>
 
         <section className="py-16 lg:py-24">
-          <Reveal className="flex flex-col gap-10">
-            <div className="flex items-center gap-5">
+          <div className="flex flex-col gap-10">
+            <Reveal className="flex items-center gap-5">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Ce facem</span>
               <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
-            </div>
+            </Reveal>
 
             <ul className="grid gap-4 sm:grid-cols-2">
               {services.map((service, index) => (
                 <li key={service.slug}>
+                  <Reveal delay={80 * index} className="h-full">
                   <Link
                     href={`/servicii#${service.slug}`}
                     className="group flex h-full items-start gap-5 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-brand-light/40 hover:bg-white/[0.06] motion-reduce:transition-none"
@@ -207,10 +210,11 @@ export default function DespreNoiPage() {
                       </span>
                     </span>
                   </Link>
+                  </Reveal>
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
         </section>
       </div>
 

@@ -98,17 +98,17 @@ export default function ContactPage() {
 
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1fr_minmax(0,31rem)] lg:gap-20 lg:py-20">
         <div className="flex flex-col gap-10">
-          <Reveal className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2 pb-2">
+          <div className="flex flex-col gap-4">
+            <Reveal className="flex flex-col gap-2 pb-2">
               <span className="text-5xl leading-none font-bold tracking-tight text-paper sm:text-6xl">VANCOS</span>
               <span className="font-mono text-[10px] tracking-[0.3em] text-brand-light uppercase">
                 Mai curat, mai bine
               </span>
-            </div>
+            </Reveal>
 
-            {channels.map((channel) => (
+            {channels.map((channel, index) => (
+              <Reveal key={channel.label} delay={80 * (index + 1)}>
               <a
-                key={channel.label}
                 href={channel.href}
                 className="group flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 transition-colors duration-300 hover:border-brand-light/40 hover:bg-white/[0.06] motion-reduce:transition-none"
               >
@@ -123,9 +123,10 @@ export default function ContactPage() {
                   <span className="text-sm text-paper/60">{channel.note}</span>
                 </span>
               </a>
+              </Reveal>
             ))}
 
-            <div className="flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
+            <Reveal delay={240} className="flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
               <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
                 <IconPin className="h-5 w-5" />
               </span>
@@ -134,9 +135,9 @@ export default function ContactPage() {
                 <span className="text-lg font-bold text-paper">București</span>
                 <span className="text-sm text-paper/60">{contact.area}</span>
               </span>
-            </div>
+            </Reveal>
 
-            <div className="flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
+            <Reveal delay={320} className="flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
               <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
                 <IconClock className="h-5 w-5" />
               </span>
@@ -154,18 +155,19 @@ export default function ContactPage() {
                 </dl>
                 <span className="text-sm text-paper/60">Intervenim de regulă în 24-48h de la solicitare.</span>
               </span>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
 
-          <Reveal className="flex flex-col gap-6 pt-4">
-            <div className="flex items-center gap-5">
+          <div className="flex flex-col gap-6 pt-4">
+            <Reveal className="flex items-center gap-5">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Ce urmează</span>
               <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
-            </div>
+            </Reveal>
 
             <ol className="flex flex-col gap-4">
               {steps.map((step, index) => (
-                <li key={step.title} className="flex items-start gap-4">
+                <li key={step.title}>
+                  <Reveal delay={80 * (index + 1)} className="flex items-start gap-4">
                   <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-white/15 bg-surface font-mono text-xs font-bold text-brand-light">
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -176,11 +178,12 @@ export default function ContactPage() {
                     </span>
                     <span className="text-sm leading-relaxed text-paper/70">{step.description}</span>
                   </span>
+                  </Reveal>
                 </li>
               ))}
             </ol>
 
-            <p className="text-sm text-paper/50">
+            <Reveal delay={320} className="text-sm text-paper/50">
               Trimițând formularul ești de acord cu{" "}
               <Link
                 href="/termeni-si-conditii"
@@ -189,15 +192,16 @@ export default function ContactPage() {
                 termenii și condițiile
               </Link>
               .
-            </p>
-          </Reveal>
+            </Reveal>
+          </div>
 
-          <Reveal className="flex flex-col gap-6">
-            <div className="flex items-center gap-5">
+          <div className="flex flex-col gap-6">
+            <Reveal className="flex items-center gap-5">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Unde ne găsești</span>
               <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
-            </div>
+            </Reveal>
 
+            <Reveal delay={120} className="flex flex-col gap-6">
             <div className="flex items-start gap-4">
               <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
                 <IconPin className="h-5 w-5" />
@@ -235,18 +239,21 @@ export default function ContactPage() {
                 →
               </span>
             </a>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
 
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <QuickQuoteForm />
+          <Reveal delay={120}>
+            <QuickQuoteForm />
+          </Reveal>
         </div>
       </div>
 
       <div className="mx-auto flex max-w-7xl flex-col px-6">
         <section className="py-16 lg:py-20">
-          <Reveal className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
-            <div className="flex flex-col gap-4">
+          <div className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
+            <Reveal className="flex flex-col gap-4">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Transparență</span>
               <h2 className="text-3xl font-bold text-paper sm:text-4xl">Datele firmei</h2>
               <p className="text-sm leading-relaxed text-paper/60">
@@ -259,10 +266,12 @@ export default function ContactPage() {
                 </Link>
                 .
               </p>
-            </div>
+            </Reveal>
 
-            <DateleFirmei />
-          </Reveal>
+            <Reveal delay={120}>
+              <DateleFirmei />
+            </Reveal>
+          </div>
         </section>
       </div>
     </>
