@@ -55,7 +55,7 @@ export const services: Service[] = [
       "Adaptare la nevoile fiecărui client",
     ],
     image: "servicii-gospodarii.jpg",
-    imageAlt: "Grămadă de mobilier voluminos aruncat: scaune, birouri și dulapuri",
+    imageAlt: "Grămadă de electrocasnice vechi scoase din uz: televizoare și monitoare",
   },
   {
     slug: "reciclabile",

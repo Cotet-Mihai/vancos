@@ -22,7 +22,14 @@ const PRETURI_LA = "10 septembrie 2026";
 
 const STEP = 5;
 
-export function PriceCalculator() {
+type PriceCalculatorProps = {
+  /** Rama widget-ului. În dialog o pune fereastra, deci se trimite alta. */
+  className?: string;
+  /** În dialog, antetul propriu ar dubla titlul ferestrei. */
+  showHeader?: boolean;
+};
+
+export function PriceCalculator({ className, showHeader = true }: PriceCalculatorProps = {}) {
   // Cantitatile stau pe numele materialului, nu pe pozitie. Cu un vector indexat,
   // orice modificare a listei lasa starea veche nealiniata peste cea noua —
   // materialele adaugate la coada citesc `undefined`, iar inputul trece din
@@ -56,15 +63,21 @@ export function PriceCalculator() {
   }
 
   return (
-    <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface">
-      <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
-        <span className="font-mono text-[10px] tracking-widest text-brand-light/70 uppercase">
-          Cântar · estimare live
-        </span>
-        <span className="flex h-2 w-2 animate-pulse rounded-full bg-brand-light" />
-      </div>
+    <div
+      className={
+        className ??
+        "overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface shadow-[0_32px_70px_-28px_rgba(0,0,0,0.9),0_0_50px_-20px_rgba(62,155,92,0.25)]"
+      }
+    >
+      {showHeader && (
+        <div className="border-b border-white/10 px-5 py-3">
+          <span className="font-mono text-[10px] tracking-widest text-brand-light/70 uppercase">
+            Cântar · estimare live
+          </span>
+        </div>
+      )}
 
-      <div className="flex flex-col divide-y divide-white/10 px-5">
+      <div className="flex flex-col divide-y divide-white/10 px-5 pt-1">
         {materials.map((material) => (
           <div key={material.name} className="flex items-center justify-between gap-3 py-2">
             <div className="flex min-w-0 flex-col">

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, type MouseEvent } from "react";
 import { contact } from "../_lib/contact";
 import { IconPhone, IconMail, IconChart } from "./icons";
+import { CalculatorDialog } from "./CalculatorDialog";
 
 const links = [
   { href: "/", label: "Acasă" },
@@ -112,13 +113,7 @@ export function Header() {
             })}
           </nav>
 
-          <a
-            href={contact.phoneHref}
-            className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light sm:flex"
-          >
-            <IconPhone className="h-4 w-4" />
-            Sună acum
-          </a>
+          <CalculatorDialog />
 
           {/* Hamburgerul rămâne pe loc; liniile se rotesc în X când e deschis. */}
           <button

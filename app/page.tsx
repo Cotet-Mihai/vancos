@@ -130,7 +130,7 @@ export default function Home() {
       <Hero />
 
       <section className="flex flex-col gap-10 py-16">
-        <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-10 px-6">
+        <div className="mx-auto flex w-full max-w-[88rem] flex-col gap-10 px-6">
           <Reveal className="flex flex-col items-center gap-4 text-center">
             <div className="flex items-center gap-3">
               <span className="h-[3px] w-8 rounded-full bg-brand-light" />

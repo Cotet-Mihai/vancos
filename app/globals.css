@@ -222,6 +222,46 @@ input[type="number"] {
   background-size: 26px 26px;
 }
 
+/* Textul de pe cardul de serviciu, pe desktop.
+
+   Alunecarea e animație, nu tranziție, tocmai pentru ieșire: o tranziție ar
+   parcurge drumul înapoi, adică textul s-ar duce spre dreapta exact când cardul
+   se îngustează, iar cele două împreună se citesc ca o deplasare spre centru.
+   Animația există doar cât ține hover-ul; la ieșire dispare, transformarea
+   revine instantaneu la zero și rămâne doar stingerea. */
+@keyframes card-reveal-in {
+  from {
+    transform: translateX(1.75rem);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-reveal {
+    opacity: 0;
+    transition:
+      opacity 380ms ease-out,
+      grid-template-rows 380ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  .group:hover .card-reveal {
+    opacity: 1;
+    animation: card-reveal-in 520ms cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+}
+
+/* Selecția de text în culorile site-ului, nu albastrul implicit al browserului.
+   `::selection` nu moștenește, deci regula trebuie să prindă și elementele —
+   de aici perechea cu `*`. Verdele brandului la 35% lasă textul lizibil pe
+   dedesubt; peste asta, literele s-ar citi greu. */
+::selection,
+*::selection {
+  background-color: rgba(62, 155, 92, 0.35);
+  color: var(--paper);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-coverage,
   .animate-aura,
@@ -230,6 +270,7 @@ input[type="number"] {
   .hero-rise,
   .hero-media-in,
   .text-brand-gradient,
+  .card-reveal,
   [data-slot="accordion-content"] {
     animation: none;
   }
