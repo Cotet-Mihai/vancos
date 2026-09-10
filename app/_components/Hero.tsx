@@ -135,7 +135,7 @@ export function Hero() {
       </section>
 
       <div
-        className="hero-rise border-t border-white/10 sm:absolute sm:inset-x-0 sm:bottom-0 sm:z-10"
+        className="hero-rise border-y border-white/10 sm:absolute sm:inset-x-0 sm:bottom-0 sm:z-10 sm:border-b-0"
         style={{ "--rise-delay": "0.85s" } as CSSProperties}
       >
         <dl className="mx-auto grid max-w-7xl grid-cols-4 divide-x divide-white/10 px-4 py-5 sm:px-6 sm:py-8">

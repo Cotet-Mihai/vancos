@@ -20,7 +20,7 @@ export function ServiceCard({ service, image }: ServiceCardProps) {
       <div className="absolute inset-0 bg-gradient-to-t from-black from-15% via-black/60 via-55% to-black/10 transition-opacity duration-500 lg:from-black/90 lg:from-0% lg:via-black/30 lg:via-50% lg:group-hover:from-black/95" />
 
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-4 sm:p-5">
-        <h3 className="line-clamp-2 min-h-[2.5rem] text-sm leading-tight font-bold text-white transition-all duration-500 ease-out sm:min-h-[2.75rem] lg:text-base">
+        <h3 className="line-clamp-2 min-h-[2.5rem] text-center text-sm leading-tight font-bold text-white transition-all duration-500 ease-out sm:min-h-[2.75rem] lg:text-base">
           {service.title}
         </h3>
         {/* Deschiderea la hover e o interactiune de desktop: pe touch nu se
@@ -31,11 +31,8 @@ export function ServiceCard({ service, image }: ServiceCardProps) {
             <p className="hidden text-white/80 sm:line-clamp-2 sm:text-sm">{service.summary}</p>
             <Link
               href={`/servicii#${service.slug}`}
-              className="flex w-full items-center justify-center gap-2 rounded-full bg-brand-light px-4 py-1.5 text-xs font-bold text-ink transition-transform duration-300 sm:gap-3 sm:py-2 sm:text-sm lg:w-fit lg:justify-start lg:pr-5 lg:pl-2 lg:hover:scale-105 motion-reduce:transition-none"
+              className="flex w-full items-center justify-center rounded-full bg-brand-light px-4 py-1.5 text-xs font-bold text-ink transition-transform duration-300 sm:py-2 sm:text-sm lg:w-fit lg:px-5 lg:hover:scale-105 motion-reduce:transition-none"
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-brand-light sm:h-7 sm:w-7">
-                →
-              </span>
               Detalii
             </Link>
           </div>

@@ -150,15 +150,13 @@ export default function Home() {
         </div>
 
         <Reveal className="mx-auto w-full max-w-[88rem] px-6">
-          <div className="flex w-full flex-col gap-5 rounded-[2rem] border border-white/10 bg-surface px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:rounded-full sm:px-10 sm:py-4">
-            <div className="flex items-center gap-4">
-              <div className="flex flex-col gap-1">
-                <h3 className="text-lg font-bold text-paper">Ai deșeuri de ridicat?</h3>
-                <p className="text-sm text-paper/70">Spune-ne ce ai de transportat și îți răspundem rapid.</p>
-              </div>
+          <div className="flex w-full flex-col items-center gap-5 rounded-[2rem] border border-white/10 bg-surface px-6 py-6 text-center sm:flex-row sm:justify-between sm:gap-6 sm:rounded-full sm:px-10 sm:py-4 sm:text-left">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-lg font-bold text-paper">Ai deșeuri de ridicat?</h3>
+              <p className="text-sm text-paper/70">Spune-ne ce ai de transportat și îți răspundem rapid.</p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:gap-6 sm:divide-x sm:divide-white/10">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:justify-start sm:gap-6 sm:divide-x sm:divide-white/10">
               <div className="flex items-center gap-2 text-xs font-semibold text-paper/70 sm:pr-6">
                 <IconClock className="h-5 w-5 text-brand-light" />
                 Răspuns rapid
