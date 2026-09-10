@@ -64,7 +64,7 @@ export function Hero() {
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-[67%_50%] sm:object-center"
             />
           </div>
         </div>
