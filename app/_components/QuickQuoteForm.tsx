@@ -10,14 +10,14 @@ const wasteTypes = [
   "Deșeuri din demolări",
   "Deșeuri din gospodărie",
   "Materiale reciclabile",
-  "Mixt — mai multe tipuri de deșeuri",
+  "Mixt, mai multe tipuri de deșeuri",
   "Altceva",
 ];
 
 // Aceleași clase pentru input, select si textarea, ca sa nu se vada nicio diferenta
 // de inaltime sau de contur intre ele in coloana din dreapta.
 const fieldClass =
-  "w-full rounded-2xl border border-white/12 bg-white/[0.04] px-4 py-3.5 text-sm text-paper outline-none transition-colors duration-200 placeholder:text-white/30 focus:border-brand-light/70 focus:bg-white/[0.07] motion-reduce:transition-none";
+  "w-full rounded-2xl border border-white/12 bg-white/[0.04] px-4 py-3 text-sm text-paper outline-none sm:py-3.5 transition-colors duration-200 placeholder:text-white/30 focus:border-brand-light/70 focus:bg-white/[0.07] motion-reduce:transition-none";
 
 const labelClass = "font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase";
 
@@ -32,7 +32,7 @@ export function QuickQuoteForm() {
     event.preventDefault();
     const subject = encodeURIComponent(`Cerere ofertă de la ${name}`);
     const body = encodeURIComponent(
-      `Nume: ${name}\nTelefon: ${phone}\nTip deșeu: ${type}\n\nDetalii:\n${details || "—"}`,
+      `Nume: ${name}\nTelefon: ${phone}\nTip deșeu: ${type}\n\nDetalii:\n${details || "(fără detalii)"}`,
     );
     window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
   }
@@ -40,17 +40,17 @@ export function QuickQuoteForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-6 rounded-[2rem] border border-white/10 bg-ink/70 p-7 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] backdrop-blur-xl sm:p-9"
+      className="flex flex-col gap-5 rounded-[2rem] border border-white/10 bg-ink/70 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] backdrop-blur-xl sm:gap-6 sm:p-7 lg:p-9"
     >
       <div className="flex flex-col gap-4 border-b border-dashed border-white/15 pb-5">
         <div className="flex items-center justify-between gap-4">
           <span className="text-lg font-bold tracking-tight text-paper">VANCOS</span>
           <span className="font-mono text-[10px] tracking-[0.25em] text-white/40 uppercase">Cerere rapidă</span>
         </div>
-        <h3 className="text-2xl font-bold text-paper">Solicită o ofertă</h3>
+        <h3 className="text-xl font-bold text-paper sm:text-2xl">Solicită o ofertă</h3>
       </div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4 sm:gap-5">
         <label className="flex flex-col gap-2">
           <span className={labelClass}>Nume</span>
           <input

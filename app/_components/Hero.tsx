@@ -3,7 +3,7 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "../../public/images/hero-truck.png";
+import heroImage from "../../public/images/hero-truck-2.png";
 import { IconTruck, IconContainer, IconBolt, IconRecycle } from "./icons";
 
 // Pe mobil banda are patru coloane într-un ecran de 360-400px, deci eticheta
@@ -60,7 +60,7 @@ export function Hero() {
           <div className="hero-zoom absolute inset-0">
             <Image
               src={heroImage}
-              alt="Camion Vancos cu container de reciclare, pe fundalul orizontului Bucureștiului"
+              alt="Camion Vancos de 3,5 tone cu container încărcat cu moloz, pe fundalul orizontului Bucureștiului"
               fill
               priority
               sizes="100vw"
@@ -99,7 +99,7 @@ export function Hero() {
               Facem loc
               <br className="hidden sm:inline" /> pentru un
               <br className="hidden sm:inline" />{" "}
-              <span className="text-brand-light sm:whitespace-nowrap">oraș mai curat.</span>
+              <span className="text-brand-gradient sm:whitespace-nowrap">oraș mai curat.</span>
             </h1>
             <p
               className="hero-rise max-w-md text-white/80"

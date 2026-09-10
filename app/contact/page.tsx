@@ -35,7 +35,8 @@ const steps = [
   {
     icon: IconDocument,
     title: "Ne spui ce ai de ridicat",
-    description: "Tipul deșeurilor, cantitatea aproximativă și zona din București.",
+    // Spațiu insecabil: „și" nu rămâne singur la capăt de rând, ci trece cu „zona".
+    description: "Tipul deșeurilor, cantitatea aproximativă și zona din București.",
   },
   {
     icon: IconClock,
@@ -52,50 +53,27 @@ const steps = [
 export default function ContactPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-surface">
+      <section className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-ink sm:block sm:min-h-0">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.4]"
-          style={{
-            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
+          className="dot-grid absolute inset-0"
         />
         <div
           aria-hidden="true"
-          className="hero-media pointer-events-none absolute inset-y-0 right-0 w-full opacity-70 sm:w-[72%] lg:w-[58%]"
+          className="hero-media pointer-events-none absolute inset-y-0 right-0 w-full opacity-55 sm:w-[72%] sm:opacity-70 lg:w-[58%]"
         >
           <div className="hero-media-in absolute inset-0" style={{ "--rise-delay": "0.1s" } as CSSProperties}>
             <Image src={heroContact} alt="" fill priority sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface to-transparent" />
         </div>
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-48 left-1/3 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(62,155,92,0.3)_0%,rgba(62,155,92,0)_70%)] blur-2xl"
-        />
 
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-6 pt-36 pb-14">
-          <span
-            className="hero-rise flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase"
-            style={{ "--rise-delay": "0.15s" } as CSSProperties}
-          >
-            <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
-              <span
-                aria-hidden="true"
-                className="animate-coverage absolute inset-0 rounded-full border border-brand-light"
-              />
-              <span className="h-2.5 w-2.5 rounded-full bg-brand-light shadow-[0_0_10px_rgba(62,155,92,0.9)]" />
-            </span>
-            Dispatch — preluăm cereri
-          </span>
-
+        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col gap-6 px-6 pt-28 pb-12 sm:flex-none sm:pt-36 sm:pb-14">
           <h1
             className="hero-rise max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl"
             style={{ "--rise-delay": "0.3s" } as CSSProperties}
           >
-            Spune-ne ce ai de <span className="text-brand-light">transportat.</span>
+            Spune-ne ce ai de <span className="text-brand-gradient">transportat.</span>
           </h1>
 
           <p
@@ -108,8 +86,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1fr_minmax(0,31rem)] lg:gap-20 lg:py-20">
-        <div className="flex flex-col gap-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 lg:grid-cols-[1fr_minmax(0,31rem)] lg:gap-20 lg:py-20">
+        <div className="flex min-w-0 flex-col gap-10">
           <div className="flex flex-col gap-4">
             <Reveal className="flex flex-col gap-2 pb-2">
               <span className="text-5xl leading-none font-bold tracking-tight text-paper sm:text-6xl">VANCOS</span>
@@ -122,38 +100,41 @@ export default function ContactPage() {
               <Reveal key={channel.label} delay={80 * (index + 1)}>
               <a
                 href={channel.href}
-                className="group flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 transition-colors duration-300 hover:border-brand-light/40 hover:bg-white/[0.06] motion-reduce:transition-none"
+                className="group flex items-center justify-between gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 transition-colors duration-300 hover:border-brand-light/40 hover:bg-white/[0.06] motion-reduce:transition-none"
               >
-                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
-                  <channel.icon className="h-5 w-5" />
-                </span>
-                <span className="flex min-w-0 flex-col gap-1">
+                <span className="flex min-w-0 flex-1 flex-col gap-1">
                   <span className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
                     {channel.label}
                   </span>
                   <span className="text-lg font-bold break-words text-paper">{channel.value}</span>
                   <span className="text-sm text-paper/60">{channel.note}</span>
                 </span>
+                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
+                  <channel.icon className="h-5 w-5" />
+                </span>
               </a>
               </Reveal>
             ))}
 
-            <Reveal delay={240} className="flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
-                <IconPin className="h-5 w-5" />
-              </span>
-              <span className="flex min-w-0 flex-col gap-1">
+            <Reveal
+              delay={240}
+              className="flex items-center justify-between gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5"
+            >
+              <span className="flex min-w-0 flex-1 flex-col gap-1">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Zonă</span>
                 <span className="text-lg font-bold text-paper">București</span>
                 <span className="text-sm text-paper/60">{contact.area}</span>
               </span>
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
+                <IconPin className="h-5 w-5" />
+              </span>
             </Reveal>
 
-            <Reveal delay={320} className="flex items-start gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
-                <IconClock className="h-5 w-5" />
-              </span>
-              <span className="flex min-w-0 flex-col gap-1">
+            <Reveal
+              delay={320}
+              className="flex items-center justify-between gap-4 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5"
+            >
+              <span className="flex min-w-0 flex-1 flex-col gap-1">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Program</span>
                 <dl className="flex flex-col gap-0.5">
                   {contact.program.map((interval) => (
@@ -166,6 +147,9 @@ export default function ContactPage() {
                   ))}
                 </dl>
                 <span className="text-sm text-paper/60">Intervenim de regulă în 24-48h de la solicitare.</span>
+              </span>
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
+                <IconClock className="h-5 w-5" />
               </span>
             </Reveal>
           </div>
@@ -195,16 +179,6 @@ export default function ContactPage() {
               ))}
             </ol>
 
-            <Reveal delay={320} className="text-sm text-paper/50">
-              Trimițând formularul ești de acord cu{" "}
-              <Link
-                href="/termeni-si-conditii"
-                className="font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline motion-reduce:transition-none"
-              >
-                termenii și condițiile
-              </Link>
-              .
-            </Reveal>
           </div>
 
           <div className="flex flex-col gap-6">
@@ -214,13 +188,13 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={120} className="flex flex-col gap-6">
-            <div className="flex items-start gap-4">
-              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
-                <IconPin className="h-5 w-5" />
-              </span>
-              <span className="flex min-w-0 flex-col gap-1">
+            <div className="flex items-center justify-between gap-4">
+              <span className="flex min-w-0 flex-1 flex-col gap-1">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Punct de lucru</span>
                 <span className="text-lg font-bold text-paper">{contact.address}</span>
+              </span>
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
+                <IconPin className="h-5 w-5" />
               </span>
             </div>
 
@@ -255,7 +229,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
           <Reveal delay={120}>
             <QuickQuoteForm />
           </Reveal>
@@ -264,7 +238,7 @@ export default function ContactPage() {
 
       <div className="mx-auto flex max-w-7xl flex-col px-6">
         <section className="py-16 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
             <Reveal className="flex flex-col gap-4">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Transparență</span>
               <h2 className="text-3xl font-bold text-paper sm:text-4xl">Datele firmei</h2>

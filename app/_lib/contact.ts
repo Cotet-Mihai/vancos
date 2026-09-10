@@ -10,8 +10,8 @@ type Interval = {
 // nevoie de o singură propoziție. Ambele se derivă din aceeași sursă, ca să nu
 // ajungă un orar actualizat într-un loc și rămas vechi în celălalt.
 const program: Interval[] = [
-  { zile: "Luni – Vineri", ore: "08:00 – 18:30" },
-  { zile: "Sâmbătă", ore: "08:00 – 15:00" },
+  { zile: "Luni-Vineri", ore: "08:00-18:30" },
+  { zile: "Sâmbătă", ore: "08:00-15:00" },
   { zile: "Duminică", ore: "Închis", inchis: true },
 ];
 

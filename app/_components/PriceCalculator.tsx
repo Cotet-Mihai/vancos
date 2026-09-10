@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
+import { PickupRequestDialog } from "./PickupRequestDialog";
 
 // Prețuri comunicate de Vancos, în ordinea primită. Când se schimbă, se
 // actualizează și `PRETURI_LA`, care apare sub total — un preț orientativ fără
@@ -28,12 +28,21 @@ export function PriceCalculator() {
   // materialele adaugate la coada citesc `undefined`, iar inputul trece din
   // controlat in necontrolat si ramane gol.
   const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const quantityOf = (name: string) => quantities[name] ?? 0;
 
-  const total = useMemo(
-    () => materials.reduce((sum, material) => sum + (quantities[material.name] ?? 0) * material.pricePerKg, 0),
+  const lines = useMemo(
+    () =>
+      materials
+        .map((material) => ({ ...material, quantity: quantities[material.name] ?? 0 }))
+        .filter((line) => line.quantity > 0),
     [quantities],
+  );
+
+  const total = useMemo(
+    () => lines.reduce((sum, line) => sum + line.quantity * line.pricePerKg, 0),
+    [lines],
   );
 
   function adjust(name: string, delta: number) {
@@ -112,17 +121,26 @@ export function PriceCalculator() {
       </div>
 
       <div className="flex flex-col gap-3 px-5 pb-5">
-        <Link
-          href="/contact"
+        <button
+          type="button"
+          onClick={() => setDialogOpen(true)}
           className="flex w-full items-center justify-center rounded-full bg-brand-light px-6 py-2.5 text-sm font-bold text-ink transition-transform duration-300 hover:scale-[1.02] motion-reduce:transition-none"
         >
           Solicită preluarea
-        </Link>
+        </button>
         <p className="text-[11px] leading-relaxed text-paper/50">
           Prețuri orientative, actualizate la {PRETURI_LA}. Prețul final se stabilește la cântărirea și verificarea
           materialului.
         </p>
       </div>
+
+      <PickupRequestDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        lines={lines}
+        total={total}
+        pricedAt={PRETURI_LA}
+      />
     </div>
   );
 }

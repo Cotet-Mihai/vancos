@@ -28,50 +28,28 @@ const images: Record<string, StaticImageData> = {
 export default function ServiciiPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-surface">
+      <section className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-ink sm:block sm:min-h-0">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.4]"
-          style={{
-            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
+          className="dot-grid absolute inset-0"
         />
         <div
           aria-hidden="true"
-          className="hero-media pointer-events-none absolute inset-y-0 right-0 w-full opacity-60 sm:w-[72%] lg:w-[58%]"
+          className="hero-media pointer-events-none absolute inset-y-0 right-0 w-full opacity-45 sm:w-[72%] sm:opacity-60 lg:w-[58%]"
         >
           <div className="hero-media-in absolute inset-0" style={{ "--rise-delay": "0.1s" } as CSSProperties}>
             <Image src={heroServicii} alt="" fill priority sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface to-transparent" />
         </div>
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-40 -right-32 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(62,155,92,0.3)_0%,rgba(62,155,92,0)_70%)] blur-2xl"
-        />
 
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-6 pt-36 pb-16">
-          <span
-            className="hero-rise flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase"
-            style={{ "--rise-delay": "0.15s" } as CSSProperties}
-          >
-            <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
-              <span
-                aria-hidden="true"
-                className="animate-coverage absolute inset-0 rounded-full border border-brand-light"
-              />
-              <span className="h-2.5 w-2.5 rounded-full bg-brand-light shadow-[0_0_10px_rgba(62,155,92,0.9)]" />
-            </span>
-            Catalog — {services.length} servicii
-          </span>
-
+        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between gap-8 px-6 pt-28 pb-12 sm:flex-none sm:justify-start sm:pt-36 sm:pb-16">
+          <div className="flex flex-col gap-6 sm:gap-8">
           <h1
             className="hero-rise max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl"
             style={{ "--rise-delay": "0.3s" } as CSSProperties}
           >
-            Servicii pentru <span className="text-brand-light">orice tip de deșeu.</span>
+            Servicii pentru <span className="text-brand-gradient">orice tip de deșeu.</span>
           </h1>
 
           <p
@@ -80,11 +58,12 @@ export default function ServiciiPage() {
           >
             De la degajarea molozului rezultat din demolări, până la colectarea deșeurilor reciclabile, adaptăm fiecare
             intervenție la nevoile tale.
-          </p>
+            </p>
+          </div>
 
           <nav
             aria-label="Sari la un serviciu"
-            className="hero-rise flex flex-wrap gap-3 pt-2"
+            className="hero-rise grid grid-cols-2 gap-3 sm:flex sm:flex-wrap"
             style={{ "--rise-delay": "0.6s" } as CSSProperties}
           >
             {services.map((service, index) => (
@@ -112,11 +91,10 @@ export default function ServiciiPage() {
             <section key={service.slug} id={service.slug} className="scroll-mt-28 py-16 lg:py-24">
               <div className="flex flex-col gap-8">
                 <Reveal className="flex items-center gap-5">
-                  <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Serviciu {unit}</span>
-                  <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
-                  <span className="font-mono text-[10px] tracking-[0.25em] text-white/30 uppercase">
+                  <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">
                     {service.shortLabel}
                   </span>
+                  <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
                 </Reveal>
 
                 <div

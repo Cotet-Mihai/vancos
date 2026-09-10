@@ -10,12 +10,12 @@ const anpcBadges = [
   {
     src: anpcSal,
     href: "https://anpc.ro/ce-este-sal/",
-    alt: "ANPC — Soluționarea Alternativă a Litigiilor",
+    alt: "ANPC: Soluționarea Alternativă a Litigiilor",
   },
   {
     src: anpcSol,
     href: "https://ec.europa.eu/consumers/odr",
-    alt: "SOL — Soluționarea Online a Litigiilor",
+    alt: "SOL: Soluționarea Online a Litigiilor",
   },
 ];
 
@@ -56,17 +56,11 @@ export function Footer() {
             </span>
           </span>
           <p className="max-w-xs text-sm leading-relaxed text-white/55">
-            Degajare deșeuri din construcții, demolări și gospodării, plus colectare de reciclabile — în toată zona
+            Degajare deșeuri din construcții, demolări și gospodării, plus colectare de reciclabile, în toată zona
             București.
           </p>
           <span className="flex items-center gap-2.5 pt-1 text-xs font-semibold text-white/45">
-            <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span
-                aria-hidden="true"
-                className="animate-coverage absolute inset-0 rounded-full border border-brand-light"
-              />
-              <span className="h-2 w-2 rounded-full bg-brand-light" />
-            </span>
+            <span aria-hidden="true" className="h-2 w-2 flex-shrink-0 rounded-full bg-brand-light" />
             Preluăm cereri · 24-48h
           </span>
         </div>
@@ -143,7 +137,18 @@ export function Footer() {
               Termeni și condiții
             </Link>
           </div>
-          <span className="font-mono text-[10px] tracking-[0.25em] text-white/25 uppercase">București · România</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] tracking-[0.25em] text-white/25 uppercase">
+            <span>București · România</span>
+            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/15" />
+            <a
+              href="https://devicom.ro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-200 hover:text-brand-light motion-reduce:transition-none"
+            >
+              Dev by devicom.ro
+            </a>
+          </div>
         </div>
 
         {/* Siglele au deja corp alb si colturi rotunjite in grafica, transparent

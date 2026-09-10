@@ -40,7 +40,7 @@ const sectiuni = [
           în scris sau telefonic.
         </p>
         <p>
-          Termenul de intervenție comunicat pe site — de regulă 24-48 de ore de la solicitare — este orientativ și
+          Termenul de intervenție comunicat pe site, de regulă 24-48 de ore de la solicitare, este orientativ și
           depinde de disponibilitate, de trafic și de condițiile de la fața locului.
         </p>
       </>
@@ -104,7 +104,7 @@ const sectiuni = [
     titlu: "Proprietate intelectuală",
     continut: (
       <p>
-        Conținutul site-ului — texte, imagini, elemente grafice și structura paginilor — aparține Vancos și nu poate fi
+        Conținutul site-ului (texte, imagini, elemente grafice și structura paginilor) aparține Vancos și nu poate fi
         reprodus sau folosit comercial fără acordul nostru scris.
       </p>
     ),
@@ -158,7 +158,7 @@ export default function TermeniSiConditiiPage() {
         <h2 className="text-xl font-bold text-paper">Soluționarea litigiilor</h2>
         <div className="flex flex-col gap-4 leading-relaxed text-paper/70">
           <p>
-            Dacă ai o nemulțumire, scrie-ne întâi nouă — cele mai multe se rezolvă direct. Dacă nu ajungem la o
+            Dacă ai o nemulțumire, scrie-ne întâi nouă, pentru că cele mai multe se rezolvă direct. Dacă nu ajungem la o
             soluție, te poți adresa{" "}
             <a href={ANPC} target="_blank" rel="noopener noreferrer" className={linkClass}>
               Autorității Naționale pentru Protecția Consumatorilor

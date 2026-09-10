@@ -60,7 +60,7 @@ export function CoverageMap() {
     <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row lg:items-center lg:gap-16">
       <Reveal className="flex flex-col gap-6 lg:flex-1">
         <div className="flex flex-col gap-3">
-          <h2 className="text-4xl font-bold text-paper sm:text-5xl">Zona de acoperire</h2>
+          <h2 className="text-3xl font-bold text-paper sm:text-5xl">Zona de acoperire</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
         </div>
 
@@ -73,13 +73,23 @@ export function CoverageMap() {
                 onMouseLeave={() => setActive(null)}
                 onFocus={() => setActive(sector.id)}
                 onBlur={() => setActive(null)}
-                className={`w-full rounded-full border px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
+                className={`flex w-full items-center gap-3 rounded-[1.25rem] border p-3 text-left transition-colors duration-200 motion-reduce:transition-none ${
                   active === sector.id
-                    ? "border-brand-light bg-brand-light/15 text-brand-light"
-                    : "border-white/10 bg-surface text-paper"
+                    ? "border-brand-light/50 bg-brand-light/10"
+                    : "border-white/10 bg-white/[0.03] hover:border-brand-light/40 hover:bg-white/[0.06]"
                 }`}
               >
-                {sector.label}
+                <span
+                  aria-hidden="true"
+                  className={`flex h-8 w-8 flex-none items-center justify-center rounded-full font-mono text-sm font-bold transition-colors duration-200 motion-reduce:transition-none ${
+                    active === sector.id
+                      ? "bg-brand-light text-ink"
+                      : "border border-white/15 text-brand-light"
+                  }`}
+                >
+                  {sector.id}
+                </span>
+                <span className="min-w-0 text-xs font-semibold text-paper sm:text-sm">Sector</span>
               </button>
             </li>
           ))}

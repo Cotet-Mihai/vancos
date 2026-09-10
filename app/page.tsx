@@ -73,6 +73,18 @@ const calculatorBenefits = [
   },
 ];
 
+// Asezarea de pe telefon, pe indexul argumentului. Primul tine doua randuri, cu
+// continutul grupat la mijloc — `justify-between` il imprastia pe toata
+// inaltimea de cand a disparut eticheta care statea sus. Al patrulea tine randul
+// intreg si pentru ca altfel ramane un gol: cardul de acoperire cere doua
+// coloane si nu incape langa el.
+const whyUsLayout = [
+  "row-span-2 justify-center gap-3 sm:row-span-1 sm:justify-start sm:gap-3",
+  "",
+  "",
+  "col-span-2 sm:col-span-1",
+];
+
 const materials = [
   "Fier",
   "Aluminiu",
@@ -125,8 +137,8 @@ export default function Home() {
               <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">Serviciile noastre</span>
               <span className="h-[3px] w-8 rounded-full bg-brand-light" />
             </div>
-            <h2 className="max-w-3xl text-4xl font-bold text-paper sm:text-5xl">
-              Servicii pentru <span className="text-brand-light">orice tip de deșeu.</span>
+            <h2 className="max-w-3xl text-3xl font-bold text-paper sm:text-5xl">
+              Servicii pentru <span className="text-brand-gradient">orice tip de deșeu.</span>
             </h2>
             <p className="max-w-2xl text-paper/70">
               Colectăm și transportăm deșeuri din construcții, demolări, gospodării și materiale reciclabile. Rapid,
@@ -150,7 +162,7 @@ export default function Home() {
         </div>
 
         <Reveal className="mx-auto w-full max-w-[88rem] px-6">
-          <div className="flex w-full flex-col items-center gap-5 rounded-[2rem] border border-white/10 bg-surface px-6 py-6 text-center sm:flex-row sm:justify-between sm:gap-6 sm:rounded-full sm:px-10 sm:py-4 sm:text-left">
+          <div className="flex w-full flex-col items-center gap-5 rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-6 text-center sm:flex-row sm:justify-between sm:gap-6 sm:rounded-full sm:px-10 sm:py-4 sm:text-left">
             <div className="flex flex-col gap-1">
               <h3 className="text-lg font-bold text-paper">Ai deșeuri de ridicat?</h3>
               <p className="text-sm text-paper/70">Spune-ne ce ai de transportat și îți răspundem rapid.</p>
@@ -183,10 +195,10 @@ export default function Home() {
           <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">
             Cântar · Estimare · Reciclare
           </span>
-          <h2 className="text-4xl leading-tight font-bold text-paper sm:text-5xl">
+          <h2 className="text-3xl leading-tight font-bold text-paper sm:text-5xl">
             Estimează rapid
             <br />
-            <span className="text-brand-light">valoarea materialelor tale</span>
+            <span className="text-brand-gradient">valoarea materialelor tale</span>
           </h2>
           <p className="max-w-xl text-paper/70">
             Află instant o estimare a valorii materialelor pe care vrei să le reciclezi. Prețuri orientative,
@@ -203,7 +215,7 @@ export default function Home() {
               return (
                 <li
                   key={benefit.title}
-                  className={`flex rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.09)] backdrop-blur-xl sm:flex-row sm:items-center sm:gap-4 sm:text-left ${
+                  className={`flex rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-4 transition-colors duration-300 hover:border-brand-light/40 hover:bg-white/[0.06] motion-reduce:transition-none sm:flex-row sm:items-center sm:gap-4 sm:p-6 sm:text-left ${
                     wide ? "col-span-2 items-center gap-4" : "flex-col items-center gap-3 text-center"
                   }`}
                 >
@@ -245,17 +257,17 @@ export default function Home() {
       </section>
 
       <section className="mx-auto flex max-w-7xl flex-col px-6 py-16">
-        <Reveal className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="relative flex flex-col justify-center gap-3 overflow-hidden rounded-[1.75rem] border border-brand-light/25 bg-brand/15 p-8 sm:col-span-2">
+        <Reveal className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+          <div className="relative col-span-2 flex flex-col justify-center gap-3 overflow-hidden rounded-[1.75rem] border border-brand-light/25 bg-brand/15 p-6 sm:p-8">
             <span
               aria-hidden="true"
               className="map-fade pointer-events-none absolute inset-0 flex items-center justify-end pr-4 text-[10rem] leading-none font-bold text-brand-light opacity-20 sm:text-[15rem]"
             >
               ?
             </span>
-            <h2 className="relative z-10 text-4xl font-bold text-paper sm:text-5xl">De ce Vancos</h2>
+            <h2 className="relative z-10 text-3xl font-bold text-paper sm:text-5xl">De ce Vancos</h2>
             <span className="relative z-10 h-[3px] w-12 rounded-full bg-brand-light" />
-            <p className="relative z-10 max-w-md text-paper/70">
+            <p className="relative z-10 max-w-md text-sm text-paper/70 sm:text-base">
               Argumentele care ne diferențiază și te ajută să alegi rapid soluția potrivită pentru deșeurile tale.
             </p>
           </div>
@@ -263,18 +275,15 @@ export default function Home() {
           {whyUs.map((item, index) => (
             <div
               key={item.title}
-              className="flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-light/40"
+              className={`flex flex-col gap-2 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-4 transition-colors duration-300 hover:border-brand-light/40 hover:bg-white/[0.06] motion-reduce:transition-none sm:gap-3 sm:p-6 ${whyUsLayout[index]}`}
             >
-              <span className="font-mono text-[10px] tracking-widest text-brand-light">
-                ARG.{String(index + 1).padStart(2, "0")}
-              </span>
-              <item.icon className="h-8 w-8 flex-shrink-0 text-brand-light" />
-              <h3 className="font-semibold text-paper">{item.title}</h3>
-              <p className="text-sm text-paper/70">{item.description}</p>
+              <item.icon className="h-7 w-7 flex-shrink-0 text-brand-light sm:h-8 sm:w-8" />
+              <h3 className="text-sm font-semibold text-paper sm:text-base">{item.title}</h3>
+              <p className="text-xs leading-relaxed text-paper/70 sm:text-sm">{item.description}</p>
             </div>
           ))}
 
-          <div className="relative flex min-h-44 items-center gap-5 overflow-hidden rounded-[1.75rem] border border-brand-light/25 bg-brand/15 p-6 sm:col-span-2">
+          <div className="relative col-span-2 flex min-h-36 items-center gap-5 overflow-hidden rounded-[1.75rem] border border-brand-light/25 bg-brand/15 p-5 sm:min-h-44 sm:p-6">
             <svg
               aria-hidden="true"
               viewBox="0 0 400 200"
@@ -335,7 +344,7 @@ export default function Home() {
       <section className="mx-auto max-w-3xl px-6 py-16">
         <Reveal className="flex flex-col gap-8">
           <div className="flex flex-col gap-2">
-            <h2 className="text-4xl font-bold text-paper sm:text-5xl">Întrebări frecvente</h2>
+            <h2 className="text-3xl font-bold text-paper sm:text-5xl">Întrebări frecvente</h2>
             <span className="h-[3px] w-12 rounded-full bg-brand" />
           </div>
           <Accordion className="border-t border-white/10">

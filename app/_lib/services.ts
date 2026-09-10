@@ -17,7 +17,7 @@ export const services: Service[] = [
     title: "Degajare deșeuri din construcții",
     summary: "Containere de până la 4 tone pentru moloz, resturi de materiale și ambalaje de șantier.",
     description:
-      "Degajăm deșeurile rezultate din lucrări de construcții — moloz, resturi de materiale, ambalaje și cofraje — cu containere de până la 4 tone. Firma noastră dispune de mașini de 3,5 tone, care nu necesită autorizație de circulație în nicio zonă din București, așa că ajungem la șantier indiferent de restricțiile din zonă.",
+      "Degajăm deșeurile rezultate din lucrări de construcții (moloz, resturi de materiale, ambalaje și cofraje) cu containere de până la 4 tone. Firma noastră dispune de mașini de 3,5 tone, care nu necesită autorizație de circulație în nicio zonă din București, așa că ajungem la șantier indiferent de restricțiile din zonă.",
     advantages: [
       "Containere de până la 4 tone pentru moloz și resturi de materiale",
       "Mașini de 3,5 tone, fără autorizație de circulație în nicio zonă din București",
@@ -55,7 +55,7 @@ export const services: Service[] = [
       "Adaptare la nevoile fiecărui client",
     ],
     image: "servicii-gospodarii.jpg",
-    imageAlt: "Grămadă de mobilier voluminos aruncat — scaune, birouri și dulapuri",
+    imageAlt: "Grămadă de mobilier voluminos aruncat: scaune, birouri și dulapuri",
   },
   {
     slug: "reciclabile",

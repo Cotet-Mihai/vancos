@@ -190,6 +190,38 @@ input[type="number"] {
   animation-delay: var(--rise-delay, 0s);
 }
 
+/* „oraș mai curat" curge într-un degrade care se plimbă încet prin verde.
+   Textul primește culoarea din fundal prin `background-clip`, deci trebuie să
+   rămână transparent — iar `background-size` mai lat decât textul e ceea ce dă
+   animației ce deplasa. */
+@keyframes brand-sheen {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-brand-gradient {
+  background-image: linear-gradient(100deg, var(--brand-light) 0%, #6fd694 35%, var(--brand-light) 60%, #2f7d49 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: brand-sheen 7s ease-in-out infinite;
+}
+
+/* Grila de puncte din fundalul secțiunilor. A stat în cinci locuri ca stil
+   inline, iar peste ea era un container cu `opacity: 0.4` care se înmulțea cu
+   alfa punctului — 0.06 × 0.4 = 0.024, adică sub pragul vizibil. Acum culoarea
+   e scrisă o singură dată, la valoarea finală. */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-coverage,
   .animate-aura,
@@ -197,6 +229,7 @@ input[type="number"] {
   .hero-zoom,
   .hero-rise,
   .hero-media-in,
+  .text-brand-gradient,
   [data-slot="accordion-content"] {
     animation: none;
   }
@@ -293,9 +326,44 @@ input[type="number"] {
    spre stânga, ca textul să rămână pe fundal curat. Masca stă pe containerul
    fix, iar animația pe un strat interior — pusă pe același element, scalarea
    ar deplasa și marginea de estompare odată cu poza. */
+/* Estomparea imaginii din antet urmează direcția în care stă textul.
+
+   Pe telefon textul e peste imagine, pe toată lățimea, deci estomparea merge de
+   sus în jos: poza se stinge complet în capul ecranului, unde stă titlul, și se
+   închide din nou la bază. Un singur gradient, fără compunere.
+
+   De la `sm` în sus textul are coloană proprie în stânga, deci estomparea
+   principală devine orizontală, iar a doua mască doar topește marginea de sus
+   și pe cea de jos — fără ea se vedea muchia dreptunghiului pe fundal.
+   `mask-composite: intersect` e forma standard; `source-in` e echivalentul
+   vechi din WebKit, păstrat pentru browserele care încă cer prefixul. */
 .hero-media {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 62%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 62%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 74%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 74%, #000 92%, transparent 100%);
+}
+
+@media (min-width: 640px) {
+  .hero-media {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 78%),
+      linear-gradient(to bottom, transparent 0%, #000 22%, #000 72%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 78%),
+      linear-gradient(to bottom, transparent 0%, #000 22%, #000 72%, transparent 100%);
+    mask-composite: intersect;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-media {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 94%),
+      linear-gradient(to bottom, transparent 0%, #000 22%, #000 72%, transparent 100%);
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 94%),
+      linear-gradient(to bottom, transparent 0%, #000 22%, #000 72%, transparent 100%);
+  }
 }
 
 @keyframes hero-media-in {

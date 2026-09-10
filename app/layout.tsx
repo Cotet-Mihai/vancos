@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     template: "%s | Vancos",
-    default: "Vancos – Degajări deșeuri și colectare reciclabile în București",
+    default: "Vancos · Degajări deșeuri și colectare reciclabile în București",
   },
   description:
     "Vancos preia și transportă deșeuri din construcții, demolări și gospodării în București, plus colectare diversificată de deșeuri reciclabile.",
