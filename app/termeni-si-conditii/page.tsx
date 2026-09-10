@@ -97,6 +97,13 @@ const sectiuni = [
           </a>
           .
         </p>
+        <p>
+          Despre cookie-uri și conținutul extern încărcat pe site, vezi{" "}
+          <Link href="/politica-cookie" className={linkClass}>
+            politica de cookie-uri
+          </Link>
+          .
+        </p>
       </>
     ),
   },

@@ -3,6 +3,7 @@ import { Montserrat, Caveat, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_components/Header";
 import { Footer } from "./_components/Footer";
+import { CookieBanner } from "./_components/CookieBanner";
 import { BackgroundLayer } from "./_components/BackgroundLayer";
 
 const montserrat = Montserrat({
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

@@ -136,6 +136,13 @@ export function Footer() {
             >
               Termeni și condiții
             </Link>
+            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/20" />
+            <Link
+              href="/politica-cookie"
+              className="transition-colors duration-200 hover:text-paper motion-reduce:transition-none"
+            >
+              Politica de cookie-uri
+            </Link>
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] tracking-[0.25em] text-white/25 uppercase">
             <span>București · România</span>

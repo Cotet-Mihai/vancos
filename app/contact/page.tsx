@@ -6,6 +6,7 @@ import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { QuickQuoteForm } from "../_components/QuickQuoteForm";
 import { DateleFirmei } from "../_components/DateleFirmei";
+import { ContactMap } from "../_components/ContactMap";
 import { Reveal } from "../_components/Reveal";
 import { IconPhone, IconMail, IconPin, IconClock, IconDocument, IconTruck } from "../_components/icons";
 
@@ -198,18 +199,7 @@ export default function ContactPage() {
               </span>
             </div>
 
-            {/* Harta se încarcă de la Google abia când intră în viewport. Adresa
-                merge ca text în `q`, deci geocodarea o face Google — nu punem
-                coordonate scrise de mână, care ar muta acul fără să se observe. */}
-            <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface">
-              <iframe
-                title={`Harta către ${contact.address}`}
-                src={`https://www.google.com/maps?q=${encodeURIComponent(contact.address)}&z=16&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block h-72 w-full border-0 sm:h-80"
-              />
-            </div>
+            <ContactMap />
 
             <a
               href={contact.mapsHref}
