@@ -210,7 +210,7 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
         )}
 
         {!result?.ok && (
-        <DialogFooter className="mx-0 mb-0 flex-col gap-3 border-t border-white/10 bg-transparent px-5 pt-4 pb-6">
+        <DialogFooter className="mx-0 mb-0 flex-col gap-3 border-t border-white/10 bg-transparent px-5 py-4">
           {result && !result.ok && (
             <p
               role="alert"
