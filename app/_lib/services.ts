@@ -1,6 +1,8 @@
 export type Service = {
   slug: string;
   title: string;
+  /** Eticheta scurta, pentru navigare si liste — titlul complet e prea lung. */
+  shortLabel: string;
   summary: string;
   description: string;
   advantages: string[];
@@ -11,6 +13,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "constructii",
+    shortLabel: "Construcții",
     title: "Degajare deșeuri din construcții",
     summary: "Containere de până la 4 tone pentru moloz, resturi de materiale și ambalaje de șantier.",
     description:
@@ -25,6 +28,7 @@ export const services: Service[] = [
   },
   {
     slug: "demolari",
+    shortLabel: "Demolări",
     title: "Degajare deșeuri din demolări",
     summary: "Preluăm molozul rezultat din demolări și debităm pe loc elementele prea voluminoase pentru transport.",
     description:
@@ -39,6 +43,7 @@ export const services: Service[] = [
   },
   {
     slug: "gospodarii",
+    shortLabel: "Gospodării",
     title: "Preluare deșeuri din gospodării",
     summary:
       "Venim cu forță de muncă pentru încărcare și, dacă e nevoie, debităm deșeurile voluminoase la fața locului.",
@@ -54,6 +59,7 @@ export const services: Service[] = [
   },
   {
     slug: "reciclabile",
+    shortLabel: "Reciclabile",
     title: "Colectare diversificată a deșeurilor reciclabile",
     summary: "Preluăm fier, aluminiu, cupru, bronz, alamă, plumb și electrocasnice.",
     description:

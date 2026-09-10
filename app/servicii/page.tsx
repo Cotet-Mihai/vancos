@@ -23,15 +23,6 @@ const images: Record<string, StaticImageData> = {
   reciclabile: imgReciclabile,
 };
 
-// Titlurile din services.ts sunt prea lungi pentru pastilele de navigare, iar
-// scurtarea lor programatic ar tăia exact cuvântul care le distinge.
-const shortLabels: Record<string, string> = {
-  constructii: "Construcții",
-  demolari: "Demolări",
-  gospodarii: "Gospodării",
-  reciclabile: "Reciclabile",
-};
-
 export default function ServiciiPage() {
   return (
     <>
@@ -80,7 +71,7 @@ export default function ServiciiPage() {
                 <span className="font-mono text-[10px] tracking-widest text-brand-light">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                {shortLabels[service.slug]}
+                {service.shortLabel}
               </Link>
             ))}
           </nav>
@@ -99,7 +90,7 @@ export default function ServiciiPage() {
                   <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Serviciu {unit}</span>
                   <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
                   <span className="font-mono text-[10px] tracking-[0.25em] text-white/30 uppercase">
-                    {shortLabels[service.slug]}
+                    {service.shortLabel}
                   </span>
                 </div>
 

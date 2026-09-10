@@ -19,6 +19,8 @@ export interface DateFirma {
   registruComert: string | null;
   /** Sediul social, așa cum apare în registrul comerțului. */
   sediuSocial: string | null;
+  /** Anul înregistrării, pentru vechimea afișată public. */
+  infiintata: string | null;
 }
 
 /**
@@ -37,6 +39,7 @@ export const firma: DateFirma = {
   cui: "RO40212045",
   registruComert: "J40/16910/2018",
   sediuSocial: "Str. Știucii nr. 31, camera 3, Sector 2, București",
+  infiintata: "2018",
 };
 
 /** Data ultimei revizuiri a textului, afișată în pagină. */
