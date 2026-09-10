@@ -14,7 +14,16 @@ export const metadata: Metadata = {
   title: "Despre noi",
   description:
     "Vancos degajează deșeuri din construcții, demolări și gospodării și colectează deșeuri reciclabile în toată zona București.",
+  alternates: { canonical: "/despre-noi" },
+  openGraph: {
+    type: "website",
+    url: "/despre-noi",
+    title: "Despre Vancos · Degajări deșeuri în București",
+    description:
+      "Vancos degajează deșeuri din construcții, demolări și gospodării și colectează deșeuri reciclabile în toată zona București.",
+  },
 };
+
 
 const stats = [
   { icon: IconClock, value: `Din ${firma.infiintata ?? "?"}`, label: "De când deservim Bucureștiul", short: "Vechime" },

@@ -4,6 +4,8 @@ import heroServicii from "../../public/images/hero-servicii.jpg";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { services } from "../_lib/services";
+import { breadcrumbSchema, servicesSchema } from "../_lib/schema";
+import { JsonLd } from "../_components/JsonLd";
 import { Reveal } from "../_components/Reveal";
 import { FinalCta } from "../_components/FinalCta";
 import { IconCheck } from "../_components/icons";
@@ -16,7 +18,16 @@ export const metadata: Metadata = {
   title: "Servicii",
   description:
     "Degajare deșeuri din construcții și demolări, preluare deșeuri din gospodării și colectare de deșeuri reciclabile în București.",
+  alternates: { canonical: "/servicii" },
+  openGraph: {
+    type: "website",
+    url: "/servicii",
+    title: "Servicii de degajare deșeuri în București | Vancos",
+    description:
+      "Degajare deșeuri din construcții și demolări, preluare deșeuri din gospodării și colectare de deșeuri reciclabile în București.",
+  },
 };
+
 
 const images: Record<string, StaticImageData> = {
   constructii: imgConstructii,
@@ -28,6 +39,15 @@ const images: Record<string, StaticImageData> = {
 export default function ServiciiPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          servicesSchema,
+          breadcrumbSchema([
+            { name: "Acasă", path: "/" },
+            { name: "Servicii", path: "/servicii" },
+          ]),
+        ]}
+      />
       <section className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-ink sm:block sm:min-h-0">
         <div
           aria-hidden="true"

@@ -5,13 +5,15 @@ import imgDemolari from "../public/images/servicii-demolari.jpg";
 import imgGospodarii from "../public/images/servicii-gospodarii.jpg";
 import imgReciclabile from "../public/images/servicii-reciclabile.jpg";
 import { services } from "./_lib/services";
+import { faqs } from "./_lib/faqs";
+import { faqSchema } from "./_lib/schema";
+import { JsonLd } from "./_components/JsonLd";
 import { ServiceCard } from "./_components/ServiceCard";
 import { Reveal } from "./_components/Reveal";
 import { PriceCalculator } from "./_components/PriceCalculator";
 import { HowWeWork } from "./_components/HowWeWork";
 import { CoverageMap } from "./_components/CoverageMap";
 import { Hero } from "./_components/Hero";
-import { contact } from "./_lib/contact";
 import { FinalCta } from "./_components/FinalCta";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
@@ -97,36 +99,11 @@ const materials = [
   "Deșeuri menajere",
 ];
 
-const faqs = [
-  {
-    question: "Ce zone din București deserviți?",
-    answer: "Lucrăm în toate cele 6 sectoare ale Bucureștiului.",
-  },
-  {
-    question: "Cât de repede puteți interveni?",
-    answer: "De obicei intervenim în 24-48h de la solicitare, în funcție de disponibilitate.",
-  },
-  {
-    question: "Am nevoie de autorizație pentru containerul vostru?",
-    answer: "Nu. Mașinile noastre de 3,5 tone circulă fără autorizație de circulație în nicio zonă din București.",
-  },
-  {
-    question: "Ce fac dacă nu am cine să încarce containerul?",
-    answer: "Punem la dispoziție forță de muncă pentru încărcare, în funcție de disponibilitate.",
-  },
-  {
-    question: "Ce deșeuri reciclabile preluați?",
-    answer: "Fier, aluminiu, cupru, bronz, alamă, plumb, precum și electronice și electrocasnice.",
-  },
-  {
-    question: "Care este programul vostru?",
-    answer: contact.programText,
-  },
-];
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqSchema(faqs)} />
       <Hero />
 
       <section className="flex flex-col gap-10 py-16">

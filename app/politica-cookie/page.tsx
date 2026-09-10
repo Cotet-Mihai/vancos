@@ -5,8 +5,18 @@ import { actualizat } from "../_lib/legal";
 
 export const metadata: Metadata = {
   title: "Politica de cookie-uri",
-  description: "Ce cookie-uri folosește site-ul Vancos și cum le poți controla din browser.",
+  description:
+    "Ce cookie-uri folosește site-ul Vancos și cum le poți controla din browser.",
+  alternates: { canonical: "/politica-cookie" },
+  openGraph: {
+    type: "website",
+    url: "/politica-cookie",
+    title: "Politica de cookie-uri | Vancos",
+    description:
+      "Ce cookie-uri folosește site-ul Vancos și cum le poți controla din browser.",
+  },
 };
+
 
 const linkClass =
   "font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline";

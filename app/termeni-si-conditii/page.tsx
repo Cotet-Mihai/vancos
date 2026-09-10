@@ -6,8 +6,18 @@ import { ANPC, ANPC_SAL, ANPC_SOL, actualizat } from "../_lib/legal";
 
 export const metadata: Metadata = {
   title: "Termeni și condiții",
-  description: "Termenii și condițiile de utilizare a site-ului Vancos și de solicitare a serviciilor de degajare deșeuri.",
+  description:
+    "Termenii și condițiile de utilizare a site-ului Vancos și de solicitare a serviciilor de degajare deșeuri.",
+  alternates: { canonical: "/termeni-si-conditii" },
+  openGraph: {
+    type: "website",
+    url: "/termeni-si-conditii",
+    title: "Termeni și condiții | Vancos",
+    description:
+      "Termenii și condițiile de utilizare a site-ului Vancos și de solicitare a serviciilor de degajare deșeuri.",
+  },
 };
+
 
 const linkClass =
   "font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline";

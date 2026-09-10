@@ -12,8 +12,18 @@ import { IconPhone, IconMail, IconPin, IconClock, IconDocument, IconTruck } from
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contactează Vancos pentru degajare de deșeuri și colectare de reciclabile în București.",
+  description:
+    "Contactează Vancos pentru degajare de deșeuri și colectare de reciclabile în București. Telefon, email și punct de lucru.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    type: "website",
+    url: "/contact",
+    title: "Contact Vancos · Degajări deșeuri București",
+    description:
+      "Contactează Vancos pentru degajare de deșeuri și colectare de reciclabile în București. Telefon, email și punct de lucru.",
+  },
 };
+
 
 const channels = [
   {
