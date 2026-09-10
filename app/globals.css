@@ -196,6 +196,7 @@ input[type="number"] {
   .animate-marquee,
   .hero-zoom,
   .hero-rise,
+  .hero-media-in,
   [data-slot="accordion-content"] {
     animation: none;
   }
@@ -286,4 +287,29 @@ input[type="number"] {
 .field-select option:hover {
   background-color: var(--brand);
   color: var(--paper);
+}
+
+/* Imaginea din antetul paginilor interioare: intră din dreapta și se stinge
+   spre stânga, ca textul să rămână pe fundal curat. Masca stă pe containerul
+   fix, iar animația pe un strat interior — pusă pe același element, scalarea
+   ar deplasa și marginea de estompare odată cu poza. */
+.hero-media {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 62%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 62%);
+}
+
+@keyframes hero-media-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-media-in {
+  animation: hero-media-in 1.8s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  animation-delay: var(--rise-delay, 0s);
 }

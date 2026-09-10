@@ -1,5 +1,7 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import heroContact from "../../public/images/hero-contact.jpg";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { QuickQuoteForm } from "../_components/QuickQuoteForm";
@@ -59,6 +61,16 @@ export default function ContactPage() {
             backgroundSize: "28px 28px",
           }}
         />
+        <div
+          aria-hidden="true"
+          className="hero-media pointer-events-none absolute inset-y-0 right-0 w-full opacity-70 sm:w-[72%] lg:w-[58%]"
+        >
+          <div className="hero-media-in absolute inset-0" style={{ "--rise-delay": "0.1s" } as CSSProperties}>
+            <Image src={heroContact} alt="" fill priority sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface to-transparent" />
+        </div>
+
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-48 left-1/3 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(62,155,92,0.3)_0%,rgba(62,155,92,0)_70%)] blur-2xl"

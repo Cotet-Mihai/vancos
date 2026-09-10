@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import type { CSSProperties } from "react";
+import heroServicii from "../../public/images/hero-servicii.jpg";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { services } from "../_lib/services";
@@ -36,6 +37,16 @@ export default function ServiciiPage() {
             backgroundSize: "28px 28px",
           }}
         />
+        <div
+          aria-hidden="true"
+          className="hero-media pointer-events-none absolute inset-y-0 right-0 w-full opacity-60 sm:w-[72%] lg:w-[58%]"
+        >
+          <div className="hero-media-in absolute inset-0" style={{ "--rise-delay": "0.1s" } as CSSProperties}>
+            <Image src={heroServicii} alt="" fill priority sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface to-transparent" />
+        </div>
+
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-40 -right-32 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(62,155,92,0.3)_0%,rgba(62,155,92,0)_70%)] blur-2xl"
