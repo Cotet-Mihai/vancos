@@ -2,6 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 import type { Metadata } from "next";
 import { services } from "../_lib/services";
 import imgConstructii from "../../public/images/servicii-constructii.jpg";
+import imgDemolari from "../../public/images/servicii-demolari.jpg";
 import imgGospodarii from "../../public/images/servicii-gospodarii.jpg";
 import imgReciclabile from "../../public/images/servicii-reciclabile.jpg";
 
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 const images: Record<string, StaticImageData> = {
-  "constructii-demolari": imgConstructii,
+  constructii: imgConstructii,
+  demolari: imgDemolari,
   gospodarii: imgGospodarii,
   reciclabile: imgReciclabile,
 };

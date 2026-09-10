@@ -33,12 +33,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ro"
-      className={`${montserrat.variable} ${caveat.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${caveat.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-paper">
         <BackgroundLayer />
         <Header />
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

@@ -152,3 +152,12 @@ export function IconTorch({ className }: IconProps) {
     </svg>
   );
 }
+
+export function IconChart({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6.5 16v-4M12 16V8m5.5 8v-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}

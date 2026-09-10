@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./ContactForm";
 import { IconPhone, IconMail, IconPin } from "../_components/icons";
+import { contact } from "../_lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -16,17 +17,21 @@ export default function ContactPage() {
           Spune-ne ce deșeuri ai de ridicat și în ce zonă din București te afli. Îți răspundem cu o ofertă rapidă.
         </p>
         <ul className="flex flex-col gap-4 text-paper/80">
-          <li className="flex items-center gap-3">
-            <IconPhone className="h-5 w-5 text-brand" />
-            [telefon]
+          <li>
+            <a href={contact.phoneHref} className="flex items-center gap-3 transition-colors hover:text-brand-light">
+              <IconPhone className="h-5 w-5 flex-shrink-0 text-brand" />
+              {contact.phone}
+            </a>
+          </li>
+          <li>
+            <a href={contact.emailHref} className="flex items-center gap-3 transition-colors hover:text-brand-light">
+              <IconMail className="h-5 w-5 flex-shrink-0 text-brand" />
+              {contact.email}
+            </a>
           </li>
           <li className="flex items-center gap-3">
-            <IconMail className="h-5 w-5 text-brand" />
-            [email]
-          </li>
-          <li className="flex items-center gap-3">
-            <IconPin className="h-5 w-5 text-brand" />
-            [adresă/zonă acoperită] — deservim toată zona București
+            <IconPin className="h-5 w-5 flex-shrink-0 text-brand" />
+            {contact.area}
           </li>
         </ul>
         <p className="text-sm text-paper/60">Program: [program de lucru]</p>

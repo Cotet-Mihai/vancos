@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { contact } from "../_lib/contact";
 
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -11,7 +12,7 @@ export function ContactForm() {
     event.preventDefault();
     const subject = encodeURIComponent(`Cerere ofertă de la ${name}`);
     const body = encodeURIComponent(`Nume: ${name}\nTelefon: ${phone}\n\nMesaj:\n${message}`);
-    window.location.href = `mailto:[email]?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
   }
 
   return (

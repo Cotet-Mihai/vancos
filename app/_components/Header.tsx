@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
+import { contact } from "../_lib/contact";
 import { IconMenu, IconClose, IconPhone } from "./icons";
 
 const links = [
@@ -69,7 +70,7 @@ export function Header() {
         </nav>
 
         <a
-          href="tel:[telefon]"
+          href={contact.phoneHref}
           className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:bg-brand-light sm:flex"
         >
           <IconPhone className="h-4 w-4" />
@@ -99,7 +100,7 @@ export function Header() {
             </Link>
           ))}
           <a
-            href="tel:[telefon]"
+            href={contact.phoneHref}
             className="mt-2 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold tracking-widest text-white uppercase"
           >
             <IconPhone className="h-4 w-4" />

@@ -16,7 +16,7 @@ export function ServiceCard({ service, image, unit }: ServiceCardProps) {
         alt={service.imageAlt}
         fill
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        sizes="(min-width: 1024px) 40vw, 100vw"
+        sizes="(min-width: 1024px) 30vw, 100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 transition-opacity duration-500 group-hover:from-black/95" />
 

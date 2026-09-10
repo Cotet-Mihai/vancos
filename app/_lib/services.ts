@@ -10,19 +10,32 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "constructii-demolari",
-    title: "Degajare deșeuri din construcții și demolări",
-    summary:
-      "Ridicăm până la 4 tone de moloz pe container, cu mașini de 3,5 tone care nu au nevoie de autorizație de circulație.",
+    slug: "constructii",
+    title: "Degajare deșeuri din construcții",
+    summary: "Containere de până la 4 tone pentru moloz, resturi de materiale și ambalaje de șantier.",
     description:
-      "Degajăm deșeuri rezultate din construcții și demolări, până în 4 tone pe container. Avantajul principal al acestui serviciu este faptul că firma noastră dispune de mașini de 3,5 tone, care nu necesită autorizație de circulație în nicio zonă din București. Acesta este principalul motiv pentru care clienții noștri apelează la noi.",
+      "Degajăm deșeurile rezultate din lucrări de construcții — moloz, resturi de materiale, ambalaje și cofraje — cu containere de până la 4 tone. Firma noastră dispune de mașini de 3,5 tone, care nu necesită autorizație de circulație în nicio zonă din București, așa că ajungem la șantier indiferent de restricțiile din zonă.",
     advantages: [
+      "Containere de până la 4 tone pentru moloz și resturi de materiale",
       "Mașini de 3,5 tone, fără autorizație de circulație în nicio zonă din București",
-      "Containere de până la 4 tone",
-      "Intervenție rapidă, oriunde în oraș",
+      "Ridicare programată, adaptată ritmului șantierului",
     ],
     image: "servicii-constructii.jpg",
-    imageAlt: "Moloz și deșeuri rezultate dintr-o demolare",
+    imageAlt: "Container de șantier plin cu resturi de materiale de construcții",
+  },
+  {
+    slug: "demolari",
+    title: "Degajare deșeuri din demolări",
+    summary: "Preluăm molozul rezultat din demolări și debităm pe loc elementele prea voluminoase pentru transport.",
+    description:
+      "Preluăm deșeurile rezultate din demolări, până în 4 tone pe container. Acolo unde elementele sunt prea voluminoase pentru a fi încărcate ca atare, le debităm la fața locului cu flex sau autogen, în funcție de material și de spațiul disponibil.",
+    advantages: [
+      "Preluare moloz din demolări, până în 4 tone pe container",
+      "Debitare cu flex sau autogen la fața locului",
+      "Intervenție rapidă, oriunde în oraș",
+    ],
+    image: "servicii-demolari.jpg",
+    imageAlt: "Excavatoare demolând o clădire, cu moloz în prim-plan",
   },
   {
     slug: "gospodarii",
@@ -37,7 +50,7 @@ export const services: Service[] = [
       "Adaptare la nevoile fiecărui client",
     ],
     image: "servicii-gospodarii.jpg",
-    imageAlt: "Camion de gunoi ridicând o pubelă",
+    imageAlt: "Grămadă de mobilier voluminos aruncat — scaune, birouri și dulapuri",
   },
   {
     slug: "reciclabile",
