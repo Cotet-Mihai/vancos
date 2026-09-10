@@ -117,16 +117,16 @@ export function Hero() {
           >
             <Link
               href="/contact"
-              className="group flex w-full items-center justify-center gap-3 rounded-full bg-brand-light p-2 text-sm font-bold text-ink shadow-lg transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:justify-start sm:py-2 sm:pr-6 sm:pl-2"
+              className="group flex w-full items-center justify-center gap-3 rounded-full bg-brand-light px-6 py-2.5 text-sm font-bold text-ink shadow-lg transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:justify-start sm:py-2 sm:pr-6 sm:pl-2"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-brand-light transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
+              <span className="hidden h-9 w-9 items-center justify-center rounded-full bg-ink text-brand-light transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 sm:flex">
                 →
               </span>
               Solicită o ofertă
             </Link>
             <Link
               href="/servicii"
-              className="flex w-full items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition-colors duration-300 hover:bg-white/10 motion-reduce:transition-none sm:w-auto"
+              className="flex w-full items-center justify-center rounded-full border border-white/30 px-6 py-2.5 text-sm font-bold text-white transition-colors duration-300 hover:bg-white/10 motion-reduce:transition-none sm:w-auto sm:py-3"
             >
               Află mai multe
             </Link>
