@@ -31,7 +31,7 @@ export function ServiceCard({ service, image }: ServiceCardProps) {
             <p className="hidden text-white/80 sm:line-clamp-2 sm:text-sm">{service.summary}</p>
             <Link
               href={`/servicii#${service.slug}`}
-              className="flex w-full items-center justify-center rounded-full bg-brand-light px-4 py-1.5 text-xs font-bold text-ink transition-transform duration-300 sm:py-2 sm:text-sm lg:w-fit lg:px-5 lg:hover:scale-105 motion-reduce:transition-none"
+              className="flex w-full items-center justify-center rounded-full border border-brand-light px-4 py-1.5 text-xs font-bold text-brand-light transition-colors duration-300 hover:bg-brand-light/10 sm:py-2 sm:text-sm lg:w-fit lg:px-5 motion-reduce:transition-none"
             >
               Detalii
             </Link>

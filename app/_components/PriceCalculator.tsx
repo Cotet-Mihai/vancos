@@ -3,14 +3,22 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+// Prețuri comunicate de Vancos, în ordinea primită. Când se schimbă, se
+// actualizează și `PRETURI_LA`, care apare sub total — un preț orientativ fără
+// data la care a fost valabil nu-i spune nimic clientului.
 const materials = [
-  { name: "Fier", pricePerKg: 1.2 },
-  { name: "Aluminiu", pricePerKg: 6.5 },
-  { name: "Cupru", pricePerKg: 28 },
-  { name: "Bronz", pricePerKg: 20 },
-  { name: "Alamă", pricePerKg: 18 },
-  { name: "Plumb", pricePerKg: 5.5 },
+  { name: "Fier", pricePerKg: 0.8 },
+  { name: "Cupru", pricePerKg: 42 },
+  { name: "Bronz", pricePerKg: 21 },
+  { name: "Aluminiu", pricePerKg: 5 },
+  { name: "Plumb", pricePerKg: 4 },
+  { name: "Radiatoare aluminiu", pricePerKg: 2 },
+  { name: "Radiatoare cupru + aluminiu", pricePerKg: 12 },
+  { name: "Baterii auto", pricePerKg: 2 },
+  { name: "Cabluri electrice", pricePerKg: 6 },
 ];
+
+const PRETURI_LA = "10 septembrie 2026";
 
 const STEP = 5;
 
@@ -45,18 +53,20 @@ export function PriceCalculator() {
 
       <div className="flex flex-col divide-y divide-white/10 px-6">
         {materials.map((material, index) => (
-          <div key={material.name} className="flex items-center justify-between gap-4 py-4">
-            <div className="flex flex-col">
-              <span className="font-semibold text-paper">{material.name}</span>
-              <span className="font-mono text-xs text-brand-light/60">{material.pricePerKg.toFixed(2)} lei/kg</span>
+          <div key={material.name} className="flex items-center justify-between gap-3 py-3.5 sm:gap-4 sm:py-4">
+            <div className="flex min-w-0 flex-col">
+              <span className="text-sm leading-tight font-semibold text-paper sm:text-base">{material.name}</span>
+              <span className="font-mono text-xs text-brand-light/60">
+                {material.pricePerKg.toLocaleString("ro-RO", { minimumFractionDigits: 2 })} lei/kg
+              </span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => adjust(index, -STEP)}
                 aria-label={`Scade cantitatea de ${material.name.toLowerCase()}`}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-paper transition-colors hover:border-brand-light hover:text-brand-light"
+                className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-paper transition-colors hover:border-brand-light hover:text-brand-light sm:h-8 sm:w-8"
               >
                 −
               </button>
@@ -67,7 +77,7 @@ export function PriceCalculator() {
                   value={quantities[index]}
                   onChange={(event) => setQuantity(index, event.target.value)}
                   aria-label={`Cantitate de ${material.name.toLowerCase()} în kg`}
-                  className="w-16 rounded-lg border border-transparent bg-transparent text-center font-mono text-lg font-bold text-paper tabular-nums outline-none focus:border-brand-light"
+                  className="w-11 rounded-lg border border-transparent bg-transparent text-center font-mono text-base font-bold text-paper tabular-nums outline-none focus:border-brand-light sm:w-16 sm:text-lg"
                 />
                 <span className="text-xs font-normal text-paper/40">kg</span>
               </span>
@@ -75,7 +85,7 @@ export function PriceCalculator() {
                 type="button"
                 onClick={() => adjust(index, STEP)}
                 aria-label={`Crește cantitatea de ${material.name.toLowerCase()}`}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-paper transition-colors hover:border-brand-light hover:text-brand-light"
+                className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-paper transition-colors hover:border-brand-light hover:text-brand-light sm:h-8 sm:w-8"
               >
                 +
               </button>
@@ -108,7 +118,8 @@ export function PriceCalculator() {
           Solicită preluarea
         </Link>
         <p className="text-xs text-paper/50">
-          Prețuri orientative, valabile la data actualizării. Prețul final se stabilește la recepția materialului.
+          Prețuri orientative, actualizate la {PRETURI_LA}. Prețul final se stabilește la cântărirea și verificarea
+          materialului.
         </p>
       </div>
     </div>
