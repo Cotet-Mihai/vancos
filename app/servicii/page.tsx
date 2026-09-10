@@ -1,4 +1,5 @@
 import Image, { type StaticImageData } from "next/image";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { services } from "../_lib/services";
@@ -41,7 +42,10 @@ export default function ServiciiPage() {
         />
 
         <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-6 pt-36 pb-16">
-          <span className="flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase">
+          <span
+            className="hero-rise flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase"
+            style={{ "--rise-delay": "0.15s" } as CSSProperties}
+          >
             <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
               <span
                 aria-hidden="true"
@@ -52,16 +56,26 @@ export default function ServiciiPage() {
             Catalog — {services.length} servicii
           </span>
 
-          <h1 className="max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl">
+          <h1
+            className="hero-rise max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl"
+            style={{ "--rise-delay": "0.3s" } as CSSProperties}
+          >
             Servicii pentru <span className="text-brand-light">orice tip de deșeu.</span>
           </h1>
 
-          <p className="max-w-xl leading-relaxed text-paper/70">
+          <p
+            className="hero-rise max-w-xl leading-relaxed text-paper/70"
+            style={{ "--rise-delay": "0.45s" } as CSSProperties}
+          >
             De la degajarea molozului rezultat din demolări, până la colectarea deșeurilor reciclabile, adaptăm fiecare
             intervenție la nevoile tale.
           </p>
 
-          <nav aria-label="Sari la un serviciu" className="flex flex-wrap gap-3 pt-2">
+          <nav
+            aria-label="Sari la un serviciu"
+            className="hero-rise flex flex-wrap gap-3 pt-2"
+            style={{ "--rise-delay": "0.6s" } as CSSProperties}
+          >
             {services.map((service, index) => (
               <Link
                 key={service.slug}
@@ -85,21 +99,24 @@ export default function ServiciiPage() {
 
           return (
             <section key={service.slug} id={service.slug} className="scroll-mt-28 py-16 lg:py-24">
-              <Reveal className="flex flex-col gap-8">
-                <div className="flex items-center gap-5">
+              <div className="flex flex-col gap-8">
+                <Reveal className="flex items-center gap-5">
                   <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Serviciu {unit}</span>
                   <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
                   <span className="font-mono text-[10px] tracking-[0.25em] text-white/30 uppercase">
                     {service.shortLabel}
                   </span>
-                </div>
+                </Reveal>
 
                 <div
                   className={`flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16 ${
                     reversed ? "lg:flex-row-reverse" : ""
                   }`}
                 >
-                  <div className="group relative h-72 w-full overflow-hidden rounded-[2rem] border border-white/10 sm:h-96 lg:h-[28rem] lg:flex-1">
+                  <Reveal
+                    delay={100}
+                    className="group relative h-72 w-full overflow-hidden rounded-[2rem] border border-white/10 sm:h-96 lg:h-[28rem] lg:flex-1"
+                  >
                     <Image
                       src={images[service.slug]}
                       alt={service.imageAlt}
@@ -120,9 +137,9 @@ export default function ServiciiPage() {
                     >
                       {unit}
                     </span>
-                  </div>
+                  </Reveal>
 
-                  <div className="flex flex-col gap-6 lg:flex-1">
+                  <Reveal delay={200} className="flex flex-col gap-6 lg:flex-1">
                     <h2 className="text-3xl font-bold text-paper sm:text-4xl">{service.title}</h2>
                     <p className="leading-relaxed text-paper/70">{service.description}</p>
 
@@ -149,9 +166,9 @@ export default function ServiciiPage() {
                       </span>
                       Cere ofertă pentru acest serviciu
                     </Link>
-                  </div>
+                  </Reveal>
                 </div>
-              </Reveal>
+              </div>
             </section>
           );
         })}

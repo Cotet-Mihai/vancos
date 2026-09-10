@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import despreImage from "../../public/images/despre-noi.jpg";
 import { services } from "../_lib/services";
 import { firma } from "../_lib/legal";
@@ -63,7 +64,10 @@ export default function DespreNoiPage() {
         />
 
         <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-6 pt-36 pb-16">
-          <span className="flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase">
+          <span
+            className="hero-rise flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase"
+            style={{ "--rise-delay": "0.15s" } as CSSProperties}
+          >
             <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
               <span
                 aria-hidden="true"
@@ -74,11 +78,17 @@ export default function DespreNoiPage() {
             Despre noi · București
           </span>
 
-          <h1 className="max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl">
+          <h1
+            className="hero-rise max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl"
+            style={{ "--rise-delay": "0.3s" } as CSSProperties}
+          >
             Firma din spatele <span className="text-brand-light">containerelor.</span>
           </h1>
 
-          <p className="max-w-xl leading-relaxed text-paper/70">
+          <p
+            className="hero-rise max-w-xl leading-relaxed text-paper/70"
+            style={{ "--rise-delay": "0.45s" } as CSSProperties}
+          >
             Suntem o firmă din București specializată în degajarea deșeurilor din construcții, demolări și gospodării,
             plus colectarea diversificată a deșeurilor reciclabile.
           </p>

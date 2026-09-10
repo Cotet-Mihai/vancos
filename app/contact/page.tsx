@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { QuickQuoteForm } from "../_components/QuickQuoteForm";
@@ -64,7 +65,10 @@ export default function ContactPage() {
         />
 
         <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-6 pt-36 pb-14">
-          <span className="flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase">
+          <span
+            className="hero-rise flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase"
+            style={{ "--rise-delay": "0.15s" } as CSSProperties}
+          >
             <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
               <span
                 aria-hidden="true"
@@ -75,11 +79,17 @@ export default function ContactPage() {
             Dispatch — preluăm cereri
           </span>
 
-          <h1 className="max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl">
+          <h1
+            className="hero-rise max-w-3xl text-4xl leading-[0.98] font-bold text-paper sm:text-5xl lg:text-6xl"
+            style={{ "--rise-delay": "0.3s" } as CSSProperties}
+          >
             Spune-ne ce ai de <span className="text-brand-light">transportat.</span>
           </h1>
 
-          <p className="max-w-xl leading-relaxed text-paper/70">
+          <p
+            className="hero-rise max-w-xl leading-relaxed text-paper/70"
+            style={{ "--rise-delay": "0.45s" } as CSSProperties}
+          >
             Sună, scrie-ne sau completează formularul. Îți răspundem cu o ofertă clară, în funcție de tipul deșeurilor
             și de zona în care te afli.
           </p>
