@@ -193,21 +193,38 @@ export default function Home() {
             actualizate, pentru o colaborare simplă și transparentă.
           </p>
 
-          <ul className="flex flex-col gap-3">
-            {calculatorBenefits.map((benefit) => (
-              <li
-                key={benefit.title}
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.09)] backdrop-blur-xl"
-              >
-                <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
-                  <benefit.icon className="h-5 w-5" />
-                </span>
-                <span className="flex flex-col gap-0.5">
-                  <span className="font-semibold text-paper">{benefit.title}</span>
-                  <span className="text-sm text-paper/70">{benefit.description}</span>
-                </span>
-              </li>
-            ))}
+          {/* Pe telefon primele doua stau umar la umar, deci se aseaza pe
+              verticala ca sa incapa in jumatate de ecran; a treia tine tot
+              randul si ramane orizontala. De la `sm` in sus lista redevine
+              coloana, iar `col-span-2` nu mai are efect intr-un flex. */}
+          <ul className="grid grid-cols-2 gap-3 sm:flex sm:flex-col">
+            {calculatorBenefits.map((benefit, index) => {
+              const wide = index === calculatorBenefits.length - 1;
+              return (
+                <li
+                  key={benefit.title}
+                  className={`flex rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.09)] backdrop-blur-xl sm:flex-row sm:items-center sm:gap-4 sm:text-left ${
+                    wide ? "col-span-2 items-center gap-4" : "flex-col items-center gap-3 text-center"
+                  }`}
+                >
+                  <span
+                    className={`flex flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light sm:h-12 sm:w-12 ${
+                      wide ? "h-12 w-12" : "h-10 w-10"
+                    }`}
+                  >
+                    <benefit.icon className="h-5 w-5" />
+                  </span>
+                  <span className="flex flex-col gap-0.5">
+                    <span className={`font-semibold text-paper sm:text-base ${wide ? "" : "text-sm"}`}>
+                      {benefit.title}
+                    </span>
+                    <span className={`text-paper/70 sm:text-sm ${wide ? "text-sm" : "text-xs"}`}>
+                      {benefit.description}
+                    </span>
+                  </span>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex flex-wrap items-center gap-6">
