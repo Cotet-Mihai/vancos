@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
-import { ANPC, ANPC_SAL, ANPC_SOL, actualizat, firma } from "../_lib/legal";
+import { DateleFirmei } from "../_components/DateleFirmei";
+import { ANPC, ANPC_SAL, ANPC_SOL, actualizat } from "../_lib/legal";
 
 export const metadata: Metadata = {
   title: "Termeni și condiții",
@@ -10,48 +11,6 @@ export const metadata: Metadata = {
 
 const linkClass =
   "font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline";
-
-/** Marcaj vizibil pentru o dată de firmă necompletată — vezi `_lib/legal.ts`. */
-function DeCompletat({ camp }: { camp: string }) {
-  return (
-    <span className="rounded-md bg-accent-warm/20 px-1.5 py-0.5 font-mono text-xs font-bold tracking-wide text-accent-warm">
-      [de completat: {camp}]
-    </span>
-  );
-}
-
-function Identificare() {
-  const randuri = [
-    { eticheta: "Denumire", valoare: firma.denumire, camp: "denumirea firmei" },
-    { eticheta: "CUI", valoare: firma.cui, camp: "CUI" },
-    { eticheta: "Reg. Com.", valoare: firma.registruComert, camp: "nr. registrul comerțului" },
-    { eticheta: "Sediu social", valoare: firma.sediuSocial, camp: "sediul social" },
-  ];
-
-  return (
-    <dl className="flex flex-col divide-y divide-white/5 rounded-[1.5rem] border border-white/10 bg-surface px-5 py-1">
-      {randuri.map((rand) => (
-        <div key={rand.eticheta} className="flex flex-wrap items-baseline justify-between gap-3 py-3.5">
-          <dt className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">{rand.eticheta}</dt>
-          <dd className="text-sm font-semibold text-paper">
-            {rand.valoare ?? <DeCompletat camp={rand.camp} />}
-          </dd>
-        </div>
-      ))}
-      <div className="flex flex-wrap items-baseline justify-between gap-3 py-3.5">
-        <dt className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Contact</dt>
-        <dd className="flex flex-col items-end gap-1 text-sm font-semibold text-paper">
-          <a href={contact.phoneHref} className="hover:text-brand-light">
-            {contact.phone}
-          </a>
-          <a href={contact.emailHref} className="hover:text-brand-light">
-            {contact.email}
-          </a>
-        </dd>
-      </div>
-    </dl>
-  );
-}
 
 const sectiuni = [
   {
@@ -185,7 +144,7 @@ export default function TermeniSiConditiiPage() {
 
       <section className="flex flex-col gap-4">
         <h2 className="text-xl font-bold text-paper">Cine suntem</h2>
-        <Identificare />
+        <DateleFirmei />
       </section>
 
       {sectiuni.map((sectiune) => (

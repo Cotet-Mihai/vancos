@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import despreImage from "../../public/images/despre-noi.jpg";
 import { services } from "../_lib/services";
-import { contact } from "../_lib/contact";
 import { firma } from "../_lib/legal";
 import { Reveal } from "../_components/Reveal";
 import { FinalCta } from "../_components/FinalCta";
@@ -44,13 +43,6 @@ const principles = [
     title: "Venim pregătiți",
     description: "Aducem oameni pentru încărcare și debităm cu flex sau autogen la fața locului.",
   },
-];
-
-const identitate = [
-  { eticheta: "Denumire", valoare: firma.denumire },
-  { eticheta: "CUI", valoare: firma.cui },
-  { eticheta: "Reg. Com.", valoare: firma.registruComert },
-  { eticheta: "Sediu social", valoare: firma.sediuSocial },
 ];
 
 export default function DespreNoiPage() {
@@ -120,7 +112,7 @@ export default function DespreNoiPage() {
       </section>
 
       <div className="mx-auto flex max-w-7xl flex-col px-6">
-        <section className="border-b border-white/10 py-16 lg:py-24">
+        <section className="py-16 lg:py-24">
           <Reveal className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
             <div className="flex flex-col gap-4">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Cine suntem</span>
@@ -149,7 +141,7 @@ export default function DespreNoiPage() {
           </Reveal>
         </section>
 
-        <section className="border-b border-white/10 py-16 lg:py-24">
+        <section className="py-16 lg:py-24">
           <Reveal className="flex flex-col gap-10">
             <div className="flex items-center gap-5">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Cum lucrăm</span>
@@ -174,7 +166,7 @@ export default function DespreNoiPage() {
           </Reveal>
         </section>
 
-        <section className="border-b border-white/10 py-16 lg:py-24">
+        <section className="py-16 lg:py-24">
           <Reveal className="flex flex-col gap-10">
             <div className="flex items-center gap-5">
               <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Ce facem</span>
@@ -213,47 +205,6 @@ export default function DespreNoiPage() {
       </div>
 
       <CoverageMap />
-
-      <div className="mx-auto flex max-w-7xl flex-col px-6">
-        <section className="border-t border-white/10 py-16 lg:py-24">
-          <Reveal className="grid gap-10 lg:grid-cols-[22rem_1fr] lg:gap-20">
-            <div className="flex flex-col gap-4">
-              <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Transparență</span>
-              <h2 className="text-3xl font-bold text-paper sm:text-4xl">Datele firmei</h2>
-              <p className="text-sm leading-relaxed text-paper/60">
-                Sunt aceleași date pe care le găsești și în{" "}
-                <Link
-                  href="/termeni-si-conditii"
-                  className="font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline motion-reduce:transition-none"
-                >
-                  termeni și condiții
-                </Link>
-                .
-              </p>
-            </div>
-
-            <dl className="flex flex-col divide-y divide-white/5 rounded-[1.5rem] border border-white/10 bg-surface px-6 py-1">
-              {identitate.map((rand) => (
-                <div key={rand.eticheta} className="flex flex-wrap items-baseline justify-between gap-3 py-4">
-                  <dt className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">{rand.eticheta}</dt>
-                  <dd className="text-sm font-semibold text-paper">{rand.valoare}</dd>
-                </div>
-              ))}
-              <div className="flex flex-wrap items-baseline justify-between gap-3 py-4">
-                <dt className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Contact</dt>
-                <dd className="flex flex-col items-end gap-1 text-sm font-semibold text-paper">
-                  <a href={contact.phoneHref} className="hover:text-brand-light">
-                    {contact.phone}
-                  </a>
-                  <a href={contact.emailHref} className="hover:text-brand-light">
-                    {contact.email}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          </Reveal>
-        </section>
-      </div>
 
       <FinalCta />
     </>

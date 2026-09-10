@@ -12,6 +12,8 @@ import { Reveal } from "./_components/Reveal";
 import { PriceCalculator } from "./_components/PriceCalculator";
 import { HowWeWork } from "./_components/HowWeWork";
 import { CoverageMap } from "./_components/CoverageMap";
+import { DeCompletat } from "./_components/DeCompletat";
+import { contact } from "./_lib/contact";
 import { FinalCta } from "./_components/FinalCta";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
@@ -120,7 +122,7 @@ const faqs = [
   },
   {
     question: "Care este programul vostru?",
-    answer: "[program de lucru]",
+    answer: contact.program ?? <DeCompletat camp="programul de lucru" />,
   },
 ];
 

@@ -61,7 +61,7 @@ export default function ServiciiPage() {
             intervenție la nevoile tale.
           </p>
 
-          <nav aria-label="Sari la un serviciu" className="flex flex-wrap gap-3 border-t border-white/10 pt-8">
+          <nav aria-label="Sari la un serviciu" className="flex flex-wrap gap-3 pt-2">
             {services.map((service, index) => (
               <Link
                 key={service.slug}
@@ -84,7 +84,7 @@ export default function ServiciiPage() {
           const reversed = index % 2 === 1;
 
           return (
-            <section key={service.slug} id={service.slug} className="scroll-mt-28 border-b border-white/10 py-16 last:border-b-0 lg:py-24">
+            <section key={service.slug} id={service.slug} className="scroll-mt-28 py-16 lg:py-24">
               <Reveal className="flex flex-col gap-8">
                 <div className="flex items-center gap-5">
                   <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Serviciu {unit}</span>

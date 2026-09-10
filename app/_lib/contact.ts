@@ -6,4 +6,11 @@ export const contact = {
   email: "vancosrecycling@gmail.com",
   emailHref: "mailto:vancosrecycling@gmail.com",
   area: "Deservim toate cele 6 sectoare din București",
-} as const;
+  /**
+   * Programul de lucru — `null` cât timp nu îl avem confirmat de la Vancos.
+   * Unde e folosit se afișează un marcaj vizibil în locul lui, ca să nu apuce
+   * să ajungă live un „Program: ..." gol. Formatul așteptat: „Luni-Vineri,
+   * 08:00-18:00 · Sâmbătă, 09:00-14:00".
+   */
+  program: null as string | null,
+};
