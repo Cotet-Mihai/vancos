@@ -138,16 +138,12 @@ export default function Home() {
               unde exista cursor pentru deschiderea la hover. Proprietatile flex
               ale copiilor sunt ignorate cat timp parintele e grila. */}
           <Reveal delay={120} className="grid w-full grid-cols-2 gap-3 sm:gap-4 lg:flex lg:flex-row">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <div
                 key={service.slug}
                 className="flex min-w-0 flex-1 transition-[flex-grow] duration-500 ease-out hover:flex-[3]"
               >
-                <ServiceCard
-                  service={service}
-                  image={serviceImages[service.slug]}
-                  unit={String(index + 1).padStart(2, "0")}
-                />
+                <ServiceCard service={service} image={serviceImages[service.slug]} />
               </div>
             ))}
           </Reveal>

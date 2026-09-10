@@ -139,9 +139,6 @@ export default function ServiciiPage() {
                       aria-hidden="true"
                       className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/20"
                     />
-                    <span className="absolute top-4 left-4 rounded-md border border-white/20 bg-ink/70 px-2 py-1 font-mono text-[10px] tracking-widest text-brand-light backdrop-blur-sm">
-                      UNIT—{unit}
-                    </span>
                     <span
                       aria-hidden="true"
                       className="absolute -bottom-6 right-4 font-mono text-[7rem] leading-none font-bold text-white/10 select-none"
