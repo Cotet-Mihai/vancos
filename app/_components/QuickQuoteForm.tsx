@@ -83,7 +83,7 @@ export function QuickQuoteForm() {
             <select
               value={type}
               onChange={(event) => setType(event.target.value)}
-              className={`${fieldClass} appearance-none pr-11 [color-scheme:dark]`}
+              className={`${fieldClass} field-select appearance-none pr-11 [color-scheme:dark]`}
             >
               {wasteTypes.map((option) => (
                 <option key={option} value={option}>

@@ -224,3 +224,17 @@ input[type="number"] {
   -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 88%);
   mask-image: linear-gradient(to bottom, #000 0, transparent 88%);
 }
+
+/* Popup-ul nativ de select ignoră `color-scheme: dark` pe Windows și rămâne alb,
+   iar opțiunile moștenesc textul deschis al câmpului — adică alb pe alb. Culorile
+   se pun explicit pe `option`, singurul lucru din popup pe care îl putem stiliza. */
+.field-select option {
+  background-color: var(--surface);
+  color: var(--paper);
+}
+
+.field-select option:checked,
+.field-select option:hover {
+  background-color: var(--brand);
+  color: var(--paper);
+}
