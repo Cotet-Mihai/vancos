@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { QuickQuoteForm } from "./QuickQuoteForm";
+import { Reveal } from "./Reveal";
 import { IconClock, IconShield, IconTruck, IconContainer } from "./icons";
 
 // Faptele care s-ar cere oricum la telefon, strânse în ultimul ecran,
@@ -32,7 +33,7 @@ export function FinalCta() {
       />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1fr_minmax(0,31rem)] lg:items-center lg:gap-20 lg:py-28">
-        <div className="flex flex-col gap-7">
+        <Reveal className="flex flex-col gap-7">
           <span className="flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-white/50 uppercase">
             <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
               <span
@@ -75,9 +76,11 @@ export function FinalCta() {
               Vezi datele de contact →
             </Link>
           </p>
-        </div>
+        </Reveal>
 
-        <QuickQuoteForm />
+        <Reveal delay={120}>
+          <QuickQuoteForm />
+        </Reveal>
       </div>
     </section>
   );

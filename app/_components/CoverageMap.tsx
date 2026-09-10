@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Reveal } from "./Reveal";
 
 // Conturul sectoarelor e trasat automat din harta administrativă de referință:
 // pixelii au fost clasificați pe culoare, marginea fiecărei zone urmărită cu
@@ -57,7 +58,7 @@ export function CoverageMap() {
 
   return (
     <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row lg:items-center lg:gap-16">
-      <div className="flex flex-col gap-6 lg:flex-1">
+      <Reveal className="flex flex-col gap-6 lg:flex-1">
         <div className="flex flex-col gap-3">
           <h2 className="text-4xl font-bold text-paper sm:text-5xl">Zona de acoperire</h2>
           <span className="h-[3px] w-12 rounded-full bg-brand" />
@@ -83,9 +84,9 @@ export function CoverageMap() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
 
-      <div className="lg:flex-1">
+      <Reveal delay={120} className="lg:flex-1">
         <div className="relative">
           <svg
             viewBox="0 0 650 650"
@@ -133,7 +134,7 @@ export function CoverageMap() {
 
           <p className="mt-4 text-center text-sm text-paper/60">București</p>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

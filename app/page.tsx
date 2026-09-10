@@ -119,7 +119,7 @@ export default function Home() {
 
       <section className="flex flex-col gap-10 py-16">
         <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-10 px-6">
-          <div className="flex flex-col items-center gap-4 text-center">
+          <Reveal className="flex flex-col items-center gap-4 text-center">
             <div className="flex items-center gap-3">
               <span className="h-[3px] w-8 rounded-full bg-brand-light" />
               <span className="text-xs font-bold tracking-[0.3em] text-white/50 uppercase">Serviciile noastre</span>
@@ -132,9 +132,9 @@ export default function Home() {
               Colectăm și transportăm deșeuri din construcții, demolări, gospodării și materiale reciclabile. Rapid,
               eficient și fără complicații.
             </p>
-          </div>
+          </Reveal>
 
-          <Reveal className="flex w-full flex-col gap-4 lg:flex-row">
+          <Reveal delay={120} className="flex w-full flex-col gap-4 lg:flex-row">
             {services.map((service, index) => (
               <div
                 key={service.slug}
@@ -150,7 +150,7 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <div className="mx-auto w-full max-w-[88rem] px-6">
+        <Reveal className="mx-auto w-full max-w-[88rem] px-6">
           <div className="flex w-full flex-col gap-6 rounded-[2rem] border border-white/10 bg-surface px-10 py-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full">
             <div className="flex items-center gap-4">
               <div className="flex flex-col gap-1">
@@ -178,11 +178,11 @@ export default function Home() {
               Contactează-ne
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="mx-auto grid max-w-2xl gap-12 px-6 py-16 lg:max-w-[88rem] lg:grid-cols-[1fr_34rem] lg:gap-32 lg:items-center">
-        <div className="flex flex-col gap-6">
+        <Reveal className="flex flex-col gap-6">
           <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">
             Cântar · Estimare · Reciclare
           </span>
@@ -223,9 +223,11 @@ export default function Home() {
             </Link>
             <p className="max-w-[13rem] text-sm text-paper/60">Un mediu mai curat începe cu decizii simple.</p>
           </div>
-        </div>
+        </Reveal>
 
-        <PriceCalculator />
+        <Reveal delay={120}>
+          <PriceCalculator />
+        </Reveal>
       </section>
 
       <section className="mx-auto flex max-w-7xl flex-col px-6 py-16">
@@ -298,7 +300,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <div className="relative overflow-hidden border-y border-white/10 py-4">
+      <Reveal className="relative overflow-hidden border-y border-white/10 py-4">
         <div className="flex w-max animate-marquee gap-8">
           {[...materials, ...materials].map((material, index) => (
             <span
@@ -310,18 +312,19 @@ export default function Home() {
             </span>
           ))}
         </div>
-      </div>
+      </Reveal>
 
       <HowWeWork />
 
       <CoverageMap />
 
-      <section className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-16">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-4xl font-bold text-paper sm:text-5xl">Întrebări frecvente</h2>
-          <span className="h-[3px] w-12 rounded-full bg-brand" />
-        </div>
-        <Accordion className="border-t border-white/10">
+      <section className="mx-auto max-w-3xl px-6 py-16">
+        <Reveal className="flex flex-col gap-8">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-4xl font-bold text-paper sm:text-5xl">Întrebări frecvente</h2>
+            <span className="h-[3px] w-12 rounded-full bg-brand" />
+          </div>
+          <Accordion className="border-t border-white/10">
           {faqs.map((faq) => (
             <AccordionItem key={faq.question} value={faq.question} className="border-b border-white/10">
               <AccordionTrigger className="gap-4 py-5 text-base font-semibold text-paper hover:no-underline **:data-[slot=accordion-trigger-icon]:size-5 **:data-[slot=accordion-trigger-icon]:text-brand-light">
@@ -330,7 +333,8 @@ export default function Home() {
               <AccordionContent className="pb-5 text-sm text-paper/70">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
-        </Accordion>
+          </Accordion>
+        </Reveal>
       </section>
 
       <FinalCta />
