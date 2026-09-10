@@ -1,5 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-  <rect width="40" height="40" rx="10" fill="#1c1c1a"/>
-  <path d="M9 31C9 19 19 9 31 9C31 21 21 31 9 31Z" fill="#F5F4F0"/>
-  <path d="M15 31C15 23 23 15 31 15C31 23 23 31 15 31Z" fill="#3E9B5C"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="Vancos">
+  <!-- Pătrat rotunjit pe ink-ul site-ului, ca pictograma să se vadă și pe fundal
+       deschis, și pe cel întunecat al unei bare de file. -->
+  <rect width="40" height="40" rx="10" fill="#141412"/>
+  <!-- „V" desenat ca formă plină, nu ca literă: la 16px, un font ar fi randat
+       inegal de la un sistem la altul, iar conturul subțire s-ar fi pierdut.
+       Vârful e ușor rotunjit, ca să nu se vadă ca un ac la dimensiune mică. -->
+  <path
+    d="M10 11.5h4.9l5.1 12.9 5.1-12.9H30l-7.7 18.2a2.5 2.5 0 0 1-4.6 0L10 11.5Z"
+    fill="#3E9B5C"
+  />
 </svg>

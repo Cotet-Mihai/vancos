@@ -22,10 +22,11 @@ const linkClass =
   "font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline";
 
 /**
- * Textul descrie ce face efectiv site-ul, verificat în cod: nu există analytics,
- * pixeli de urmărire, `localStorage` sau cookie-uri proprii. Singurul terț este
- * harta Google de pe pagina de Contact. Dacă se adaugă vreodată analytics sau un
- * alt serviciu extern, secțiunile de mai jos trebuie rescrise odată cu el.
+ * Textul descrie ce face efectiv site-ul, verificat în cod: nu există cookie-uri
+ * proprii și niciun pixel de urmărire. Există Vercel Analytics, care nu scrie pe
+ * dispozitiv, și harta Google de pe pagina de Contact, care poate. Dacă se
+ * adaugă vreodată alt serviciu extern, secțiunile de mai jos se rescriu odată cu
+ * el — o politică rămasă în urmă e o declarație falsă, nu o omisiune.
  */
 const browsers = [
   { name: "Chrome", href: "https://support.google.com/chrome/answer/95647" },
@@ -50,9 +51,13 @@ const sectiuni = [
     continut: (
       <>
         <p>
-          Site-ul Vancos <strong className="font-semibold text-paper">nu setează cookie-uri proprii</strong>. Nu folosim
-          Google Analytics sau alt instrument de statistici, nu avem pixeli de urmărire, nu afișăm reclame și nu
-          construim profiluri de vizitatori.
+          Site-ul Vancos <strong className="font-semibold text-paper">nu setează cookie-uri proprii</strong>. Nu avem
+          pixeli de urmărire, nu afișăm reclame și nu construim profiluri de vizitatori.
+        </p>
+        <p>
+          Folosim Vercel Analytics ca să știm câți oameni ne vizitează și ce pagini citesc. Nu setează cookie-uri și nu
+          salvează nimic pe dispozitivul tău: numără printr-un identificator calculat din cererea către server, care se
+          șterge după 24 de ore și nu poate fi legat de tine.
         </p>
         <p>
           Singurul lucru pe care îl salvăm în browserul tău este răspunsul dat bannerului de la prima vizită, ca să nu
@@ -148,8 +153,8 @@ export default function PoliticaCookiePage() {
       <section className="flex flex-col gap-3 rounded-[1.5rem] border border-brand-light/25 bg-brand/15 p-6">
         <h2 className="text-lg font-bold text-paper">Pe scurt</h2>
         <p className="leading-relaxed text-paper/80">
-          Nu folosim cookie-uri de urmărire și nu setăm niciun cookie propriu. Singurul cookie care poate apărea vine de
-          la harta Google încorporată în pagina de Contact.
+          Nu folosim cookie-uri de urmărire și nu setăm niciun cookie propriu. Statisticile de trafic nu scriu nimic pe
+          dispozitivul tău. Singurul cookie care poate apărea vine de la harta Google încorporată în pagina de Contact.
         </p>
       </section>
 
