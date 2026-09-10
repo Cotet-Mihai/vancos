@@ -11,6 +11,7 @@ const wasteTypes = [
   "Deșeuri din demolări",
   "Deșeuri din gospodărie",
   "Materiale reciclabile",
+  "Mixt — mai multe tipuri de deșeuri",
   "Altceva",
 ];
 

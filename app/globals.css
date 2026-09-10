@@ -227,7 +227,22 @@ input[type="number"] {
 
 /* Popup-ul nativ de select ignoră `color-scheme: dark` pe Windows și rămâne alb,
    iar opțiunile moștenesc textul deschis al câmpului — adică alb pe alb. Culorile
-   se pun explicit pe `option`, singurul lucru din popup pe care îl putem stiliza. */
+   se pun explicit pe `option`, singurul lucru din popup pe care îl putem stiliza.
+
+   Fundalul popup-ului îl ia din `background-color`-ul select-ului. Utilitarul
+   comun al câmpurilor e alb translucid — peste ink arată a sticlă, dar în popup
+   se randează ca o ramă albă în jurul opțiunilor. Aici îl facem opac, cu un
+   token al temei: pe câmpul închis diferența față de celelalte câmpuri e sub
+   pragul vizibil, iar popup-ul iese închis la culoare. Regula nu stă într-un
+   `@layer`, deci bate utilitarul Tailwind fără `!important`.
+
+   Culoarea se scrie direct, nu prin `color-mix`: Lightning CSS ar genera un
+   fallback `var(--paper)` — alb — pentru browserele fără `color-mix`, exact
+   inversul a ceea ce vrem. Starea de focus rămâne semnalată de bordura verde. */
+.field-select {
+  background-color: var(--surface);
+}
+
 .field-select option {
   background-color: var(--surface);
   color: var(--paper);
