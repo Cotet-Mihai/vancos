@@ -44,19 +44,19 @@ export function PriceCalculator() {
 
   return (
     <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface">
-      <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+      <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
         <span className="font-mono text-[10px] tracking-widest text-brand-light/70 uppercase">
           Cântar · estimare live
         </span>
         <span className="flex h-2 w-2 animate-pulse rounded-full bg-brand-light" />
       </div>
 
-      <div className="flex flex-col divide-y divide-white/10 px-6">
+      <div className="flex max-h-[19rem] flex-col divide-y divide-white/10 overflow-y-auto px-5 sm:max-h-[21rem]">
         {materials.map((material, index) => (
-          <div key={material.name} className="flex items-center justify-between gap-3 py-3.5 sm:gap-4 sm:py-4">
+          <div key={material.name} className="flex items-center justify-between gap-3 py-2.5 sm:gap-4">
             <div className="flex min-w-0 flex-col">
-              <span className="text-sm leading-tight font-semibold text-paper sm:text-base">{material.name}</span>
-              <span className="font-mono text-xs text-brand-light/60">
+              <span className="text-sm leading-tight font-semibold text-paper">{material.name}</span>
+              <span className="font-mono text-[11px] leading-tight text-brand-light/60">
                 {material.pricePerKg.toLocaleString("ro-RO", { minimumFractionDigits: 2 })} lei/kg
               </span>
             </div>
@@ -94,11 +94,11 @@ export function PriceCalculator() {
         ))}
       </div>
 
-      <div className="m-6 mt-4 rounded-2xl bg-ink px-6 py-5 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]">
+      <div className="m-5 mt-4 rounded-2xl bg-ink px-5 py-4 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]">
         <div className="flex items-center justify-between">
           <span className="font-mono text-xs tracking-widest text-white/40 uppercase">Total estimat</span>
           <span
-            className="font-mono text-4xl font-bold text-brand-light tabular-nums"
+            className="font-mono text-3xl font-bold text-brand-light tabular-nums sm:text-4xl"
             style={{ textShadow: "0 0 16px rgba(62,155,92,0.6)" }}
           >
             {total.toLocaleString("ro-RO", { maximumFractionDigits: 1 })}
@@ -107,17 +107,14 @@ export function PriceCalculator() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 px-6 pb-6">
+      <div className="flex flex-col gap-3 px-5 pb-5">
         <Link
           href="/contact"
-          className="flex w-full items-center justify-center gap-3 rounded-full bg-brand-light py-3 pr-6 pl-2 text-sm font-bold text-ink transition-all duration-300 hover:scale-[1.02]"
+          className="flex w-full items-center justify-center rounded-full bg-brand-light px-6 py-2.5 text-sm font-bold text-ink transition-transform duration-300 hover:scale-[1.02] motion-reduce:transition-none"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-brand-light">
-            →
-          </span>
           Solicită preluarea
         </Link>
-        <p className="text-xs text-paper/50">
+        <p className="text-[11px] leading-relaxed text-paper/50">
           Prețuri orientative, actualizate la {PRETURI_LA}. Prețul final se stabilește la cântărirea și verificarea
           materialului.
         </p>
