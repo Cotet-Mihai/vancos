@@ -251,9 +251,11 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <Reveal delay={120}>
-          <PriceCalculator />
-        </Reveal>
+        <div id="calculator" className="scroll-mt-24">
+          <Reveal delay={120}>
+            <PriceCalculator />
+          </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto flex max-w-7xl flex-col px-6 py-16">

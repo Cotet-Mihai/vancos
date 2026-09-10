@@ -73,12 +73,13 @@ export function CoverageMap() {
                 onMouseLeave={() => setActive(null)}
                 onFocus={() => setActive(sector.id)}
                 onBlur={() => setActive(null)}
-                className={`flex w-full items-center gap-3 rounded-[1.25rem] border p-3 text-left transition-colors duration-200 motion-reduce:transition-none ${
+                className={`flex w-full items-center justify-between gap-3 rounded-[1.25rem] border p-3 text-left transition-colors duration-200 motion-reduce:transition-none ${
                   active === sector.id
                     ? "border-brand-light/50 bg-brand-light/10"
                     : "border-white/10 bg-white/[0.03] hover:border-brand-light/40 hover:bg-white/[0.06]"
                 }`}
               >
+                <span className="min-w-0 text-xs font-semibold text-paper sm:text-sm">Sector</span>
                 <span
                   aria-hidden="true"
                   className={`flex h-8 w-8 flex-none items-center justify-center rounded-full font-mono text-sm font-bold transition-colors duration-200 motion-reduce:transition-none ${
@@ -89,7 +90,6 @@ export function CoverageMap() {
                 >
                   {sector.id}
                 </span>
-                <span className="min-w-0 text-xs font-semibold text-paper sm:text-sm">Sector</span>
               </button>
             </li>
           ))}

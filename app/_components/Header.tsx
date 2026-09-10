@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { contact } from "../_lib/contact";
-import { IconPhone, IconMail } from "./icons";
+import { IconPhone, IconMail, IconChart } from "./icons";
 
 const links = [
   { href: "/", label: "Acasă" },
@@ -23,6 +23,29 @@ export function Header() {
     const value = typeof next === "function" ? next(open) : next;
     setOpenedAt(value ? pathname : null);
   };
+
+  // Un link catre hash-ul curent nu declanseaza nicio navigare: daca esti deja
+  // pe `/#calculator`, browserul nu are ce schimba. Cand suntem deja pe Acasa,
+  // derulam noi; de pe alta pagina, lasam linkul sa navigheze normal.
+  function goToCalculator(event: MouseEvent<HTMLAnchorElement>) {
+    if (pathname !== "/") {
+      setOpenedAt(null);
+      return;
+    }
+
+    const target = document.getElementById("calculator");
+    if (!target) return;
+
+    event.preventDefault();
+    // Blocarea derularii se ridica aici, nu la curatarea efectului: aceea ruleaza
+    // dupa randare, deci saltul ar cadea cat timp pagina e inca blocata.
+    document.documentElement.style.overflow = "";
+    setOpenedAt(null);
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+  }
 
   useEffect(() => {
     function handleScroll() {
@@ -158,20 +181,30 @@ export function Header() {
             }`}
             style={{ transitionDelay: open ? "520ms" : "0ms" }}
           >
-            <a
-              href={contact.phoneHref}
+            <Link
+              href="/#calculator"
+              onClick={goToCalculator}
               className="flex items-center justify-center gap-2 rounded-full bg-brand-light px-6 py-3 text-sm font-bold text-ink"
             >
-              <IconPhone className="h-4 w-4" />
-              {contact.phone}
-            </a>
-            <a
-              href={contact.emailHref}
-              className="flex items-center justify-center gap-2 text-sm text-white/55 transition-colors hover:text-paper"
-            >
-              <IconMail className="h-4 w-4 text-brand-light" />
-              {contact.email}
-            </a>
+              <IconChart className="h-4 w-4" />
+              Fă un calcul rapid
+            </Link>
+            <div className="flex flex-col items-center gap-2">
+              <a
+                href={contact.phoneHref}
+                className="flex items-center gap-2 text-sm font-semibold text-paper transition-colors hover:text-brand-light"
+              >
+                <IconPhone className="h-4 w-4 text-brand-light" />
+                {contact.phone}
+              </a>
+              <a
+                href={contact.emailHref}
+                className="flex items-center gap-2 text-sm text-white/55 transition-colors hover:text-paper"
+              >
+                <IconMail className="h-4 w-4 text-brand-light" />
+                {contact.email}
+              </a>
+            </div>
           </div>
         </div>
       </div>
