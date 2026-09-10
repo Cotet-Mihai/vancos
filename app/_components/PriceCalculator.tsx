@@ -23,23 +23,27 @@ const PRETURI_LA = "10 septembrie 2026";
 const STEP = 5;
 
 export function PriceCalculator() {
-  const [quantities, setQuantities] = useState<number[]>(materials.map(() => 0));
+  // Cantitatile stau pe numele materialului, nu pe pozitie. Cu un vector indexat,
+  // orice modificare a listei lasa starea veche nealiniata peste cea noua —
+  // materialele adaugate la coada citesc `undefined`, iar inputul trece din
+  // controlat in necontrolat si ramane gol.
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
+
+  const quantityOf = (name: string) => quantities[name] ?? 0;
 
   const total = useMemo(
-    () => materials.reduce((sum, material, index) => sum + quantities[index] * material.pricePerKg, 0),
+    () => materials.reduce((sum, material) => sum + (quantities[material.name] ?? 0) * material.pricePerKg, 0),
     [quantities],
   );
 
-  function adjust(index: number, delta: number) {
-    setQuantities((current) =>
-      current.map((quantity, i) => (i === index ? Math.max(0, quantity + delta) : quantity)),
-    );
+  function adjust(name: string, delta: number) {
+    setQuantities((current) => ({ ...current, [name]: Math.max(0, (current[name] ?? 0) + delta) }));
   }
 
-  function setQuantity(index: number, value: string) {
+  function setQuantity(name: string, value: string) {
     const parsed = Number(value);
-    const next = value === "" ? 0 : Number.isFinite(parsed) ? Math.max(0, parsed) : quantities[index];
-    setQuantities((current) => current.map((quantity, i) => (i === index ? next : quantity)));
+    if (value !== "" && !Number.isFinite(parsed)) return;
+    setQuantities((current) => ({ ...current, [name]: value === "" ? 0 : Math.max(0, parsed) }));
   }
 
   return (
@@ -51,22 +55,22 @@ export function PriceCalculator() {
         <span className="flex h-2 w-2 animate-pulse rounded-full bg-brand-light" />
       </div>
 
-      <div className="flex max-h-[19rem] flex-col divide-y divide-white/10 overflow-y-auto px-5 sm:max-h-[21rem]">
-        {materials.map((material, index) => (
-          <div key={material.name} className="flex items-center justify-between gap-3 py-2.5 sm:gap-4">
+      <div className="flex flex-col divide-y divide-white/10 px-5">
+        {materials.map((material) => (
+          <div key={material.name} className="flex items-center justify-between gap-3 py-2">
             <div className="flex min-w-0 flex-col">
-              <span className="text-sm leading-tight font-semibold text-paper">{material.name}</span>
-              <span className="font-mono text-[11px] leading-tight text-brand-light/60">
+              <span className="text-[13px] leading-tight font-semibold text-paper sm:text-sm">{material.name}</span>
+              <span className="font-mono text-[10px] leading-tight text-brand-light/60 sm:text-[11px]">
                 {material.pricePerKg.toLocaleString("ro-RO", { minimumFractionDigits: 2 })} lei/kg
               </span>
             </div>
 
-            <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
+            <div className="flex flex-shrink-0 items-center gap-1.5 sm:gap-2">
               <button
                 type="button"
-                onClick={() => adjust(index, -STEP)}
+                onClick={() => adjust(material.name, -STEP)}
                 aria-label={`Scade cantitatea de ${material.name.toLowerCase()}`}
-                className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-paper transition-colors hover:border-brand-light hover:text-brand-light sm:h-8 sm:w-8"
+                className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-sm text-paper transition-colors hover:border-brand-light hover:text-brand-light sm:h-7 sm:w-7"
               >
                 −
               </button>
@@ -74,18 +78,18 @@ export function PriceCalculator() {
                 <input
                   type="number"
                   min="0"
-                  value={quantities[index]}
-                  onChange={(event) => setQuantity(index, event.target.value)}
+                  value={quantityOf(material.name)}
+                  onChange={(event) => setQuantity(material.name, event.target.value)}
                   aria-label={`Cantitate de ${material.name.toLowerCase()} în kg`}
-                  className="w-11 rounded-lg border border-transparent bg-transparent text-center font-mono text-base font-bold text-paper tabular-nums outline-none focus:border-brand-light sm:w-16 sm:text-lg"
+                  className="w-9 rounded-lg border border-transparent bg-transparent text-center font-mono text-sm font-bold text-paper tabular-nums outline-none focus:border-brand-light sm:w-11 sm:text-base"
                 />
-                <span className="text-xs font-normal text-paper/40">kg</span>
+                <span className="text-[10px] font-normal text-paper/40">kg</span>
               </span>
               <button
                 type="button"
-                onClick={() => adjust(index, STEP)}
+                onClick={() => adjust(material.name, STEP)}
                 aria-label={`Crește cantitatea de ${material.name.toLowerCase()}`}
-                className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-paper transition-colors hover:border-brand-light hover:text-brand-light sm:h-8 sm:w-8"
+                className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/15 text-sm text-paper transition-colors hover:border-brand-light hover:text-brand-light sm:h-7 sm:w-7"
               >
                 +
               </button>
