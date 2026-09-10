@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
+import { sendRequest } from "../_actions/send-request";
+import { lei, type PickupLine, type RequestResult } from "../_lib/request";
 import {
   Dialog,
   DialogContent,
@@ -11,12 +13,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-export type PickupLine = {
-  name: string;
-  quantity: number;
-  pricePerKg: number;
-};
 
 type PickupRequestDialogProps = {
   open: boolean;
@@ -28,8 +24,6 @@ type PickupRequestDialogProps = {
   pricedAt: string;
 };
 
-const lei = (value: number) => value.toLocaleString("ro-RO", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
 const fieldClass =
   "w-full rounded-xl border border-white/12 bg-white/[0.04] px-4 py-3 text-sm text-paper outline-none transition-colors duration-200 placeholder:text-white/30 focus:border-brand-light/70 focus:bg-white/[0.07] motion-reduce:transition-none";
 
@@ -40,31 +34,16 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [agreed, setAgreed] = useState(false);
-
-  // Aceleași rânduri pe care le vede în previzualizare ajung și în email, ca
-  // ce a confirmat pe ecran să fie exact ce ne trimite.
-  function buildBody() {
-    const rows = lines.map(
-      (line) =>
-        `- ${line.name}: ${line.quantity} kg x ${lei(line.pricePerKg)} lei = ${lei(line.quantity * line.pricePerKg)} lei`,
-    );
-    return [
-      `Nume: ${name}`,
-      `Email: ${email}`,
-      `Telefon: ${phone}`,
-      "",
-      "Materiale pentru preluare:",
-      ...rows,
-      "",
-      `Total estimat: ${lei(total)} lei`,
-      `Prețuri orientative, actualizate la ${pricedAt}.`,
-    ].join("\n");
-  }
+  const [website, setWebsite] = useState("");
+  const [result, setResult] = useState<RequestResult | null>(null);
+  const [pending, startTransition] = useTransition();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const subject = encodeURIComponent(`Solicitare preluare de la ${name}`);
-    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${encodeURIComponent(buildBody())}`;
+    setResult(null);
+    startTransition(async () => {
+      setResult(await sendRequest({ kind: "preluare", name, email, phone, lines, total, website }));
+    });
   }
 
   return (
@@ -80,6 +59,28 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
           </DialogDescription>
         </DialogHeader>
 
+        {result?.ok ? (
+          <div className="flex flex-col items-center gap-4 px-5 py-10 text-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-light text-ink">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-6 w-6">
+                <path
+                  d="M5 12.5l4.5 4.5L19 7"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <h3 className="text-xl font-bold text-paper">Solicitarea a plecat</h3>
+            <p className="max-w-sm text-sm leading-relaxed text-paper/70">
+              Ți-am trimis o confirmare pe {email}. Îți răspundem în 24-48 de ore.
+            </p>
+            <a href={contact.phoneHref} className="text-sm font-bold text-brand-light">
+              Sau sună-ne: {contact.phone}
+            </a>
+          </div>
+        ) : (
         <div className="flex min-h-0 flex-col gap-5 overflow-y-auto px-5 py-5">
           <section className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
             <span className={labelClass}>Previzualizare solicitare</span>
@@ -118,7 +119,7 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
             )}
           </section>
 
-          <form id="pickup-form" onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form id="pickup-form" onSubmit={handleSubmit} className="relative flex flex-col gap-4">
             <label className="flex flex-col gap-2">
               <span className={labelClass}>Nume</span>
               <input
@@ -193,20 +194,43 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
                 și cu prelucrarea datelor mele pentru a primi o ofertă.
               </span>
             </label>
+            {/* Capcana pentru roboți: scoasă din ecran și din ordinea de tabulare. */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={website}
+              onChange={(event) => setWebsite(event.target.value)}
+              className="absolute left-[-9999px] h-0 w-0 opacity-0"
+            />
           </form>
         </div>
+        )}
 
+        {!result?.ok && (
         <DialogFooter className="flex-col gap-3 border-t border-white/10 px-5 py-4">
+          {result && !result.ok && (
+            <p
+              role="alert"
+              className="w-full rounded-xl border border-accent-warm/40 bg-accent-warm/10 px-4 py-3 text-xs leading-relaxed text-accent-warm"
+            >
+              {result.error}
+            </p>
+          )}
+
           <button
             type="submit"
             form="pickup-form"
-            disabled={lines.length === 0}
+            disabled={lines.length === 0 || pending}
             className="flex w-full items-center justify-center rounded-full bg-brand-light px-6 py-3 text-sm font-bold text-ink transition-transform duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
-            Trimite solicitarea
+            {pending ? "Se trimite…" : "Trimite solicitarea"}
           </button>
           <p className="text-center text-[11px] text-white/40">Îți răspundem în 24-48h. Fără costuri ascunse.</p>
         </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );
