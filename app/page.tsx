@@ -7,12 +7,10 @@ import imgGospodarii from "../public/images/servicii-gospodarii.jpg";
 import imgReciclabile from "../public/images/servicii-reciclabile.jpg";
 import { services } from "./_lib/services";
 import { ServiceCard } from "./_components/ServiceCard";
-import { Logo } from "./_components/Logo";
 import { Reveal } from "./_components/Reveal";
 import { PriceCalculator } from "./_components/PriceCalculator";
 import { HowWeWork } from "./_components/HowWeWork";
 import { CoverageMap } from "./_components/CoverageMap";
-import { DeCompletat } from "./_components/DeCompletat";
 import { contact } from "./_lib/contact";
 import { FinalCta } from "./_components/FinalCta";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -122,7 +120,7 @@ const faqs = [
   },
   {
     question: "Care este programul vostru?",
-    answer: contact.program ?? <DeCompletat camp="programul de lucru" />,
+    answer: contact.programText,
   },
 ];
 
@@ -227,7 +225,6 @@ export default function Home() {
         <div className="mx-auto w-full max-w-[88rem] px-6">
           <div className="flex w-full flex-col gap-6 rounded-[2rem] border border-white/10 bg-surface px-10 py-4 sm:flex-row sm:items-center sm:justify-between sm:rounded-full">
             <div className="flex items-center gap-4">
-              <Logo className="h-7 w-7 flex-shrink-0 text-brand-light" />
               <div className="flex flex-col gap-1">
                 <h3 className="text-lg font-bold text-paper">Ai deșeuri de ridicat?</h3>
                 <p className="text-sm text-paper/70">Spune-ne ce ai de transportat și îți răspundem rapid.</p>

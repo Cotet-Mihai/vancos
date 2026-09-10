@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { QuickQuoteForm } from "../_components/QuickQuoteForm";
-import { DeCompletat } from "../_components/DeCompletat";
 import { DateleFirmei } from "../_components/DateleFirmei";
 import { Reveal } from "../_components/Reveal";
 import { IconPhone, IconMail, IconPin, IconClock, IconDocument, IconTruck } from "../_components/icons";
@@ -133,9 +132,16 @@ export default function ContactPage() {
               </span>
               <span className="flex min-w-0 flex-col gap-1">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Program</span>
-                <span className="text-lg font-bold text-paper">
-                  {contact.program ?? <DeCompletat camp="programul de lucru" />}
-                </span>
+                <dl className="flex flex-col gap-0.5">
+                  {contact.program.map((interval) => (
+                    <div key={interval.zile} className="flex flex-wrap items-baseline gap-x-3">
+                      <dt className="text-sm text-paper/60">{interval.zile}</dt>
+                      <dd className={interval.inchis ? "text-sm text-paper/40" : "text-base font-bold text-paper"}>
+                        {interval.ore}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
                 <span className="text-sm text-paper/60">Intervenim de regulă în 24-48h de la solicitare.</span>
               </span>
             </div>
@@ -174,6 +180,51 @@ export default function ContactPage() {
               </Link>
               .
             </p>
+          </Reveal>
+
+          <Reveal className="flex flex-col gap-6">
+            <div className="flex items-center gap-5">
+              <span className="font-mono text-xs tracking-[0.3em] text-brand-light uppercase">Unde ne găsești</span>
+              <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
+            </div>
+
+            <div className="flex items-start gap-4">
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-brand-light/25 bg-brand-light/15 text-brand-light">
+                <IconPin className="h-5 w-5" />
+              </span>
+              <span className="flex min-w-0 flex-col gap-1">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">Punct de lucru</span>
+                <span className="text-lg font-bold text-paper">{contact.address}</span>
+              </span>
+            </div>
+
+            {/* Harta se încarcă de la Google abia când intră în viewport. Adresa
+                merge ca text în `q`, deci geocodarea o face Google — nu punem
+                coordonate scrise de mână, care ar muta acul fără să se observe. */}
+            <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface">
+              <iframe
+                title={`Harta către ${contact.address}`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(contact.address)}&z=16&output=embed`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-72 w-full border-0 sm:h-80"
+              />
+            </div>
+
+            <a
+              href={contact.mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex w-fit items-center gap-2 text-sm font-bold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline motion-reduce:transition-none"
+            >
+              Deschide în Google Maps
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+              >
+                →
+              </span>
+            </a>
           </Reveal>
         </div>
 

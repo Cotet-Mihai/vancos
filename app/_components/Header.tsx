@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Logo } from "./Logo";
 import { contact } from "../_lib/contact";
 import { IconMenu, IconClose, IconPhone } from "./icons";
 
@@ -37,8 +36,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <Logo className="h-9 w-9 text-brand-light" />
+        <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
           <span className="flex flex-col leading-none">
             <span className="text-lg font-bold tracking-tight text-white">VANCOS</span>
             <span className="text-[10px] font-semibold tracking-[0.2em] text-white/50 uppercase">

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { Logo } from "./Logo";
 import { contact } from "../_lib/contact";
 import { IconChevronDown } from "./icons";
 
@@ -45,7 +44,7 @@ export function QuickQuoteForm() {
     >
       <div className="flex flex-col gap-4 border-b border-dashed border-white/15 pb-5">
         <div className="flex items-center justify-between gap-4">
-          <Logo className="h-7 w-7 flex-shrink-0 text-brand-light" />
+          <span className="text-lg font-bold tracking-tight text-paper">VANCOS</span>
           <span className="font-mono text-[10px] tracking-[0.25em] text-white/40 uppercase">Cerere rapidă</span>
         </div>
         <h3 className="text-2xl font-bold text-paper">Solicită o ofertă</h3>
