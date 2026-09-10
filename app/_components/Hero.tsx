@@ -71,50 +71,53 @@ export function Hero() {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-black from-0% via-black/70 via-30% to-transparent to-50%"
+          className="absolute inset-0 hidden bg-gradient-to-r from-black from-0% via-black/70 via-30% to-transparent to-50% sm:block"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/85"
+          className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/35 to-black/90 sm:from-black/50 sm:via-transparent sm:to-black/85"
         />
 
         <div
           ref={parallaxContentRef}
-          className="relative z-10 flex w-full max-w-2xl flex-col gap-6 px-6 will-change-transform sm:px-24 lg:pr-6 lg:pl-48"
+          className="absolute inset-0 z-10 flex flex-col justify-between px-6 pt-28 pb-8 will-change-transform sm:relative sm:inset-auto sm:w-full sm:max-w-2xl sm:justify-center sm:gap-6 sm:px-24 sm:pt-0 sm:pb-0 lg:pr-6 lg:pl-48"
         >
-          <span
-            className="hero-rise text-xs font-bold tracking-[0.3em] text-white/60 uppercase"
-            style={{ "--rise-delay": "0.2s" } as CSSProperties}
-          >
-            Servicii de colectare și reciclare
-          </span>
-          {/* Rândurile forțate sunt o alegere tipografică de desktop: la lățime
-              de telefon ar rupe titlul în locuri greșite, așa că sub `sm` textul
-              curge singur. `hidden` scoate saltul, `sm:inline` îl readuce. */}
-          <h1
-            className="hero-rise max-w-2xl text-[2.5rem] leading-[1] font-bold text-white sm:text-6xl sm:leading-[0.95] lg:text-7xl"
-            style={{ "--rise-delay": "0.35s" } as CSSProperties}
-          >
-            Facem loc
-            <br className="hidden sm:inline" /> pentru un
-            <br className="hidden sm:inline" />{" "}
-            <span className="text-brand-light sm:whitespace-nowrap">oraș mai curat.</span>
-          </h1>
-          <p
-            className="hero-rise max-w-md text-white/80"
-            style={{ "--rise-delay": "0.5s" } as CSSProperties}
-          >
-            Colectăm și transportăm deșeuri din construcții,
-            <br className="hidden sm:inline" /> demolări, gospodării și materiale reciclabile.
-            <br className="hidden sm:inline" /> Rapid, eficient și fără complicații.
-          </p>
+          <div className="flex flex-col gap-5 sm:gap-6">
+            <span
+              className="hero-rise text-xs font-bold tracking-[0.3em] text-white/60 uppercase"
+              style={{ "--rise-delay": "0.2s" } as CSSProperties}
+            >
+              Servicii de colectare și reciclare
+            </span>
+            {/* Rândurile forțate sunt o alegere tipografică de desktop: la lățime
+                de telefon ar rupe titlul în locuri greșite, așa că sub `sm` textul
+                curge singur. `hidden` scoate saltul, `sm:inline` îl readuce. */}
+            <h1
+              className="hero-rise max-w-2xl text-[2.5rem] leading-[1] font-bold text-white sm:text-6xl sm:leading-[0.95] lg:text-7xl"
+              style={{ "--rise-delay": "0.35s" } as CSSProperties}
+            >
+              Facem loc
+              <br className="hidden sm:inline" /> pentru un
+              <br className="hidden sm:inline" />{" "}
+              <span className="text-brand-light sm:whitespace-nowrap">oraș mai curat.</span>
+            </h1>
+            <p
+              className="hero-rise max-w-md text-white/80"
+              style={{ "--rise-delay": "0.5s" } as CSSProperties}
+            >
+              Colectăm și transportăm deșeuri din construcții,
+              <br className="hidden sm:inline" /> demolări, gospodării și materiale reciclabile.
+              <br className="hidden sm:inline" /> Rapid, eficient și fără complicații.
+            </p>
+          </div>
+
           <div
-            className="hero-rise flex flex-wrap gap-4"
+            className="hero-rise flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
             style={{ "--rise-delay": "0.65s" } as CSSProperties}
           >
             <Link
               href="/contact"
-              className="group flex items-center gap-3 rounded-full bg-brand-light py-2 pr-6 pl-2 text-sm font-bold text-ink shadow-lg transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              className="group flex w-full items-center justify-center gap-3 rounded-full bg-brand-light p-2 text-sm font-bold text-ink shadow-lg transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto sm:justify-start sm:py-2 sm:pr-6 sm:pl-2"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-brand-light transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
                 →
@@ -123,7 +126,7 @@ export function Hero() {
             </Link>
             <Link
               href="/servicii"
-              className="flex items-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition-colors duration-300 hover:bg-white/10 motion-reduce:transition-none"
+              className="flex w-full items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition-colors duration-300 hover:bg-white/10 motion-reduce:transition-none sm:w-auto"
             >
               Află mai multe
             </Link>
