@@ -96,7 +96,6 @@ const materials = [
   "Plumb",
   "Moloz",
   "Electrocasnice",
-  "Deșeuri menajere",
 ];
 
 
