@@ -23,8 +23,8 @@ const address = "Șoseaua Andronache nr. 254, Sector 2, București";
 // Datele de contact stau într-un singur loc: Header, Footer, pagina de Contact
 // și formularul le citesc de aici, ca să nu ajungă niciodată desincronizate.
 export const contact = {
-  phone: "0723 774 625",
-  phoneHref: "tel:+40723774625",
+  phone: "0771 411 375",
+  phoneHref: "tel:+40771411375",
   email: "vancosrecycling@gmail.com",
   emailHref: "mailto:vancosrecycling@gmail.com",
   area: "Deservim toate cele 6 sectoare din București",
