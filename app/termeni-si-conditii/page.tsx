@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { DateleFirmei } from "../_components/DateleFirmei";
-import { ANPC, ANPC_SAL, ANPC_SOL, actualizat } from "../_lib/legal";
+import { ANPC, ANPC_SAL, actualizat } from "../_lib/legal";
 
 export const metadata: Metadata = {
   title: "Termeni și condiții",
@@ -34,7 +34,7 @@ const sectiuni = [
         </p>
         <p>
           Site-ul este unul de prezentare. Prin el nu se încheie contracte online și nu se fac plăți. Formularele
-          deschid o cerere pe email către noi, iar relația contractuală se stabilește ulterior, direct între tine și
+          ne trimit cererea ta pe email, iar relația contractuală se stabilește ulterior, direct între tine și
           firmă.
         </p>
       </>
@@ -94,17 +94,15 @@ const sectiuni = [
     continut: (
       <>
         <p>
-          Prin formularele de pe site ne transmiți numele, numărul de telefon și detaliile pe care alegi să le scrii.
-          Le folosim exclusiv ca să îți răspundem cu o ofertă și să organizăm intervenția. Nu le vindem și nu le
-          transmitem către terți în scopuri de marketing.
+          Prin formularele de pe site ne transmiți numele, adresa de email, numărul de telefon și detaliile cererii.
+          Le folosim ca să îți răspundem și să organizăm intervenția. Nu le vindem și nu le folosim pentru marketing.
         </p>
         <p>
-          Formularele nu salvează datele într-o bază de date pe site: ele deschid un mesaj de email către adresa
-          noastră, iar datele ajung în căsuța noastră de email. Ai dreptul să ceri accesul la datele tale,
-          rectificarea sau ștergerea lor, scriindu-ne la{" "}
-          <a href={contact.emailHref} className={linkClass}>
-            {contact.email}
-          </a>
+          Tot ce ține de datele tale (ce date colectăm, de ce, cât timp le păstrăm, cui le transmitem și ce drepturi ai)
+          este descris în{" "}
+          <Link href="/politica-de-confidentialitate" className={linkClass}>
+            politica de confidențialitate
+          </Link>
           .
         </p>
         <p>
@@ -187,11 +185,7 @@ export default function TermeniSiConditiiPage() {
             <a href={ANPC_SAL} target="_blank" rel="noopener noreferrer" className={linkClass}>
               soluționare alternativă a litigiilor (SAL)
             </a>
-            , respectiv platforma europeană de{" "}
-            <a href={ANPC_SOL} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              soluționare online a litigiilor (SOL)
-            </a>
-            .
+            , prin platforma ANPC.
           </p>
         </div>
       </section>

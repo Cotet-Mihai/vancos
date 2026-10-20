@@ -1,23 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import anpcSal from "../../public/images/anpc-sal.png";
-import anpcSol from "../../public/images/anpc-sol.png";
 import { contact } from "../_lib/contact";
+import { ANPC_SAL } from "../_lib/legal";
+import { CookieSettingsButton } from "./CookieSettingsButton";
 import { IconPhone, IconMail, IconPin } from "./icons";
-
-// Siglele duc la procedurile de solutionare a litigiilor, nu la autoritate.
-const anpcBadges = [
-  {
-    src: anpcSal,
-    href: "https://anpc.ro/ce-este-sal/",
-    alt: "ANPC: Soluționarea Alternativă a Litigiilor",
-  },
-  {
-    src: anpcSol,
-    href: "https://ec.europa.eu/consumers/odr",
-    alt: "SOL: Soluționarea Online a Litigiilor",
-  },
-];
 
 const navLinks = [
   { href: "/", label: "Acasă" },
@@ -143,6 +130,15 @@ export function Footer() {
             >
               Politica de cookie-uri
             </Link>
+            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/20" />
+            <Link
+              href="/politica-de-confidentialitate"
+              className="transition-colors duration-200 hover:text-paper motion-reduce:transition-none"
+            >
+              Confidențialitate
+            </Link>
+            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/20" />
+            <CookieSettingsButton className="cursor-pointer transition-colors duration-200 hover:text-paper motion-reduce:transition-none" />
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] tracking-[0.25em] text-white/25 uppercase">
             <span>București · România</span>
@@ -158,21 +154,25 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Siglele au deja corp alb si colturi rotunjite in grafica, transparent
-            doar in afara conturului — nu au nevoie de nicio placa in spate. */}
-        <div className="flex flex-wrap items-center gap-4">
-          {anpcBadges.map((badge) => (
-            <a
-              key={badge.href}
-              href={badge.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-light motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-            >
-              <Image src={badge.src} alt={badge.alt} width={500} height={143} sizes="160px" className="h-10 w-auto" />
-            </a>
-          ))}
-        </div>
+        {/* Pictograma SAL e obligatorie pe prima pagină (Ordinul ANPC 449/2022,
+            art. 2), iar footerul e pe toate paginile, deci și pe ea. Ordinul cere
+            50 px înălțime; grafica are deja corp alb și colțuri rotunjite, deci nu
+            are nevoie de nicio placă în spate. */}
+        <a
+          href={ANPC_SAL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-fit rounded-lg transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-light motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+        >
+          <Image
+            src={anpcSal}
+            alt="ANPC: Soluționarea Alternativă a Litigiilor"
+            width={500}
+            height={143}
+            sizes="175px"
+            className="h-[50px] w-auto"
+          />
+        </a>
       </div>
 
       {/* Filigranul repeta gestul din „De ce Vancos", unde semnul intrebarii iese

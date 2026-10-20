@@ -3,12 +3,13 @@
 import { useSyncExternalStore } from "react";
 
 /**
- * Consimțământul pentru conținutul extern încărcat pe site.
+ * Consimțământul pentru statistici și pentru conținutul extern.
  *
- * Singurul lucru care poate seta cookie-uri aici este harta Google de pe pagina
- * de Contact, deci asta guvernează alegerea: acceptat înseamnă că harta se
- * încarcă, refuzat înseamnă că rămâne un substitut static până când vizitatorul
- * cere explicit altfel. Fără această legătură, bannerul ar fi doar decor.
+ * Alegerea guvernează două lucruri: Vercel Analytics și harta Google de pe
+ * pagina de Contact. Acceptat înseamnă că ambele pornesc; refuzat înseamnă că
+ * statisticile nu se încarcă deloc, iar harta rămâne un substitut static până
+ * când vizitatorul cere explicit altfel. Fără această legătură, bannerul ar fi
+ * doar decor.
  *
  * Alegerea se ține în `localStorage`, nu într-un cookie: e o preferință a
  * vizitatorului, strict necesară ca să nu-l întrebăm la fiecare pagină, și nu
@@ -60,4 +61,19 @@ export function writeConsent(value: Consent) {
     // Dacă nu putem salva, alegerea rămâne valabilă doar pentru pagina curentă.
   }
   window.dispatchEvent(new CustomEvent(EVENT, { detail: value }));
+}
+
+/**
+ * Uită alegerea, ca bannerul să apară din nou.
+ *
+ * Retragerea acordului trebuie să fie la fel de ușoară ca acordarea lui (GDPR
+ * art. 7 alin. 3), deci nu poate cere ștergerea datelor site-ului din browser.
+ */
+export function resetConsent() {
+  try {
+    window.localStorage.removeItem(KEY);
+  } catch {
+    // Fără stocare, alegerea nici nu a fost reținută.
+  }
+  window.dispatchEvent(new CustomEvent(EVENT, { detail: null }));
 }

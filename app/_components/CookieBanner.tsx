@@ -8,11 +8,11 @@ import { useConsent, writeConsent, type Consent } from "../_lib/consent";
  *
  * Forma și textul urmează bannerul de pe devicomtech, la cererea lui Mihai.
  *
- * ATENȚIE: textul vorbește despre analiza traficului web, dar site-ul nu are
- * încă niciun instrument de măsurare. Alegerea guvernează deocamdată singurul
- * terț care există — harta Google de pe pagina de Contact. Când se adaugă
- * analytics, se leagă de aceeași alegere; până atunci, textul spune mai mult
- * decât face site-ul, iar politica de cookie-uri descrie situația reală.
+ * Alegerea guvernează exact ce spune textul: statisticile de trafic (Vercel
+ * Analytics, vezi `ConsentedAnalytics`) și harta Google de pe pagina de
+ * Contact. Dacă se adaugă alt serviciu, se leagă de aceeași alegere și textul
+ * se actualizează odată cu el. Alegerea se poate schimba oricând din
+ * „Setări cookie-uri”, în footer.
  *
  * Ce cere legea de la forma lui, și unde se vede în cod:
  *
@@ -55,8 +55,8 @@ export function CookieBanner() {
           verticală, unde un rând de text plus două butoane nu încap. */}
       <div className="flex w-full max-w-3xl flex-col gap-4 rounded-[1.25rem] border border-white/12 bg-ink/95 px-5 py-4 shadow-2xl backdrop-blur-md sm:flex-row sm:items-center sm:gap-7 sm:px-6">
         <p id="consimtamant-text" className="flex-1 text-sm leading-relaxed text-paper/80">
-          Cu acordul tău folosim module cookie neesențiale, pentru a analiza traficul web. Apăsând „Accept”, ești de
-          acord cu{" "}
+          Cu acordul tău măsurăm traficul pe site și încărcăm harta Google de pe pagina de Contact. Apăsând „Accept”,
+          ești de acord cu{" "}
           <Link
             href="/politica-cookie"
             className="font-semibold text-brand-light underline underline-offset-4 transition-colors duration-300 hover:text-paper motion-reduce:transition-none"

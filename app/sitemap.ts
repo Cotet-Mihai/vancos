@@ -10,6 +10,7 @@ const pages = [
   { path: "/despre-noi", changeFrequency: "yearly" as const, priority: 0.7 },
   { path: "/termeni-si-conditii", changeFrequency: "yearly" as const, priority: 0.2 },
   { path: "/politica-cookie", changeFrequency: "yearly" as const, priority: 0.2 },
+  { path: "/politica-de-confidentialitate", changeFrequency: "yearly" as const, priority: 0.2 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -33,7 +33,6 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [agreed, setAgreed] = useState(false);
   const [website, setWebsite] = useState("");
   const [result, setResult] = useState<RequestResult | null>(null);
   const [pending, startTransition] = useTransition();
@@ -159,41 +158,17 @@ export function PickupRequestDialog({ open, onOpenChange, lines, total, pricedAt
               />
             </label>
 
-            <label className="flex cursor-pointer items-start gap-3">
-              <span className="relative mt-px flex h-5 w-5 flex-shrink-0">
-                <input
-                  type="checkbox"
-                  required
-                  checked={agreed}
-                  onChange={(event) => setAgreed(event.target.checked)}
-                  className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-white/20 bg-white/[0.04] transition-colors duration-200 checked:border-brand-light checked:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-light motion-reduce:transition-none"
-                />
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="pointer-events-none absolute inset-0 m-auto h-3.5 w-3.5 text-ink opacity-0 transition-opacity duration-200 peer-checked:opacity-100 motion-reduce:transition-none"
-                >
-                  <path
-                    d="M5 12.5l4.5 4.5L19 7"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-              <span className="text-xs leading-relaxed text-white/50">
-                Sunt de acord cu{" "}
-                <Link
-                  href="/termeni-si-conditii"
-                  className="font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline motion-reduce:transition-none"
-                >
-                  termenii și condițiile
-                </Link>{" "}
-                și cu prelucrarea datelor mele pentru a primi o ofertă.
-              </span>
-            </label>
+            {/* Informare, nu bifă de acord: vezi comentariul din QuickQuoteForm. */}
+            <p className="text-xs leading-relaxed text-white/50">
+              Folosim datele tale doar ca să îți răspundem la solicitare. Detalii în{" "}
+              <Link
+                href="/politica-de-confidentialitate"
+                className="font-semibold text-brand-light underline-offset-4 transition-colors duration-200 hover:text-paper hover:underline motion-reduce:transition-none"
+              >
+                politica de confidențialitate
+              </Link>
+              .
+            </p>
             {/* Capcana pentru roboți: scoasă din ecran și din ordinea de tabulare. */}
             <input
               type="text"

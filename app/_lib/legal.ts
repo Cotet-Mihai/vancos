@@ -43,9 +43,16 @@ export const firma: DateFirma = {
 };
 
 /** Data ultimei revizuiri a textului, afișată în pagină. */
-export const actualizat = "10 septembrie 2026";
+export const actualizat = "20 octombrie 2026";
 
-/** Procedurile de soluționare a litigiilor la care trimit siglele din footer. */
 export const ANPC = "https://anpc.gov.ro";
-export const ANPC_SAL = "https://anpc.ro/ce-este-sal/";
-export const ANPC_SOL = "https://ec.europa.eu/consumers/odr";
+
+/**
+ * Ținta pictogramei SAL, impusă de Ordinul ANPC 449/2022, art. 2 alin. (2), în
+ * forma modificată prin Ordinul 270/2026. Vechiul `anpc.ro/ce-este-sal` nu mai
+ * îndeplinește cerința.
+ *
+ * Platforma europeană SOL a fost desființată din 20 iulie 2025 (Regulamentul
+ * UE 2024/3228), deci nu mai are ce să apară pe site.
+ */
+export const ANPC_SAL = "https://reclamatiisal.anpc.ro";

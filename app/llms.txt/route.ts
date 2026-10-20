@@ -65,6 +65,7 @@ ${faqList}
 - [Contact](${absolute("/contact")}): date de contact, program, formular de cerere
 - [Termeni și condiții](${absolute("/termeni-si-conditii")})
 - [Politica de cookie-uri](${absolute("/politica-cookie")})
+- [Politica de confidențialitate](${absolute("/politica-de-confidentialitate")})
 
 ## Note
 

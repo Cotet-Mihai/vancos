@@ -24,7 +24,8 @@ const linkClass =
 /**
  * Textul descrie ce face efectiv site-ul, verificat în cod: nu există cookie-uri
  * proprii și niciun pixel de urmărire. Există Vercel Analytics, care nu scrie pe
- * dispozitiv, și harta Google de pe pagina de Contact, care poate. Dacă se
+ * dispozitiv și pornește doar după „Accept”, și harta Google de pe pagina de
+ * Contact, care poate scrie și se încarcă tot doar cu acord. Dacă se
  * adaugă vreodată alt serviciu extern, secțiunile de mai jos se rescriu odată cu
  * el — o politică rămasă în urmă e o declarație falsă, nu o omisiune.
  */
@@ -55,9 +56,11 @@ const sectiuni = [
           pixeli de urmărire, nu afișăm reclame și nu construim profiluri de vizitatori.
         </p>
         <p>
-          Folosim Vercel Analytics ca să știm câți oameni ne vizitează și ce pagini citesc. Nu setează cookie-uri și nu
-          salvează nimic pe dispozitivul tău: numără printr-un identificator calculat din cererea către server, care se
-          șterge după 24 de ore și nu poate fi legat de tine.
+          Dacă accepți, folosim Vercel Analytics ca să știm câți oameni ne vizitează și ce pagini citesc. Nu setează
+          cookie-uri și nu salvează nimic pe dispozitivul tău: numără printr-un identificator calculat din cererea
+          către server, care se șterge după 24 de ore și nu poate fi legat de tine. Pentru asta, scriptul citește din
+          browser adresa paginii, pagina de pe care ai venit și tipul de dispozitiv, așa că îl pornim doar cu acordul
+          tău. Dacă refuzi, nu se încarcă deloc.
         </p>
         <p>
           Singurul lucru pe care îl salvăm în browserul tău este răspunsul dat bannerului de la prima vizită, ca să nu
@@ -110,8 +113,8 @@ const sectiuni = [
     continut: (
       <>
         <p>
-          Alegerea făcută la prima vizită se schimbă ștergând datele site-ului din browser: la următoarea vizită
-          bannerul apare din nou și poți răspunde altfel. Îți poți șterge oricând cookie-urile existente sau le poți
+          Alegerea făcută la prima vizită se schimbă oricând din linkul „Setări cookie-uri” din subsolul oricărei
+          pagini: bannerul apare din nou și poți răspunde altfel. Îți poți șterge oricând cookie-urile existente sau le poți
           bloca pe cele viitoare, tot din browser. Restul site-ului funcționează normal fără ele — nimic de aici nu
           depinde de cookie-uri.
         </p>
@@ -131,7 +134,7 @@ const sectiuni = [
     titlu: "Modificări ale acestei politici",
     continut: (
       <p>
-        Dacă adăugăm vreodată instrumente de statistici sau alte servicii externe, actualizăm pagina înainte ca ele să
+        Dacă adăugăm vreodată alte instrumente de statistici sau alte servicii externe, actualizăm pagina înainte ca ele să
         ajungă live și schimbăm data de mai sus. Versiunea aplicabilă este cea publicată aici în momentul vizitei tale.
       </p>
     ),
@@ -153,8 +156,9 @@ export default function PoliticaCookiePage() {
       <section className="flex flex-col gap-3 rounded-[1.5rem] border border-brand-light/25 bg-brand/15 p-6">
         <h2 className="text-lg font-bold text-paper">Pe scurt</h2>
         <p className="leading-relaxed text-paper/80">
-          Nu folosim cookie-uri de urmărire și nu setăm niciun cookie propriu. Statisticile de trafic nu scriu nimic pe
-          dispozitivul tău. Singurul cookie care poate apărea vine de la harta Google încorporată în pagina de Contact.
+          Nu folosim cookie-uri de urmărire și nu setăm niciun cookie propriu. Statisticile de trafic pornesc doar dacă
+          accepți și nu scriu nimic pe dispozitivul tău. Singurul cookie care poate apărea vine de la harta Google de
+          pe pagina de Contact, care se încarcă tot doar cu acordul tău.
         </p>
       </section>
 

@@ -3,7 +3,7 @@ import { Montserrat, Caveat, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_components/Header";
 import { Footer } from "./_components/Footer";
-import { Analytics } from "@vercel/analytics/next";
+import { ConsentedAnalytics } from "./_components/ConsentedAnalytics";
 import { CookieBanner } from "./_components/CookieBanner";
 import { JsonLd } from "./_components/JsonLd";
 import { siteUrl } from "./_lib/site";
@@ -72,11 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
         <CookieBanner />
-        {/* Vercel Analytics nu scrie nimic pe dispozitiv: numără printr-un
-            identificator calculat din cerere, șters după 24 de ore. Nu intră sub
-            art. 4 alin. (5) GDPR, deci nu trece prin bannerul de consimțământ —
-            e menționat însă în politica de cookie-uri, la inventar. */}
-        <Analytics />
+        <ConsentedAnalytics />
       </body>
     </html>
   );
