@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     template: "%s | Vancos",
-    default: "Vancos · Degajări deșeuri și colectare reciclabile în București",
+    default: "Degajare moloz și colectare reciclabile București | Vancos",
   },
   description:
     "Vancos preia și transportă deșeuri din construcții, demolări și gospodării în București, plus colectare diversificată de deșeuri reciclabile. Containere până la 4 tone, intervenție în 24-48h, toate cele 6 sectoare.",

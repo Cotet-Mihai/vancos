@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { openGraphBase } from "../_lib/site";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { DateleFirmei } from "../_components/DateleFirmei";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     "Ce date personale primește Vancos prin site, de ce, cât timp le păstrează, cui le transmite și ce drepturi ai.",
   alternates: { canonical: "/politica-de-confidentialitate" },
   openGraph: {
-    type: "website",
+    ...openGraphBase,
     url: "/politica-de-confidentialitate",
     title: "Politica de confidențialitate | Vancos",
     description:

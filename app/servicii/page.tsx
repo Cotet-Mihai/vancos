@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import heroServicii from "../../public/images/hero-servicii.jpg";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { openGraphBase } from "../_lib/site";
 import { services } from "../_lib/services";
 import { breadcrumbSchema, servicesSchema } from "../_lib/schema";
 import { JsonLd } from "../_components/JsonLd";
@@ -15,12 +16,12 @@ import imgGospodarii from "../../public/images/servicii-gospodarii.jpg";
 import imgReciclabile from "../../public/images/servicii-reciclabile.jpg";
 
 export const metadata: Metadata = {
-  title: "Servicii",
+  title: "Degajare moloz și deșeuri reciclabile în București",
   description:
     "Degajare deșeuri din construcții și demolări, preluare deșeuri din gospodării și colectare de deșeuri reciclabile în București.",
   alternates: { canonical: "/servicii" },
   openGraph: {
-    type: "website",
+    ...openGraphBase,
     url: "/servicii",
     title: "Servicii de degajare deșeuri în București | Vancos",
     description:

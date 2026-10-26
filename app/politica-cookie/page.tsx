@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { openGraphBase } from "../_lib/site";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { actualizat } from "../_lib/legal";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     "Ce cookie-uri folosește site-ul Vancos și cum le poți controla din browser.",
   alternates: { canonical: "/politica-cookie" },
   openGraph: {
-    type: "website",
+    ...openGraphBase,
     url: "/politica-cookie",
     title: "Politica de cookie-uri | Vancos",
     description:

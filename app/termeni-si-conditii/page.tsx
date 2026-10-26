@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { openGraphBase } from "../_lib/site";
 import Link from "next/link";
 import { contact } from "../_lib/contact";
 import { DateleFirmei } from "../_components/DateleFirmei";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     "Termenii și condițiile de utilizare a site-ului Vancos și de solicitare a serviciilor de degajare deșeuri.",
   alternates: { canonical: "/termeni-si-conditii" },
   openGraph: {
-    type: "website",
+    ...openGraphBase,
     url: "/termeni-si-conditii",
     title: "Termeni și condiții | Vancos",
     description:

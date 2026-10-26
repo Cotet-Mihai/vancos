@@ -83,16 +83,19 @@ export function Hero() {
           className="absolute inset-0 z-10 flex flex-col justify-between px-6 pt-28 pb-8 will-change-transform sm:relative sm:inset-auto sm:w-full sm:max-w-2xl sm:justify-center sm:gap-6 sm:px-24 sm:pt-0 sm:pb-0 lg:pr-6 lg:pl-48"
         >
           <div className="flex flex-col gap-5 sm:gap-6">
-            <span
+            {/* H1-ul e rândul mic de deasupra, nu sloganul: motoarele citesc H1-ul
+                drept subiectul paginii, iar „Facem loc pentru un oraș mai curat"
+                nu spune nimănui ce facem. Sloganul rămâne cel mai mare vizual. */}
+            <h1
               className="hero-rise text-xs font-bold tracking-[0.3em] text-white/60 uppercase"
               style={{ "--rise-delay": "0.2s" } as CSSProperties}
             >
-              Servicii de colectare și reciclare
-            </span>
+              Degajare moloz și colectare reciclabile în București
+            </h1>
             {/* Rândurile forțate sunt o alegere tipografică de desktop: la lățime
                 de telefon ar rupe titlul în locuri greșite, așa că sub `sm` textul
                 curge singur. `hidden` scoate saltul, `sm:inline` îl readuce. */}
-            <h1
+            <p
               className="hero-rise max-w-2xl text-[2.5rem] leading-[1] font-bold text-white sm:text-6xl sm:leading-[0.95] lg:text-7xl"
               style={{ "--rise-delay": "0.35s" } as CSSProperties}
             >
@@ -100,7 +103,7 @@ export function Hero() {
               <br className="hidden sm:inline" /> pentru un
               <br className="hidden sm:inline" />{" "}
               <span className="text-brand-gradient sm:whitespace-nowrap">oraș mai curat.</span>
-            </h1>
+            </p>
             <p
               className="hero-rise max-w-md text-white/80"
               style={{ "--rise-delay": "0.5s" } as CSSProperties}

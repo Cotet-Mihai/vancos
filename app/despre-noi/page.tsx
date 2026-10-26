@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { openGraphBase } from "../_lib/site";
 import type { CSSProperties } from "react";
 import despreImage from "../../public/images/despre-noi.jpg";
 import { services } from "../_lib/services";
@@ -11,12 +12,12 @@ import { CoverageMap } from "../_components/CoverageMap";
 import { IconClock, IconTruck, IconContainer, IconRecycle, IconTorch, IconBolt } from "../_components/icons";
 
 export const metadata: Metadata = {
-  title: "Despre noi",
+  title: "Despre noi · Degajări deșeuri în București",
   description:
     "Vancos degajează deșeuri din construcții, demolări și gospodării și colectează deșeuri reciclabile în toată zona București.",
   alternates: { canonical: "/despre-noi" },
   openGraph: {
-    type: "website",
+    ...openGraphBase,
     url: "/despre-noi",
     title: "Despre Vancos · Degajări deșeuri în București",
     description:

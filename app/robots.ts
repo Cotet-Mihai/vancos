@@ -26,8 +26,5 @@ export default function robots(): MetadataRoute.Robots {
       ...aiCrawlers.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
-    // Rezumatul pentru asistenți AI, generat din aceleași surse ca paginile.
-    // Nu e un standard recunoscut de roboți, dar e o urmă pe care o caută.
-    host: siteUrl,
   };
 }

@@ -13,11 +13,14 @@ const pages = [
   { path: "/politica-de-confidentialitate", changeFrequency: "yearly" as const, priority: 0.2 },
 ];
 
+/**
+ * Fără `lastModified`: data build-ului s-ar schimba la fiecare deploy fără ca
+ * paginile să se schimbe, iar Google învață repede să ignore un `lastmod` care
+ * minte. Lipsa lui nu costă nimic; Google își ține singur evidența.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   return pages.map((page) => ({
     url: absolute(page.path),
-    lastModified,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));

@@ -45,7 +45,12 @@ export const localBusinessSchema = {
   name: siteName,
   legalName: firma.denumire ?? undefined,
   vatID: firma.cui ?? undefined,
+  foundingDate: firma.infiintata ?? undefined,
   url: siteUrl,
+  // Google cere o imagine pentru afișarea extinsă a unei firme locale. Fișierul
+  // din `public` are o adresă fixă, spre deosebire de imaginea Open Graph, care
+  // primește un sufix nou la fiecare build.
+  image: absolute("/images/hero-truck-2.png"),
   telephone: contact.phone.replace(/\s/g, ""),
   email: contact.email,
   description:

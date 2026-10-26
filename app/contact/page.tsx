@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { openGraphBase } from "../_lib/site";
 import type { CSSProperties } from "react";
 import heroContact from "../../public/images/hero-contact.jpg";
 import Link from "next/link";
@@ -11,12 +12,12 @@ import { Reveal } from "../_components/Reveal";
 import { IconPhone, IconMail, IconPin, IconClock, IconDocument, IconTruck } from "../_components/icons";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact · Ridicare moloz și reciclabile București",
   description:
     "Contactează Vancos pentru degajare de deșeuri și colectare de reciclabile în București. Telefon, email și punct de lucru.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    type: "website",
+    ...openGraphBase,
     url: "/contact",
     title: "Contact Vancos · Degajări deșeuri București",
     description:

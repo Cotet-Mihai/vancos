@@ -20,3 +20,25 @@ export const absolute = (path: string) => new URL(path, siteUrl).toString();
  * de cel din pagină e exact genul de nepotrivire pe care Google o penalizează.
  */
 export type Faq = { question: string; answer: string };
+
+/**
+ * Baza Open Graph pentru paginile interioare.
+ *
+ * Un `openGraph` definit într-o pagină înlocuiește în întregime pe cel din
+ * layout, nu se combină cu el. Fără bază, paginile interioare pierd imaginea de
+ * previzualizare, numele site-ului și limba. `/opengraph-image` e imaginea
+ * generată din rădăcină, servită la o adresă fixă.
+ */
+export const openGraphBase = {
+  type: "website" as const,
+  locale: "ro_RO",
+  siteName,
+  images: [
+    {
+      url: "/opengraph-image",
+      width: 1200,
+      height: 630,
+      alt: "Vancos · Degajare moloz și colectare deșeuri reciclabile în București",
+    },
+  ],
+};
