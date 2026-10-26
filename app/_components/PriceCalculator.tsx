@@ -8,12 +8,12 @@ import { PickupRequestDialog } from "./PickupRequestDialog";
 // data la care a fost valabil nu-i spune nimic clientului.
 const materials = [
   { name: "Fier", pricePerKg: 0.8 },
-  { name: "Cupru", pricePerKg: 42 },
-  { name: "Bronz", pricePerKg: 21 },
+  { name: "Cupru", pricePerKg: 45 },
+  { name: "Bronz", pricePerKg: 24 },
   { name: "Aluminiu", pricePerKg: 5 },
   { name: "Plumb", pricePerKg: 4 },
   { name: "Radiatoare aluminiu", pricePerKg: 2 },
-  { name: "Radiatoare cupru + aluminiu", pricePerKg: 12 },
+  { name: "Radiatoare cupru + aluminiu", pricePerKg: 10 },
   { name: "Baterii auto", pricePerKg: 2 },
   { name: "Cabluri electrice", pricePerKg: 6 },
 ];
